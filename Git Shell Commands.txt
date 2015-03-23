@@ -1,0 +1,52 @@
+' -----------
+' Update git.
+' -----------
+git pull
+
+' -----------------------------------------------
+' Commit un archivo/directorio/todos los cambios.
+' -----------------------------------------------
+git add ARCHIVE/FOLDER/.
+git commit -m COMMENT
+git push
+
+' --------------------
+' Eliminar un archivo.
+' --------------------
+git rm ONE_ARCHIVE
+git commit -m COMMENT
+git push
+
+' -----------------------
+' Eliminar un directorio.
+' -----------------------
+git rm -r ONE_DIRECTORY
+git commit -m COMMENT
+git push
+
+' ----------
+' Crear tag.
+' ----------
+git tag -a VERSION -m COMMENT
+git push --tags
+
+' -------------
+' Eliminar tag.
+' -------------
+git push --delete origin VERSION
+
+' -------------
+' Crear branch.
+' -------------
+git checkout -b VERSION
+
+' ---------------
+' Cambiar branch.
+' ---------------
+git checkout VERSION
+
+' ----------------
+' Eliminar branch.
+' ----------------
+git branch -d/-D VERSION
+git push origin :VERSION
