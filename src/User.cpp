@@ -11,6 +11,17 @@ User::User(string username, string password) {
 	this->name = username;
 	this->password = password;
 	this->online = false;
+}
+
+User::User(Json::Value value) {
+	string username = value.get("username","").asString();
+	string password = value.get("password", "").asString();
+	string name = value.get("name", "").asString();
+	bool online = value.get("online","0").asString() == "1";
+	this->username = username;
+	this->password = password;
+	this->name = name;
+	this->online = online;
 
 }
 
@@ -65,7 +76,7 @@ Json::Value User::toJsonValue() {
 	return value;
 }
 
-std::string User::toJsonString() {
+string User::toJsonString() {
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,this->toJsonValue());

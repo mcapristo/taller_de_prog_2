@@ -18,6 +18,7 @@ using namespace std;
 class User {
 public:
 	User(string username, string password);
+	User(Json::Value);
 	virtual ~User();
 	string getName();
 	void setName(const string& name);
@@ -28,7 +29,7 @@ public:
 	string getUsername();
 	void setUsername(const string& username);
 	Json::Value toJsonValue();
-	std::string toJsonString();
+	string toJsonString();
 
 private:
 	string username;
