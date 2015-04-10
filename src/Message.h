@@ -18,6 +18,7 @@ using namespace Json;
 class Message {
 public:
 	Message(User* emisor, User* receptor, string body);
+	Message(Json::Value);
 	virtual ~Message();
 	const string& getBody() const;
 	time_t getDatetime() const;

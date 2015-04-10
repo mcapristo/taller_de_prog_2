@@ -14,6 +14,19 @@ Message::Message(User* emisor, User* receptor, string body) {
 	this->datetime = time(0);
 }
 
+Message::Message(Json::Value value){
+	string emisor = value.get("emisor","").asString();
+	string receptor = value.get("receptor", "").asString();
+	string id = value.get("id", "").asString();
+	string body = value.get("body","").asString();
+	//string datetime = value.get("datetime","").asString();
+	this->emisor = new User(emisor);
+	this->receptor = new User(receptor);
+	this->body = body;
+	this->id = id;
+	this->datetime = time(0);
+}
+
 Message::~Message() {
 
 }
@@ -47,6 +60,7 @@ Value Message::toJsonValue() {
 	value["emisor"] = this->emisor->getUsername();
 	value["receptor"] = this->receptor->getUsername();
 	value["body"] = this->body;
+	value["id"] = this->id;
 	//value["datetime"] = this->datetime; TODO: ver como formatear a string
 	return value;
 }

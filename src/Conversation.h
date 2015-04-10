@@ -13,7 +13,10 @@
 class Conversation {
 public:
 	Conversation(User* u1, User* u2);
+	Conversation(Json::Value value);
 	virtual ~Conversation();
+	int getTotalMessages();
+	void increaseTotalMessages();
 
 private:
 	int total_messages;
