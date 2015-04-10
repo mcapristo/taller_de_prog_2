@@ -17,8 +17,7 @@ using namespace std;
 
 class User {
 public:
-	User(string username, string password);
-	User(Json::Value);
+	User(string username);
 	virtual ~User();
 	string getName();
 	void setName(const string& name);

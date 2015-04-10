@@ -9,7 +9,7 @@
 #define DATABASE_H_
 
 #include "rocksdb/db.h"
-#include "User.h"
+#include "UserFactory.h"
 
 using namespace rocksdb;
 using namespace std;

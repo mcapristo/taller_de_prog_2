@@ -7,23 +7,11 @@
 
 #include "User.h"
 
-User::User(string username, string password) {
-	this->name = username;
-	this->password = password;
+User::User(string username) {
+	this->username = username;
 	this->online = false;
 }
 
-User::User(Json::Value value) {
-	string username = value.get("username","").asString();
-	string password = value.get("password", "").asString();
-	string name = value.get("name", "").asString();
-	bool online = value.get("online","0").asString() == "1";
-	this->username = username;
-	this->password = password;
-	this->name = name;
-	this->online = online;
-
-}
 
 User::~User() {
 	// TODO Auto-generated destructor stub
@@ -64,7 +52,7 @@ void User::setUsername(const string& username) {
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
-	value["password"] = this->password;
+	//value["password"] = this->password; // La contrasenia no se deberia mandar
 	// deberia ser if(this->name == nullptr) pero no compila
 	/*if (this->name != "") value["name"] = this->name;
 	else value["name"] = "";*/

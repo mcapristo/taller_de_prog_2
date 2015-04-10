@@ -14,7 +14,7 @@ Database::Database() {
 }
 
 Database::~Database() {
-	// TODO Auto-generated destructor stub
+
 }
 
 string Database::get(string key) {
@@ -35,6 +35,6 @@ User* Database::getUser(string key) {
 	Json::Value val = Json::Value();
 	r.parse(json,val,false);
 
-	User* user = new User(val);
-	return user;
+	UserFactory uf = UserFactory();
+	return uf.createUserFromJsonValue(val);
 }
