@@ -14,7 +14,7 @@ Database::Database() {
 }
 
 Database::~Database() {
-
+	delete this->db;
 }
 
 string Database::get(string key) {
@@ -48,7 +48,7 @@ User* Database::getUser(string key) {
 }
 
 bool Database::createUser(User* user) {
-	string username = user->getName();
+	string username = user->getUsername();
 	string json = user->toJsonString();
 	return this->put(username,json);
 }
