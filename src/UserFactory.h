@@ -19,7 +19,7 @@ public:
 	virtual ~UserFactory();
 	User* createUser(string username, string password);
 	User* createUserFromJsonValue(Json::Value value);
-	//User* createUserFromJsonString(string json);
+	User* createUserFromJsonString(string json);
 };
 
 #endif /* USERFACTORY_H_ */

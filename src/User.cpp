@@ -52,7 +52,7 @@ void User::setUsername(const string& username) {
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
-	//value["password"] = this->password; // La contrasenia no se deberia mandar
+	value["password"] = this->password; // La contrasenia no se deberia mandar
 	// deberia ser if(this->name == nullptr) pero no compila
 	/*if (this->name != "") value["name"] = this->name;
 	else value["name"] = "";*/

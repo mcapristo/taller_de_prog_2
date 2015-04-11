@@ -33,4 +33,9 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	return u;
 }
 
-//User* UserFactory::createUserFromJsonString(string json);
+User* UserFactory::createUserFromJsonString(string json) {
+	Json::Reader r = Json::Reader();
+	Json::Value val = Json::Value();
+	r.parse(json,val,false);
+	return this->createUserFromJsonValue(val);
+}
