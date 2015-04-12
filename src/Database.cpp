@@ -115,3 +115,26 @@ int Database::deleteDatabaseValues(){
 	return i;
 
 }
+
+Conversation* Database::getConversation(User* u1, User* u2){
+	string key1 = u1->getUsername()+u2->getUsername();
+	string value1 = this->get(key1);
+	if (value1 != ""){
+		Json::Reader r = Json::Reader();
+		Json::Value val = Json::Value();
+		r.parse(value1,val,false);
+		return new Conversation(val);
+	}
+	else{
+		string key2 = u1->getUsername()+u2->getUsername();
+		string value2 = this->get(key2);
+		if (value2 != "" ){
+			Json::Reader r = Json::Reader();
+			Json::Value val = Json::Value();
+			r.parse(value1,val,false);
+			return new Conversation(val);
+		}
+		else return NULL;
+	}
+
+}

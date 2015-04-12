@@ -57,3 +57,21 @@ TEST(TestsDatabase,TestDeleteDatabase){
 	res = d->deleteDatabaseValues();
 	ASSERT_EQ(1,res);
 }
+
+TEST(TestsDatabase,TestPut3Messages){
+	Database* d = new Database();
+	d->deleteDatabaseValues();
+	User u1 = User("t");
+	User u2 = User("m");
+	Message* m1 = new Message(&u1,&u2,"test message1");
+	Message* m2 = new Message(&u1,&u2,"test message2");
+	Message* m3 = new Message(&u1,&u2,"test message3");
+	d->saveMessage(m1);
+	d->saveMessage(m2);
+	d->saveMessage(m3);
+	Conversation* c = d->getConversation(&u1,&u2);
+	ASSERT_EQ(3,c->getTotalMessages());
+	delete m1;
+	delete m2;
+	delete m3;
+}

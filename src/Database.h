@@ -32,6 +32,8 @@ public:
 
 	int deleteDatabaseValues();
 
+	Conversation* getConversation(User* u1, User* u2);
+
 private:
 	DB* db;
 	bool saveMessageWithKey(Message* m, string key);
