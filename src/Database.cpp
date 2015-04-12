@@ -101,3 +101,17 @@ bool Database::saveMessage(Message* m) {
 	}
 
 }
+
+int Database::deleteDatabaseValues(){
+	Iterator* it = this->db->NewIterator(ReadOptions());
+	it->SeekToFirst();
+	int i = 0;
+	while (it->Valid()){
+		Slice key = it->key();
+		this->db->Delete(WriteOptions(),key);
+		it->Next();
+		i++;
+	}
+	return i;
+
+}

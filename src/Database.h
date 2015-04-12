@@ -30,6 +30,8 @@ public:
 	Message* getMessage(string id);
 	bool saveMessage(Message* m);
 
+	int deleteDatabaseValues();
+
 private:
 	DB* db;
 	bool saveMessageWithKey(Message* m, string key);

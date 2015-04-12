@@ -49,3 +49,11 @@ TEST(TestsDatabase,TestPutAndGetMessageFromDatabase){
 	ASSERT_EQ(m.getId(),m2->getId());
 	delete m2;
 }
+
+TEST(TestsDatabase,TestDeleteDatabase){
+	Database* d = new Database();
+	int res = d->deleteDatabaseValues();
+	d->put("a","b");
+	res = d->deleteDatabaseValues();
+	ASSERT_EQ(1,res);
+}
