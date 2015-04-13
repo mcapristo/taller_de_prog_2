@@ -21,10 +21,12 @@ string Database::get(string key) {
 	string value;
 	Status res = this->db->Get(ReadOptions(),key,&value);
 	// TODO: ver si hacer algo con el resultado
+//	cout<< "GET :clave: '" + key + "', valor: '" + value +"'"<< endl;
 	return value;
 }
 
 bool Database::put(string key, string value) {
+//	cout<< "SET: clave: '" + key + "', valor: '" + value +"'" << endl;
 	Status res = db->Put(WriteOptions(), key, value);
 	return res.ok();
 }
@@ -80,7 +82,7 @@ bool Database::saveMessageWithKey(Message* m, string key){
 	std::stringstream out;
 	out << tot_msg;
 	string finalkey = key + out.str();
-	//this->saveConversation(conv); TODO para que sobreescriba el tot_msg
+	this->saveConversation(conv);
 	delete conv;
 
 	m->setId(finalkey);
@@ -112,6 +114,7 @@ int Database::deleteDatabaseValues(){
 		it->Next();
 		i++;
 	}
+	delete it;
 	return i;
 
 }
@@ -126,7 +129,7 @@ Conversation* Database::getConversation(User* u1, User* u2){
 		return new Conversation(val);
 	}
 	else{
-		string key2 = u1->getUsername()+u2->getUsername();
+		string key2 = u2->getUsername()+u1->getUsername();
 		string value2 = this->get(key2);
 		if (value2 != "" ){
 			Json::Reader r = Json::Reader();
@@ -136,5 +139,22 @@ Conversation* Database::getConversation(User* u1, User* u2){
 		}
 		else return NULL;
 	}
+}
 
+bool Database::saveConversation(Conversation* conv){
+	string json = conv->toJsonString();
+
+	string key1 = conv->getFirstUser()->getUsername() + conv->getSecondUser()->getUsername();
+	string value1 = this->get(key1);
+	if (value1 != ""){
+		return this->put(key1,json);
+	}
+	else{
+		string key2 = conv->getSecondUser()->getUsername() + conv->getFirstUser()->getUsername();
+		string value2 = this->get(key2);
+		if (value2 != ""){
+			return this->put(key2,json);
+		}
+	}
+	return this->put(key1,json);
 }

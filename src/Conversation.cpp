@@ -33,3 +33,34 @@ int Conversation::getTotalMessages(){
 void Conversation::increaseTotalMessages(){
 	this->total_messages ++;
 }
+
+User* Conversation::getFirstUser(){
+	return this->user1;
+}
+
+User* Conversation::getSecondUser(){
+	return this->user2;
+}
+
+Json::Value Conversation::toJsonValue(){
+	Json::Value value(Json::objectValue);
+	value["user1"] = this->user1->getUsername();
+	value["user2"] = this->user2->getUsername();
+	value["total_messages"] = this->total_messages;
+	value["id"] = this->id;
+	return value;
+}
+
+void Conversation::setId(string id){
+	this->id = id;
+}
+
+string Conversation::getId(){
+	return this->id;
+}
+
+string Conversation::toJsonString(){
+	Json::StreamWriterBuilder builder;
+	builder.settings_["identation"] = "\t";
+	return Json::writeString(builder,this->toJsonValue());
+}

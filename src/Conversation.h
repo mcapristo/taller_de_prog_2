@@ -17,11 +17,18 @@ public:
 	virtual ~Conversation();
 	int getTotalMessages();
 	void increaseTotalMessages();
+	string toJsonString();
+	Json::Value toJsonValue();
+	void setId(string);
+	string getId();
+	User* getFirstUser();
+	User* getSecondUser();
 
 private:
 	int total_messages;
 	User* user1;
 	User* user2;
+	string id;
 };
 
 #endif /* CONVERSATION_H_ */

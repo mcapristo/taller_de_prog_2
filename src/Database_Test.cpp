@@ -61,8 +61,8 @@ TEST(TestsDatabase,TestDeleteDatabase){
 TEST(TestsDatabase,TestPut3Messages){
 	Database* d = new Database();
 	d->deleteDatabaseValues();
-	User u1 = User("t");
-	User u2 = User("m");
+	User u1 = User("user1");
+	User u2 = User("user2");
 	Message* m1 = new Message(&u1,&u2,"test message1");
 	Message* m2 = new Message(&u1,&u2,"test message2");
 	Message* m3 = new Message(&u1,&u2,"test message3");

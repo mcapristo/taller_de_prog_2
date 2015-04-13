@@ -33,6 +33,7 @@ public:
 	int deleteDatabaseValues();
 
 	Conversation* getConversation(User* u1, User* u2);
+	bool saveConversation(Conversation* conv);
 
 private:
 	DB* db;
