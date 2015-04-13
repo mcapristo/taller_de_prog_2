@@ -10,24 +10,59 @@
 Database::Database() {
 	Options options;
 	options.create_if_missing = true;
-	Status status = DB::Open(options, "/tmp/testdb", &this->db);
+	Status s = DB::Open(options, "/tmp/testdb", &this->db);
+	if (s.ok()){
+		s = db->CreateColumnFamily(ColumnFamilyOptions(), "UserCF", &this->userCF);
+		assert(s.ok());
+
+		s = db->CreateColumnFamily(ColumnFamilyOptions(), "ConversationCF", &this->conversationCF);
+		assert(s.ok());
+
+		s = db->CreateColumnFamily(ColumnFamilyOptions(), "MessageCF", &this->messageCF);
+		assert(s.ok());
+	}
+	else {
+		std::vector<ColumnFamilyDescriptor> column_families;
+		column_families.push_back(ColumnFamilyDescriptor(kDefaultColumnFamilyName,ColumnFamilyOptions()));
+		column_families.push_back(ColumnFamilyDescriptor("UserCF",ColumnFamilyOptions()));
+		column_families.push_back(ColumnFamilyDescriptor("ConversationCF",ColumnFamilyOptions()));
+		column_families.push_back(ColumnFamilyDescriptor("MessageCF",ColumnFamilyOptions()));
+		std::vector<ColumnFamilyHandle*> handles;
+		Status status = DB::Open(options, "/tmp/testdb",column_families,&handles,&this->db);
+		this->defaultCF = handles[0];
+		this->userCF = handles[1];
+		this->conversationCF = handles[2];
+		this->messageCF = handles[3];
+	}
 }
 
 Database::~Database() {
+	delete this->defaultCF;
+	delete this->userCF;
+	delete this->conversationCF;
+	delete this->messageCF;
 	delete this->db;
 }
 
 string Database::get(string key) {
+	return this->get(this->defaultCF,key);
+}
+
+bool Database::put(string key, string value) {
+	return this->put(this->defaultCF,key,value);
+}
+
+string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 	string value;
-	Status res = this->db->Get(ReadOptions(),key,&value);
+	Status res = this->db->Get(ReadOptions(),cfHandle,key,&value);
 	// TODO: ver si hacer algo con el resultado
 //	cout<< "GET :clave: '" + key + "', valor: '" + value +"'"<< endl;
 	return value;
 }
 
-bool Database::put(string key, string value) {
+bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 //	cout<< "SET: clave: '" + key + "', valor: '" + value +"'" << endl;
-	Status res = db->Put(WriteOptions(), key, value);
+	Status res = db->Put(WriteOptions(),cfHandle, key, value);
 	return res.ok();
 }
 
@@ -39,7 +74,7 @@ Json::Value* Database::getJsonValueFromString(string str) {
 }
 
 User* Database::getUser(string key) {
-	string json = this->get(key);
+	string json = this->get(this->userCF,key);
 	if (json == "") return NULL; //TODO: hacer un manejo de errores
 	Json::Value* val = this->getJsonValueFromString(json);
 
@@ -52,12 +87,12 @@ User* Database::getUser(string key) {
 bool Database::createUser(User* user) {
 	string username = user->getUsername();
 	string json = user->toJsonString();
-	return this->put(username,json);
+	return this->put(this->userCF,username,json);
 }
 
 
 Message* Database::getMessage(string id){
-	string json = this->get(id);
+	string json = this->get(this->messageCF,id);
 	Json::Reader r = Json::Reader();
 	Json::Value val = Json::Value();
 	r.parse(json,val,false);
@@ -66,7 +101,7 @@ Message* Database::getMessage(string id){
 
 bool Database::saveMessageWithKey(Message* m, string key){
 
-	string conversationJson = this->get(key);
+	string conversationJson = this->get(this->conversationCF,key);
 	Conversation* conv;
 	if (conversationJson == ""){
 		conv = new Conversation(m->getEmisor(),m->getReceptor());
@@ -86,13 +121,13 @@ bool Database::saveMessageWithKey(Message* m, string key){
 	delete conv;
 
 	m->setId(finalkey);
-	return this->put(finalkey,m->toJsonString());
+	return this->put(this->messageCF,finalkey,m->toJsonString());
 
 }
 
 bool Database::saveMessage(Message* m) {
 	string key1 = m->getEmisor()->getUsername() + m->getReceptor()->getUsername();
-	string res1 = this->get(key1);
+	string res1 = this->get(this->conversationCF,key1);
 
 	if (res1 != ""){
 		return this->saveMessageWithKey(m,key1);
@@ -105,6 +140,7 @@ bool Database::saveMessage(Message* m) {
 }
 
 int Database::deleteDatabaseValues(){
+	//TODO MODIFICAR PARA COLUMN FAMILIES
 	Iterator* it = this->db->NewIterator(ReadOptions());
 	it->SeekToFirst();
 	int i = 0;
@@ -121,7 +157,7 @@ int Database::deleteDatabaseValues(){
 
 Conversation* Database::getConversation(User* u1, User* u2){
 	string key1 = u1->getUsername()+u2->getUsername();
-	string value1 = this->get(key1);
+	string value1 = this->get(this->conversationCF,key1);
 	if (value1 != ""){
 		Json::Reader r = Json::Reader();
 		Json::Value val = Json::Value();
@@ -130,7 +166,7 @@ Conversation* Database::getConversation(User* u1, User* u2){
 	}
 	else{
 		string key2 = u2->getUsername()+u1->getUsername();
-		string value2 = this->get(key2);
+		string value2 = this->get(this->conversationCF,key2);
 		if (value2 != "" ){
 			Json::Reader r = Json::Reader();
 			Json::Value val = Json::Value();
@@ -147,14 +183,14 @@ bool Database::saveConversation(Conversation* conv){
 	string key1 = conv->getFirstUser()->getUsername() + conv->getSecondUser()->getUsername();
 	string value1 = this->get(key1);
 	if (value1 != ""){
-		return this->put(key1,json);
+		return this->put(this->conversationCF,key1,json);
 	}
 	else{
 		string key2 = conv->getSecondUser()->getUsername() + conv->getFirstUser()->getUsername();
 		string value2 = this->get(key2);
 		if (value2 != ""){
-			return this->put(key2,json);
+			return this->put(this->conversationCF,key2,json);
 		}
 	}
-	return this->put(key1,json);
+	return this->put(this->conversationCF,key1,json);
 }

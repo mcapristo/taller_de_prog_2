@@ -9,6 +9,9 @@
 #define DATABASE_H_
 
 #include "rocksdb/db.h"
+#include "rocksdb/slice.h"
+#include "rocksdb/options.h"
+
 #include "UserFactory.h"
 #include "Message.h"
 #include "Conversation.h"
@@ -20,6 +23,9 @@ class Database {
 public:
 	Database();
 	virtual ~Database();
+
+	string get(ColumnFamilyHandle* cfHandle,string key);
+	bool put(ColumnFamilyHandle* cfHandle, string key, string value);
 
 	string get(string key);
 	bool put(string key, string value);
@@ -37,6 +43,10 @@ public:
 
 private:
 	DB* db;
+	ColumnFamilyHandle* defaultCF;
+	ColumnFamilyHandle* userCF;
+	ColumnFamilyHandle* conversationCF;
+	ColumnFamilyHandle* messageCF;
 	bool saveMessageWithKey(Message* m, string key);
 	Json::Value* getJsonValueFromString(string str);
 
