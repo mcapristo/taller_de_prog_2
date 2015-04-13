@@ -14,7 +14,6 @@ User::User(string username) {
 
 
 User::~User() {
-	// TODO Auto-generated destructor stub
 }
 
 string User::getName(){

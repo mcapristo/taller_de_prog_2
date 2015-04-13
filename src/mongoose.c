@@ -588,7 +588,6 @@ int ns_socketpair(sock_t sp[2]) {
 }
 #endif  // NS_DISABLE_SOCKETPAIR
 
-// TODO(lsm): use non-blocking resolver
 static int ns_resolve2(const char *host, struct in_addr *ina) {
   struct hostent *he;
   if ((he = gethostbyname(host)) == NULL) {
@@ -2113,7 +2112,6 @@ static void prepare_cgi_environment(struct connection *conn,
   addenv(blk, "%s", "SERVER_PROTOCOL=HTTP/1.1");
   addenv(blk, "%s", "REDIRECT_STATUS=200"); // For PHP
 
-  // TODO(lsm): fix this for IPv6 case
   //addenv(blk, "SERVER_PORT=%d", ri->remote_port);
 
   addenv(blk, "REQUEST_METHOD=%s", ri->request_method);
@@ -2208,7 +2206,6 @@ static void open_cgi_endpoint(struct connection *conn, const char *prog) {
 
   // Try to create socketpair in a loop until success. ns_socketpair()
   // can be interrupted by a signal and fail.
-  // TODO(lsm): use sigaction to restart interrupted syscall
   do {
     ns_socketpair(fds);
   } while (fds[0] == INVALID_SOCKET);
@@ -4302,7 +4299,6 @@ int mg_terminate_ssl(struct mg_connection *c, const char *cert) {
   SSL_CTX_use_certificate_chain_file(ctx, cert);
 
   // When clear-text reply is pushed to client, switch to SSL mode.
-  // TODO(lsm): check for send() failure
   send(conn->ns_conn->sock, ok, sizeof(ok) - 1, 0);
   //DBG(("%p %lu %d SEND", c, (unsigned long) sizeof(ok) - 1, n));
   conn->ns_conn->send_iobuf.len = 0;
@@ -4335,7 +4331,6 @@ int mg_forward(struct mg_connection *c, const char *addr) {
 
   if (strcmp(c->request_method, "CONNECT") == 0) {
     // For CONNECT request, reply with 200 OK. Tunnel is established.
-    // TODO(lsm): check for send() failure
     (void) send(conn->ns_conn->sock, ok, sizeof(ok) - 1, 0);
   } else {
     // Strip "http://host:port" part from the URI

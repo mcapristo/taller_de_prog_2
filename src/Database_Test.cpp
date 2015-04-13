@@ -56,6 +56,7 @@ TEST(TestsDatabase,TestDeleteDatabase){
 	d->put("a","b");
 	res = d->deleteDatabaseValues();
 	ASSERT_EQ(1,res);
+	delete d;
 }
 
 TEST(TestsDatabase,TestPut3Messages){
@@ -74,4 +75,5 @@ TEST(TestsDatabase,TestPut3Messages){
 	delete m1;
 	delete m2;
 	delete m3;
+	delete d;
 }
