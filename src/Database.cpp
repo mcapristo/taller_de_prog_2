@@ -141,16 +141,25 @@ bool Database::saveMessage(Message* m) {
 
 int Database::deleteDatabaseValues(){
 	//TODO MODIFICAR PARA COLUMN FAMILIES
-	Iterator* it = this->db->NewIterator(ReadOptions());
-	it->SeekToFirst();
+	std::vector<ColumnFamilyHandle*> column_families;
+	column_families.push_back(this->defaultCF);
+	column_families.push_back(this->userCF);
+	column_families.push_back(this->messageCF);
+	column_families.push_back(this->conversationCF);
 	int i = 0;
-	while (it->Valid()){
-		Slice key = it->key();
-		this->db->Delete(WriteOptions(),key);
-		it->Next();
-		i++;
+	for (size_t j = 0; j< column_families.size();j++){
+		Iterator* it = this->db->NewIterator(ReadOptions(),column_families[j]);
+		it->SeekToFirst();
+
+		while (it->Valid()){
+			Slice key = it->key();
+			this->db->Delete(WriteOptions(),column_families[j],key);
+			it->Next();
+			i++;
+		}
+		delete it;
 	}
-	delete it;
+
 	return i;
 
 }
