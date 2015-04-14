@@ -66,21 +66,20 @@ bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 	return res.ok();
 }
 
-Json::Value* Database::getJsonValueFromString(string str) {
+Json::Value Database::getJsonValueFromString(string str) {
 	Json::Reader r = Json::Reader();
-	Json::Value* val = new Json::Value();
-	r.parse(str,*val,false);
+	Json::Value val = Json::Value();
+	r.parse(str,val,false);
 	return val;
 }
 
 User* Database::getUser(string key) {
 	string json = this->get(this->userCF,key);
 	if (json == "") return NULL; //TODO: hacer un manejo de errores
-	Json::Value* val = this->getJsonValueFromString(json);
+	Json::Value val = this->getJsonValueFromString(json);
 
 	UserFactory uf = UserFactory();
-	User* u = uf.createUserFromJsonValue(*val);
-	delete val;
+	User* u = uf.createUserFromJsonValue(val);
 	return u;
 }
 
@@ -93,9 +92,7 @@ bool Database::createUser(User* user) {
 
 Message* Database::getMessage(string id){
 	string json = this->get(this->messageCF,id);
-	Json::Reader r = Json::Reader();
-	Json::Value val = Json::Value();
-	r.parse(json,val,false);
+	Json::Value val = this->getJsonValueFromString(json);
 	return new Message(val);
 }
 
@@ -107,9 +104,7 @@ bool Database::saveMessageWithKey(Message* m, string key){
 		conv = new Conversation(m->getEmisor(),m->getReceptor());
 	}
 	else {
-		Json::Reader r = Json::Reader();
-		Json::Value val = Json::Value();
-		r.parse(conversationJson,val,false);
+		Json::Value val = this->getJsonValueFromString(conversationJson);
 		conv = new Conversation(val);
 	}
 	int tot_msg = conv->getTotalMessages();
@@ -165,18 +160,14 @@ Conversation* Database::getConversation(User* u1, User* u2){
 	string key1 = u1->getUsername()+u2->getUsername();
 	string value1 = this->get(this->conversationCF,key1);
 	if (value1 != ""){
-		Json::Reader r = Json::Reader();
-		Json::Value val = Json::Value();
-		r.parse(value1,val,false);
+		Json::Value val = this->getJsonValueFromString(value1);
 		return new Conversation(val);
 	}
 	else{
 		string key2 = u2->getUsername()+u1->getUsername();
 		string value2 = this->get(this->conversationCF,key2);
 		if (value2 != "" ){
-			Json::Reader r = Json::Reader();
-			Json::Value val = Json::Value();
-			r.parse(value1,val,false);
+			Json::Value val = this->getJsonValueFromString(value1);
 			return new Conversation(val);
 		}
 		else return NULL;
@@ -210,9 +201,7 @@ string Database::getUsersJson(){
 	while (it->Valid()){
 		Slice userKey = it->key();
 		string value = this->get(h,userKey.ToString());
-		Json::Reader r = Json::Reader();
-		Json::Value auxiliarValue = Json::Value();
-		r.parse(value,auxiliarValue,false);
+		Json::Value auxiliarValue = this->getJsonValueFromString(value);
 		jsonVec.append(auxiliarValue);
 		it->Next();
 	}

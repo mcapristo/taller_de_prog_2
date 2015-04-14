@@ -50,7 +50,7 @@ private:
 	ColumnFamilyHandle* conversationCF;
 	ColumnFamilyHandle* messageCF;
 	bool saveMessageWithKey(Message* m, string key);
-	Json::Value* getJsonValueFromString(string str);
+	Json::Value getJsonValueFromString(string str);
 
 };
 
