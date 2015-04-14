@@ -16,6 +16,10 @@ User::User(string username) {
 User::~User() {
 }
 
+inline bool operator==(User u1,User u2){
+	return (u1.getUsername() == u2.getUsername());
+}
+
 string User::getName(){
 	return name;
 }

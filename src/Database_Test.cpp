@@ -77,3 +77,46 @@ TEST(TestsDatabase,TestPut3Messages){
 	delete m3;
 	delete d;
 }
+
+
+TEST(TestsDatabase,TestGetUsersJson){
+	Database* d = new Database();
+	d->deleteDatabaseValues();
+	User u1 = User("user1");
+	User u2 = User("user2");
+	User u3 = User("user3");
+	User u4 = User("user4");
+	vector<User*> usersFromTest;
+	usersFromTest.push_back(&u1);
+	usersFromTest.push_back(&u2);
+	usersFromTest.push_back(&u3);
+	usersFromTest.push_back(&u4);
+	d->createUser(&u1);
+	d->createUser(&u2);
+	d->createUser(&u3);
+	d->createUser(&u4);
+	string usersJson = d->getUsersJson();
+	Json::Reader r = Json::Reader();
+	Json::Value val = Json::Value();
+	r.parse(usersJson,val,false);
+	vector<User> usersFromDB;
+	for (Json::Value::iterator it = val["users"].begin(); it != val["users"].end(); ++it) {
+		string username = ((*it)["username"].asString());
+		cout << username<< endl;
+		User u = User(username);
+		usersFromDB.push_back(u);
+	}
+	vector<string> founds;
+	for (size_t i = 0 ; i < usersFromTest.size() ; i++){
+		string userFromTest = usersFromTest[i]->getUsername();
+		for (size_t j = 0 ; j < usersFromDB.size() ; j++){
+			string userFromDB = usersFromDB[j].getUsername();
+			if (userFromTest == userFromDB){
+				founds.push_back(userFromDB);
+			}
+		}
+	}
+	ASSERT_EQ(4,founds.size());
+
+
+}

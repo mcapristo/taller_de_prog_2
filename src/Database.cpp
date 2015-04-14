@@ -150,7 +150,6 @@ int Database::deleteDatabaseValues(){
 	for (size_t j = 0; j< column_families.size();j++){
 		Iterator* it = this->db->NewIterator(ReadOptions(),column_families[j]);
 		it->SeekToFirst();
-
 		while (it->Valid()){
 			Slice key = it->key();
 			this->db->Delete(WriteOptions(),column_families[j],key);
@@ -159,9 +158,7 @@ int Database::deleteDatabaseValues(){
 		}
 		delete it;
 	}
-
 	return i;
-
 }
 
 Conversation* Database::getConversation(User* u1, User* u2){
@@ -202,4 +199,25 @@ bool Database::saveConversation(Conversation* conv){
 		}
 	}
 	return this->put(this->conversationCF,key1,json);
+}
+
+string Database::getUsersJson(){
+	ColumnFamilyHandle* h = this->userCF;
+	Iterator* it = this->db->NewIterator(ReadOptions(),h);
+	Json::Value jsonValue = Json::Value();
+	Json::Value jsonVec = Json::Value();
+	it->SeekToFirst();
+	while (it->Valid()){
+		Slice userKey = it->key();
+		string value = this->get(h,userKey.ToString());
+		Json::Reader r = Json::Reader();
+		Json::Value auxiliarValue = Json::Value();
+		r.parse(value,auxiliarValue,false);
+		jsonVec.append(auxiliarValue);
+		it->Next();
+	}
+	jsonValue["users"] = jsonVec;
+	Json::StreamWriterBuilder builder;
+	builder.settings_["identation"] = "\t";
+	return Json::writeString(builder,jsonValue);
 }

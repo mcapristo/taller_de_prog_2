@@ -41,6 +41,8 @@ public:
 	Conversation* getConversation(User* u1, User* u2);
 	bool saveConversation(Conversation* conv);
 
+	string getUsersJson();
+
 private:
 	DB* db;
 	ColumnFamilyHandle* defaultCF;
