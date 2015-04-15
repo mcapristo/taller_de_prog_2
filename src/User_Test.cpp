@@ -26,7 +26,7 @@ TEST(UserTests,TestUserToJsonValue){
 	string username = value.get("username","").asString();
 	string password = value.get("password", "").asString();
 	string name = value.get("name", "").asString();
-	bool online = value.get("online","0").asString() == "1";
+	bool online = value.get("online","0").asBool();
 	ASSERT_EQ("mpalermo", username);
 	ASSERT_EQ("contrasenia",password);
 	ASSERT_EQ("Martin Palermo", name);

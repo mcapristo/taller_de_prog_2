@@ -9,6 +9,7 @@
 #define USER_H_
 
 #include <iostream>
+#include <bits/functional_hash.h>
 #include "json/json.h"
 
 
@@ -27,6 +28,9 @@ public:
 	void setPassword(const string& password);
 	string getUsername();
 	void setUsername(const string& username);
+	string getToken();
+	void setToken(string t);
+	void login();
 	Json::Value toJsonValue();
 	string toJsonString();
 
@@ -37,6 +41,7 @@ private:
 	//UBICACION
 	//FOTO DE PERFIL
 	bool online;
+	string token;
 };
 
 #endif /* USER_H_ */

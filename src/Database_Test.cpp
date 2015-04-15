@@ -23,7 +23,7 @@ TEST(TestsDatabase,TestPutAndGetUserFromDatabase){
 	UserFactory uf = UserFactory();
 	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":\"1\"}";
 	User* user = uf.createUserFromJsonString(json);
-	bool res = d.createUser(user);
+	bool res = d.saveUser(user);
 	ASSERT_EQ(true,res);
 	User* userFromDatabase = d.getUser("mpalermo");
 	ASSERT_EQ(user->getName(),userFromDatabase->getName());
@@ -91,10 +91,10 @@ TEST(TestsDatabase,TestGetUsersJsonString){
 	usersFromTest.push_back(&u2);
 	usersFromTest.push_back(&u3);
 	usersFromTest.push_back(&u4);
-	d->createUser(&u1);
-	d->createUser(&u2);
-	d->createUser(&u3);
-	d->createUser(&u4);
+	d->saveUser(&u1);
+	d->saveUser(&u2);
+	d->saveUser(&u3);
+	d->saveUser(&u4);
 	string usersJson = d->getUsersJsonString();
 	Json::Reader r = Json::Reader();
 	Json::Value val = Json::Value();
@@ -133,9 +133,23 @@ TEST(TestsDatabase,TestGetMessagesJsonString){
 	Conversation* c = d->getConversation(&u1,&u2);
 	ASSERT_EQ(3,c->getTotalMessages());
 	string json = d->getMessagesJsonString(c);
-	cout<< json<<endl;
 	delete m1;
 	delete m2;
 	delete m3;
 	delete d;
+}
+
+TEST(TestsDatabase,TestUserValidLogin){
+	UserFactory uf = UserFactory();
+	string user = "usuario";
+	string pass = "contrasenia";
+	User* u = uf.createUser(user,pass);
+	Database d = Database();
+	d.saveUser(u);
+	string response = d.login(user,pass);
+	cout<<response<<endl;
+	Json::Value valueResponse = d.getJsonValueFromString(response);
+	ASSERT_NE(valueResponse["token"].asString(), "");
+	ASSERT_TRUE(valueResponse["online"].asBool());
+	delete u;
 }

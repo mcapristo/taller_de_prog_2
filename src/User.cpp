@@ -10,6 +10,7 @@
 User::User(string username) {
 	this->username = username;
 	this->online = false;
+	this->token = "";
 }
 
 
@@ -52,6 +53,14 @@ void User::setUsername(const string& username) {
 	this->username = username;
 }
 
+string User::getToken(){
+	return this->token;
+}
+
+void User::setToken(string t){
+	this->token = t;
+}
+
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
@@ -60,9 +69,8 @@ Json::Value User::toJsonValue() {
 	/*if (this->name != "") value["name"] = this->name;
 	else value["name"] = "";*/
 	value["name"] = this->name;
-
-	if (this->online) value["online"] = "1";//TODO: podria ir el token
-	else value["name"] = "0";
+	value["online"] = this->online;
+	value["token"] = this->token;
 
 	return value;
 }
@@ -71,5 +79,16 @@ string User::toJsonString() {
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,this->toJsonValue());
-
 }
+
+void User::login(){
+	string input = this->getUsername()+this->getPassword()+this->getName();
+	std::hash<std::string> hash_fn;
+	size_t str_hash = hash_fn(input);
+	stringstream ss;
+	ss << str_hash;
+	string token = ss.str();
+	this->setToken(token);
+	this->online = true;
+}
+

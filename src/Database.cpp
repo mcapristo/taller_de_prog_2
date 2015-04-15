@@ -55,12 +55,12 @@ bool Database::put(string key, string value) {
 string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 	string value;
 	Status res = this->db->Get(ReadOptions(),cfHandle,key,&value);
-	cout<< "GET :clave: '" + key + "', valor: '" + value +"'"<< endl;
+//	cout<< "GET from "+ cfHandle->GetName()+" :clave: '" + key + "', valor: '" + value +"'"<< endl;
 	return value;
 }
 
 bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
-	cout<< "SET: clave: '" + key + "', valor: '" + value +"'" << endl;
+//	cout<< "SET in "+ cfHandle->GetName() +": clave: '" + key + "', valor: '" + value +"'" << endl;
 	Status res = db->Put(WriteOptions(),cfHandle, key, value);
 	return res.ok();
 }
@@ -82,7 +82,7 @@ User* Database::getUser(string key) {
 	return u;
 }
 
-bool Database::createUser(User* user) {
+bool Database::saveUser(User* user) {
 	string username = user->getUsername();
 	string json = user->toJsonString();
 	return this->put(this->userCF,username,json);
@@ -247,4 +247,14 @@ string Database::getMessagesJsonString(Conversation* conv){
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,jsonValue);
+}
+
+string Database::login(string username, string password){
+	User* u = this->getUser(username);
+	if (u == NULL) return "{'result':'ERROR','CODE':1}";
+	if (u->getPassword() != password) return "{'result':'ERROR','CODE':2}";
+	u->login();
+	this->saveUser(u);
+	return u->toJsonString();
+
 }

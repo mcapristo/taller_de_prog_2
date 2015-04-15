@@ -31,12 +31,13 @@ public:
 	bool put(string key, string value);
 
 	User* getUser(string key);
-	bool createUser(User* user);
+	bool saveUser(User* user);
 
 	Message* getMessage(string id);
 	bool saveMessage(Message* m);
 
 	int deleteDatabaseValues();
+	Json::Value getJsonValueFromString(string str);
 
 	Conversation* getConversation(User* u1, User* u2);
 	bool saveConversation(Conversation* conv);
@@ -47,6 +48,8 @@ public:
 	string getMessagesJsonString(Conversation* conv);
 	Json::Value getMessagesJsonValue(Conversation* conv);
 
+	string login(string username, string password);
+
 
 private:
 	DB* db;
@@ -55,7 +58,7 @@ private:
 	ColumnFamilyHandle* conversationCF;
 	ColumnFamilyHandle* messageCF;
 	bool saveMessageWithKey(Message* m, string key);
-	Json::Value getJsonValueFromString(string str);
+
 
 };
 
