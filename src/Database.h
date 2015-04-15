@@ -41,7 +41,12 @@ public:
 	Conversation* getConversation(User* u1, User* u2);
 	bool saveConversation(Conversation* conv);
 
-	string getUsersJson();
+	string getUsersJsonString();
+	Json::Value getUsersJsonValue();
+
+	string getMessagesJsonString(Conversation* conv);
+	Json::Value getMessagesJsonValue(Conversation* conv);
+
 
 private:
 	DB* db;

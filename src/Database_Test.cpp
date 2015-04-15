@@ -79,7 +79,7 @@ TEST(TestsDatabase,TestPut3Messages){
 }
 
 
-TEST(TestsDatabase,TestGetUsersJson){
+TEST(TestsDatabase,TestGetUsersJsonString){
 	Database* d = new Database();
 	d->deleteDatabaseValues();
 	User u1 = User("user1");
@@ -95,14 +95,13 @@ TEST(TestsDatabase,TestGetUsersJson){
 	d->createUser(&u2);
 	d->createUser(&u3);
 	d->createUser(&u4);
-	string usersJson = d->getUsersJson();
+	string usersJson = d->getUsersJsonString();
 	Json::Reader r = Json::Reader();
 	Json::Value val = Json::Value();
 	r.parse(usersJson,val,false);
 	vector<User> usersFromDB;
 	for (Json::Value::iterator it = val["users"].begin(); it != val["users"].end(); ++it) {
 		string username = ((*it)["username"].asString());
-		cout << username<< endl;
 		User u = User(username);
 		usersFromDB.push_back(u);
 	}
@@ -117,6 +116,26 @@ TEST(TestsDatabase,TestGetUsersJson){
 		}
 	}
 	ASSERT_EQ(4,founds.size());
+	delete d;
+}
 
-
+TEST(TestsDatabase,TestGetMessagesJsonString){
+	Database* d = new Database();
+	d->deleteDatabaseValues();
+	User u1 = User("user1");
+	User u2 = User("user2");
+	Message* m1 = new Message(&u1,&u2,"test message1");
+	Message* m2 = new Message(&u1,&u2,"test message2");
+	Message* m3 = new Message(&u1,&u2,"test message3");
+	d->saveMessage(m1);
+	d->saveMessage(m2);
+	d->saveMessage(m3);
+	Conversation* c = d->getConversation(&u1,&u2);
+	ASSERT_EQ(3,c->getTotalMessages());
+	string json = d->getMessagesJsonString(c);
+	cout<< json<<endl;
+	delete m1;
+	delete m2;
+	delete m3;
+	delete d;
 }

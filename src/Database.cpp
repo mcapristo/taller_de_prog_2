@@ -55,13 +55,12 @@ bool Database::put(string key, string value) {
 string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 	string value;
 	Status res = this->db->Get(ReadOptions(),cfHandle,key,&value);
-	// TODO: ver si hacer algo con el resultado
-//	cout<< "GET :clave: '" + key + "', valor: '" + value +"'"<< endl;
+	cout<< "GET :clave: '" + key + "', valor: '" + value +"'"<< endl;
 	return value;
 }
 
 bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
-//	cout<< "SET: clave: '" + key + "', valor: '" + value +"'" << endl;
+	cout<< "SET: clave: '" + key + "', valor: '" + value +"'" << endl;
 	Status res = db->Put(WriteOptions(),cfHandle, key, value);
 	return res.ok();
 }
@@ -121,21 +120,22 @@ bool Database::saveMessageWithKey(Message* m, string key){
 }
 
 bool Database::saveMessage(Message* m) {
-	string key1 = m->getEmisor()->getUsername() + m->getReceptor()->getUsername();
-	string res1 = this->get(this->conversationCF,key1);
+	Conversation* conv = this->getConversation(m->getEmisor(),m->getReceptor());
 
-	if (res1 != ""){
-		return this->saveMessageWithKey(m,key1);
+	if (conv != NULL){
+		string id = conv->getId();
+		delete conv;
+		return this->saveMessageWithKey(m,id);
 	}
 	else{
-		string key2 =  m->getReceptor()->getUsername() + m->getEmisor()->getUsername();
+		string key2 = m->getEmisor()->getUsername() + m->getReceptor()->getUsername();
 		return this->saveMessageWithKey(m,key2);
 	}
 
 }
 
+
 int Database::deleteDatabaseValues(){
-	//TODO MODIFICAR PARA COLUMN FAMILIES
 	std::vector<ColumnFamilyHandle*> column_families;
 	column_families.push_back(this->defaultCF);
 	column_families.push_back(this->userCF);
@@ -175,24 +175,28 @@ Conversation* Database::getConversation(User* u1, User* u2){
 }
 
 bool Database::saveConversation(Conversation* conv){
-	string json = conv->toJsonString();
-
 	string key1 = conv->getFirstUser()->getUsername() + conv->getSecondUser()->getUsername();
 	string value1 = this->get(key1);
 	if (value1 != ""){
+		conv->setId(key1);
+		string json = conv->toJsonString();
 		return this->put(this->conversationCF,key1,json);
 	}
 	else{
 		string key2 = conv->getSecondUser()->getUsername() + conv->getFirstUser()->getUsername();
 		string value2 = this->get(key2);
 		if (value2 != ""){
+			conv->setId(key2);
+			string json = conv->toJsonString();
 			return this->put(this->conversationCF,key2,json);
 		}
 	}
+	conv->setId(key1);
+	string json = conv->toJsonString();
 	return this->put(this->conversationCF,key1,json);
 }
 
-string Database::getUsersJson(){
+Json::Value Database::getUsersJsonValue(){
 	ColumnFamilyHandle* h = this->userCF;
 	Iterator* it = this->db->NewIterator(ReadOptions(),h);
 	Json::Value jsonValue = Json::Value();
@@ -206,6 +210,40 @@ string Database::getUsersJson(){
 		it->Next();
 	}
 	jsonValue["users"] = jsonVec;
+	delete it;
+	return jsonValue;
+
+}
+
+string Database::getUsersJsonString(){
+	Json::Value jsonValue = this->getUsersJsonValue();
+	Json::StreamWriterBuilder builder;
+	builder.settings_["identation"] = "\t";
+	return Json::writeString(builder,jsonValue);
+}
+
+Json::Value Database::getMessagesJsonValue(Conversation* conv){
+	int tot_msg = conv->getTotalMessages();
+	Json::Value rootValue = Json::Value();
+	Json::Value arrayValue = Json::Value();
+	string conversationID = conv->getId();
+	ColumnFamilyHandle* cf = this->messageCF;
+
+	for (int i = 0; i< tot_msg; i++){
+		stringstream ss;
+		ss << i;
+		string str = ss.str();
+		string messageID = conversationID + str;
+		string messageJson = this->get(cf,messageID);
+		Json::Value messageValue = this->getJsonValueFromString(messageJson);
+		arrayValue.append(messageValue);
+	}
+	rootValue["messages"] = arrayValue;
+	return rootValue;
+}
+
+string Database::getMessagesJsonString(Conversation* conv){
+	Json::Value jsonValue = this->getMessagesJsonValue(conv);
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,jsonValue);
