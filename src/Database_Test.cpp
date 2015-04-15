@@ -147,9 +147,37 @@ TEST(TestsDatabase,TestUserValidLogin){
 	Database d = Database();
 	d.saveUser(u);
 	string response = d.login(user,pass);
-	cout<<response<<endl;
 	Json::Value valueResponse = d.getJsonValueFromString(response);
 	ASSERT_NE(valueResponse["token"].asString(), "");
 	ASSERT_TRUE(valueResponse["online"].asBool());
+	delete u;
+}
+
+TEST(TestsDatabase,TestUserInvalidLoginBecauseOfInvalidUsername){
+	UserFactory uf = UserFactory();
+	string user = "usuario";
+	string pass = "contrasenia";
+	User* u = uf.createUser(user,pass);
+	Database d = Database();
+	d.deleteDatabaseValues();
+	string response = d.login(user,pass);
+	cout<<response<<endl;
+	Json::Value valueResponse = d.getJsonValueFromString(response);
+	ASSERT_EQ("ERROR",valueResponse["result"].asString());
+	ASSERT_EQ("1",valueResponse["code"].asString());
+	delete u;
+}
+
+TEST(TestsDatabase,TestUserInvalidLoginBecauseOfInvalidPassword){
+	UserFactory uf = UserFactory();
+	string user = "usuario";
+	string pass = "contrasenia";
+	User* u = uf.createUser(user,pass);
+	Database d = Database();
+	d.saveUser(u);
+	string response = d.login(user,pass+"4");
+	Json::Value valueResponse = d.getJsonValueFromString(response);
+	ASSERT_EQ("ERROR",valueResponse["result"].asString());
+	ASSERT_EQ("2",valueResponse["code"].asString());
 	delete u;
 }
