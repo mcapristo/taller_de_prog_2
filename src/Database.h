@@ -48,9 +48,6 @@ public:
 	string getMessagesJsonString(Conversation* conv);
 	Json::Value getMessagesJsonValue(Conversation* conv);
 
-	string login(string username, string password);
-
-
 private:
 	DB* db;
 	ColumnFamilyHandle* defaultCF;

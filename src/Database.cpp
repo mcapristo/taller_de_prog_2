@@ -248,13 +248,3 @@ string Database::getMessagesJsonString(Conversation* conv){
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,jsonValue);
 }
-
-string Database::login(string username, string password){
-	User* u = this->getUser(username);
-	if (u == NULL) return "{\"result\":\"ERROR\",\"code\":1}";
-	if (u->getPassword() != password) return "{\"result\":\"ERROR\",\"code\":2}";
-	u->login();
-	this->saveUser(u);
-	return u->toJsonString();
-
-}
