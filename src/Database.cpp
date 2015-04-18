@@ -72,6 +72,12 @@ Json::Value Database::getJsonValueFromString(string str) {
 	return val;
 }
 
+string Database::getJsonStringFromValue(Json::Value value){
+	Json::StreamWriterBuilder builder;
+	builder.settings_["identation"] = "\t";
+	return Json::writeString(builder,value);
+}
+
 User* Database::getUser(string key) {
 	string json = this->get(this->userCF,key);
 	if (json == "") return NULL; //TODO: hacer un manejo de errores

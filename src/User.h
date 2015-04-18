@@ -12,7 +12,6 @@
 #include <bits/functional_hash.h>
 #include "json/json.h"
 
-
 using namespace std;
 
 
@@ -31,6 +30,7 @@ public:
 	string getToken();
 	void setToken(string t);
 	void login();
+	void logout();
 	Json::Value toJsonValue();
 	string toJsonString();
 

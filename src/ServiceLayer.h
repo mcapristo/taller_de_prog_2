@@ -17,6 +17,14 @@ public:
 
 	Database* getDatabase();
 	string login(string username, string password);
+	string logout(string username, string token);
+
+	static string ERROR_STRING;
+	static string OK_STRING;
+
+	static int INVALID_USERNAME;
+	static int INVALID_PASSWORD;
+	static int INVALID_TOKEN;
 private:
 	Database* db;
 };

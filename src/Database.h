@@ -37,7 +37,9 @@ public:
 	bool saveMessage(Message* m);
 
 	int deleteDatabaseValues();
+
 	Json::Value getJsonValueFromString(string str);
+	string getJsonStringFromValue(Json::Value);
 
 	Conversation* getConversation(User* u1, User* u2);
 	bool saveConversation(Conversation* conv);
