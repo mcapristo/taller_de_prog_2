@@ -13,7 +13,6 @@ User::User(string username) {
 	this->token = "";
 }
 
-
 User::~User() {
 }
 
@@ -65,9 +64,6 @@ Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
 	value["password"] = this->password; // La contrasenia no se deberia mandar
-	// deberia ser if(this->name == nullptr) pero no compila
-	/*if (this->name != "") value["name"] = this->name;
-	else value["name"] = "";*/
 	value["name"] = this->name;
 	value["online"] = this->online;
 	value["token"] = this->token;
@@ -90,5 +86,18 @@ void User::login(){
 	string token = ss.str();
 	this->setToken(token);
 	this->online = true;
+}
+
+void User::logout(){
+	this->setToken("");
+	this->online = false;
+}
+
+Json::Value User::getUserProfileJsonValue(){
+	Json::Value val = Json::Value();
+	val["username"] = this->getUsername();
+	val["name"] = this->getName();
+	val["online"] = this->isOnline();
+	return val;
 }
 

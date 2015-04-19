@@ -25,11 +25,13 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	string username = value.get("username","").asString();
 	string password = value.get("password", "").asString();
 	string name = value.get("name", "").asString();
-	bool online = value.get("online","0").asString() == "1";
+	bool online = value.get("online",false).asBool();
+	string token = value.get("token","").asString();
 	User* u = new User(username);
 	u->setPassword(password);
 	u->setName(name);
 	u->setOnline(online);
+	u->setToken(token);
 	return u;
 }
 

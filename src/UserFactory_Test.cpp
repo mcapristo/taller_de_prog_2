@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 
 TEST(UserFactoryTest,TestUserFactoryFromStringJson){
-	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":\"1\"}";
+	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":true}";
 	UserFactory uf = UserFactory();
 	User* user = uf.createUserFromJsonString(json);
 	ASSERT_EQ("mpalermo",user->getUsername());

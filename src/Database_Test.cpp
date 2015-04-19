@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include "Database.h"
 
+
 TEST(TestsDatabase,TestPutAndGetStringFromDatabase){
 	Database d = Database();
 	string key = "clave";
@@ -18,10 +19,25 @@ TEST(TestsDatabase,TestPutAndGetStringFromDatabase){
 	ASSERT_EQ(value,valueFromDatabase);
 }
 
+TEST(TestsDatabase,TestPutToTimesShouldOverride){
+	Database d = Database();
+	string key = "clave";
+	string value = "valor";
+	string value2 = "valor2";
+	bool res = d.put(key,value);
+	ASSERT_EQ(true, res);
+	string valueFromDatabase = d.get(key);
+	ASSERT_EQ(value,valueFromDatabase);
+	bool res2 = d.put(key,value2);
+	ASSERT_EQ(true, res2);
+	string valueFromDatabase2 = d.get(key);
+	ASSERT_EQ(value2,valueFromDatabase2);
+}
+
 TEST(TestsDatabase,TestPutAndGetUserFromDatabase){
 	Database d = Database();
 	UserFactory uf = UserFactory();
-	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":\"1\"}";
+	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":true}";
 	User* user = uf.createUserFromJsonString(json);
 	bool res = d.saveUser(user);
 	ASSERT_EQ(true,res);
@@ -139,45 +155,3 @@ TEST(TestsDatabase,TestGetMessagesJsonString){
 	delete d;
 }
 
-TEST(TestsDatabase,TestUserValidLogin){
-	UserFactory uf = UserFactory();
-	string user = "usuario";
-	string pass = "contrasenia";
-	User* u = uf.createUser(user,pass);
-	Database d = Database();
-	d.saveUser(u);
-	string response = d.login(user,pass);
-	Json::Value valueResponse = d.getJsonValueFromString(response);
-	ASSERT_NE(valueResponse["token"].asString(), "");
-	ASSERT_TRUE(valueResponse["online"].asBool());
-	delete u;
-}
-
-TEST(TestsDatabase,TestUserInvalidLoginBecauseOfInvalidUsername){
-	UserFactory uf = UserFactory();
-	string user = "usuario";
-	string pass = "contrasenia";
-	User* u = uf.createUser(user,pass);
-	Database d = Database();
-	d.deleteDatabaseValues();
-	string response = d.login(user,pass);
-	cout<<response<<endl;
-	Json::Value valueResponse = d.getJsonValueFromString(response);
-	ASSERT_EQ("ERROR",valueResponse["result"].asString());
-	ASSERT_EQ("1",valueResponse["code"].asString());
-	delete u;
-}
-
-TEST(TestsDatabase,TestUserInvalidLoginBecauseOfInvalidPassword){
-	UserFactory uf = UserFactory();
-	string user = "usuario";
-	string pass = "contrasenia";
-	User* u = uf.createUser(user,pass);
-	Database d = Database();
-	d.saveUser(u);
-	string response = d.login(user,pass+"4");
-	Json::Value valueResponse = d.getJsonValueFromString(response);
-	ASSERT_EQ("ERROR",valueResponse["result"].asString());
-	ASSERT_EQ("2",valueResponse["code"].asString());
-	delete u;
-}
