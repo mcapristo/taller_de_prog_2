@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include <stddef.h>
 #include <fstream>
+#include "Constants.h"
 Logger* Logger::instance = NULL;
 
 Logger* Logger::getInstnce() {
@@ -30,16 +31,16 @@ int Logger::log(int type, string message) {
 
 	if(logFile.is_open()){
 		switch (type){
-			case 1://info
+			case (Constants::INFO) :
 				logFile << "INFO " << " " << message;
 				break;
-			case 2://warn
+			case (Constants::WARN) :
 				logFile << "WARN " << " " << message;
 				break;
-			case 3://error
+			case (Constants::ERROR) :
 				logFile << "ERROR " << " " << message;
 				break;
-			case 4://error
+			case (Constants::DEBUG) :
 				logFile << "DEBUG " << " " << message;
 				break;
 		}
