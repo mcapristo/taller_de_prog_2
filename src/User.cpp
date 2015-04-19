@@ -93,3 +93,11 @@ void User::logout(){
 	this->online = false;
 }
 
+Json::Value User::getUserProfileJsonValue(){
+	Json::Value val = Json::Value();
+	val["username"] = this->getUsername();
+	val["name"] = this->getName();
+	val["online"] = this->isOnline();
+	return val;
+}
+

@@ -244,3 +244,48 @@ TEST(TestsServiceLayer, TestGetMessagesWithTwoUsers){
 	delete u1;
 	delete emisor;
 }
+
+TEST(TestsServiceLayer,TestGetOtherUserProfile){
+	ServiceLayer sl = ServiceLayer();
+	UserFactory uf = UserFactory();
+	string username = "carlos01";
+	string name = "Carlos";
+	string visitorUsername = "visitor";
+	string pass = "contrasenia";
+	User* u = uf.createUser(username,pass);
+	u->setName(name);
+	User* visitor = uf.createUser(visitorUsername,pass);
+	Database* d = sl.getDatabase();
+	d->deleteDatabaseValues();
+	d->saveUser(u);
+	d->saveUser(visitor);
+
+	string responseLogin = sl.login(visitorUsername,pass);
+	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	string userJson = sl.getUserProfile(visitorUsername, token, username);
+	Json::Value responseValue = sl.getDatabase()->getJsonValueFromString(userJson);
+	Json::Value userJsonValue = responseValue["data"];
+
+	ASSERT_EQ(ServiceLayer::OK_STRING, responseValue["result"].asString());
+	ASSERT_EQ(name, userJsonValue["name"].asString());
+	ASSERT_EQ(username , userJsonValue["username"].asString());
+	ASSERT_EQ(false,userJsonValue["online"].asBool());
+
+	sl.login(username,pass);
+
+	userJson = sl.getUserProfile(visitorUsername, token, username);
+	responseValue = sl.getDatabase()->getJsonValueFromString(userJson);
+	userJsonValue = responseValue["data"];
+
+	ASSERT_EQ(ServiceLayer::OK_STRING, responseValue["result"].asString());
+	ASSERT_EQ(name, userJsonValue["name"].asString());
+	ASSERT_EQ(username , userJsonValue["username"].asString());
+	ASSERT_EQ(true,userJsonValue["online"].asBool());
+
+
+	delete u;
+	delete visitor;
+
+}

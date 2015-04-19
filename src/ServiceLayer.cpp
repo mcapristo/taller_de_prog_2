@@ -14,6 +14,7 @@ int ServiceLayer::INVALID_USERNAME = 1;
 int ServiceLayer::INVALID_PASSWORD = 2;
 int ServiceLayer::INVALID_TOKEN = 3;
 int ServiceLayer::ERROR_SEND_MESSAGE = 4;
+int ServiceLayer::ERROR_USER_PROFILE_DOESNT_EXISTS = 5;
 
 ServiceLayer::ServiceLayer() {
 	this->db = new Database();
@@ -144,5 +145,26 @@ string ServiceLayer::getMessages(string username, string token, string user2){
 	}
 	delete u;
 	delete u2;
+	return this->getDatabase()->getJsonStringFromValue(rootValue);
+}
+
+string ServiceLayer::getUserProfile(string username, string token, string userToVisit){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	if (res != ""){
+		delete u;
+		return res;
+	}
+	Json::Value rootValue = Json::Value();
+	User* visited = this->getDatabase()->getUser(userToVisit);
+	if ( visited == NULL){
+		delete u;
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::ERROR_USER_PROFILE_DOESNT_EXISTS;
+	}
+	else{
+		rootValue["result"] = ServiceLayer::OK_STRING;
+		rootValue["data"] = visited->getUserProfileJsonValue();
+	}
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }

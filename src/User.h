@@ -33,6 +33,7 @@ public:
 	void logout();
 	Json::Value toJsonValue();
 	string toJsonString();
+	Json::Value getUserProfileJsonValue();
 
 private:
 	string username;

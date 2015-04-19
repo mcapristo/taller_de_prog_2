@@ -27,6 +27,8 @@ public:
 
 	string getMessages(string username, string token, string user2);
 
+	string getUserProfile(string username, string token, string userToVisit);
+
 	static string ERROR_STRING;
 	static string OK_STRING;
 
@@ -34,6 +36,7 @@ public:
 	static int INVALID_PASSWORD;
 	static int INVALID_TOKEN;
 	static int ERROR_SEND_MESSAGE;
+	static int ERROR_USER_PROFILE_DOESNT_EXISTS;
 private:
 	Database* db;
 };
