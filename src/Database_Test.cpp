@@ -18,10 +18,25 @@ TEST(TestsDatabase,TestPutAndGetStringFromDatabase){
 	ASSERT_EQ(value,valueFromDatabase);
 }
 
+TEST(TestsDatabase,TestPutToTimesShouldOverride){
+	Database d = Database();
+	string key = "clave";
+	string value = "valor";
+	string value2 = "valor2";
+	bool res = d.put(key,value);
+	ASSERT_EQ(true, res);
+	string valueFromDatabase = d.get(key);
+	ASSERT_EQ(value,valueFromDatabase);
+	bool res2 = d.put(key,value2);
+	ASSERT_EQ(true, res2);
+	string valueFromDatabase2 = d.get(key);
+	ASSERT_EQ(value2,valueFromDatabase2);
+}
+
 TEST(TestsDatabase,TestPutAndGetUserFromDatabase){
 	Database d = Database();
 	UserFactory uf = UserFactory();
-	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":\"1\"}";
+	string json = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\",\"online\":true}";
 	User* user = uf.createUserFromJsonString(json);
 	bool res = d.saveUser(user);
 	ASSERT_EQ(true,res);

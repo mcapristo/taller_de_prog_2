@@ -61,7 +61,10 @@ string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 
 bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 //	cout<< "SET in "+ cfHandle->GetName() +": clave: '" + key + "', valor: '" + value +"'" << endl;
-	Status res = db->Put(WriteOptions(),cfHandle, key, value);
+	WriteOptions wo = WriteOptions();
+	Status res = db->Put(wo,cfHandle, key, value);
+	string v;
+	this->db->Get(ReadOptions(),cfHandle,key,&v);
 	return res.ok();
 }
 

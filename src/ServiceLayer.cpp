@@ -13,6 +13,7 @@ string ServiceLayer::OK_STRING = "OK";
 int ServiceLayer::INVALID_USERNAME = 1;
 int ServiceLayer::INVALID_PASSWORD = 2;
 int ServiceLayer::INVALID_TOKEN = 3;
+int ServiceLayer::ERROR_SEND_MESSAGE = 4;
 
 ServiceLayer::ServiceLayer() {
 	this->db = new Database();
@@ -31,7 +32,7 @@ string ServiceLayer::login(string username, string password){
 	if (u == NULL) return "{\"result\":\"ERROR\",\"code\":1}";
 	if (u->getPassword() != password) return "{\"result\":\"ERROR\",\"code\":2}";
 	u->login();
-	this->db->saveUser(u);
+	bool res = this->db->saveUser(u);
 	string json = u->toJsonString();
 	delete u;
 	return json;
@@ -59,4 +60,36 @@ string ServiceLayer::logout(string username, string token){
 	value["data"] = json;
 	return this->getDatabase()->getJsonStringFromValue(value);
 
+}
+
+string ServiceLayer::sendMessage(string username, string token, string jsonMessage){
+	Database* db = this->getDatabase();
+	User* u = db->getUser(username);
+	Json::Value rootValue = Json::Value();
+	if (u == NULL){
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::INVALID_USERNAME;
+		delete u;
+		return db->getJsonStringFromValue(rootValue);
+	}
+	if (u->getToken() != token){
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::INVALID_TOKEN;
+		delete u;
+		return db->getJsonStringFromValue(rootValue);
+	}
+	Json::Value value = this->getDatabase()->getJsonValueFromString(jsonMessage);
+	Message* m = new Message(value);
+	delete u;
+	bool result = this->getDatabase()->saveMessage(m);
+	if (result){
+		rootValue["result"] = ServiceLayer::OK_STRING;
+		rootValue["data"] = m->toJsonString();
+	}
+	else{
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::ERROR_SEND_MESSAGE;
+	}
+	delete m;
+	return db->getJsonStringFromValue(rootValue);
 }
