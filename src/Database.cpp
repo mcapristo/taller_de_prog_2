@@ -63,8 +63,6 @@ bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 //	cout<< "SET in "+ cfHandle->GetName() +": clave: '" + key + "', valor: '" + value +"'" << endl;
 	WriteOptions wo = WriteOptions();
 	Status res = db->Put(wo,cfHandle, key, value);
-	string v;
-	this->db->Get(ReadOptions(),cfHandle,key,&v);
 	return res.ok();
 }
 
@@ -205,6 +203,23 @@ bool Database::saveConversation(Conversation* conv){
 	return this->put(this->conversationCF,key1,json);
 }
 
+vector<User*> Database::getUsers(){
+	ColumnFamilyHandle* h = this->userCF;
+	Iterator* it = this->db->NewIterator(ReadOptions(),h);
+	vector<User*> users = vector<User*>();
+	UserFactory uf = UserFactory();
+	it->SeekToFirst();
+	while (it->Valid()){
+		Slice userKey = it->key();
+		string value = this->get(h,userKey.ToString());
+		User* u = uf.createUserFromJsonString(value);
+		users.push_back(u);
+		it->Next();
+	}
+	delete it;
+	return users;
+}
+
 Json::Value Database::getUsersJsonValue(){
 	ColumnFamilyHandle* h = this->userCF;
 	Iterator* it = this->db->NewIterator(ReadOptions(),h);
@@ -257,3 +272,18 @@ string Database::getMessagesJsonString(Conversation* conv){
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,jsonValue);
 }
+
+vector<Conversation*> Database::getConversations(User* user){
+	vector<User*> users = this->getUsers();
+	vector<Conversation*> conversations = vector<Conversation*>();
+	for(size_t i = 0; i < users.size(); i++){
+		User* u = users[i];
+		Conversation* c = this->getConversation(user, u);
+		if (c != NULL){
+			conversations.push_back(c);
+		}
+		delete u;
+	}
+	return conversations;
+}
+

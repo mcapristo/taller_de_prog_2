@@ -29,58 +29,66 @@ Database* ServiceLayer::getDatabase(){
 
 string ServiceLayer::login(string username, string password){
 	User* u = this->db->getUser(username);
-	if (u == NULL) return "{\"result\":\"ERROR\",\"code\":1}";
-	if (u->getPassword() != password) return "{\"result\":\"ERROR\",\"code\":2}";
-	u->login();
-	bool res = this->db->saveUser(u);
-	string json = u->toJsonString();
-	delete u;
-	return json;
-}
-
-string ServiceLayer::logout(string username, string token){
-	User* u = this->getDatabase()->getUser(username);
 	Json::Value value = Json::Value();
 	if (u == NULL){
 		value["result"] = ServiceLayer::ERROR_STRING;
 		value["code"] = ServiceLayer::INVALID_USERNAME;
+	}
+	else if (u->getPassword() != password){
+		value["result"] = ServiceLayer::ERROR_STRING;
+		value["code"] = ServiceLayer::INVALID_PASSWORD;
+	}
+	else {
+		u->login();
+		this->db->saveUser(u);
+		value["result"] = ServiceLayer::OK_STRING;
+		value["data"] = u->toJsonValue();
+	}
+	delete u;
+	return this->getDatabase()->getJsonStringFromValue(value);
+}
+
+string ServiceLayer::logout(string username, string token){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	if (res != ""){
 		delete u;
+		return res;
+	}
+	Json::Value value = Json::Value();
+	u->logout();
+	this->getDatabase()->saveUser(u);
+	Json::Value json = u->toJsonValue();
+	value["data"] = json;
+	delete u;
+	return this->getDatabase()->getJsonStringFromValue(value);
+}
+
+string ServiceLayer::validateToken(User* u, string token){
+	Json::Value value = Json::Value();
+	if (u == NULL){
+		value["result"] = ServiceLayer::ERROR_STRING;
+		value["code"] = ServiceLayer::INVALID_USERNAME;
 		return this->getDatabase()->getJsonStringFromValue(value);
 	}
 	if (u->getToken() != token){
 		value["result"] = ServiceLayer::ERROR_STRING;
 		value["code"] = ServiceLayer::INVALID_TOKEN;
-		delete u;
 		return this->getDatabase()->getJsonStringFromValue(value);
 	}
-	u->logout();
-	this->getDatabase()->saveUser(u);
-	Json::Value json = u->toJsonValue();
-	delete u;
-	value["data"] = json;
-	return this->getDatabase()->getJsonStringFromValue(value);
-
+	return "";
 }
 
 string ServiceLayer::sendMessage(string username, string token, string jsonMessage){
-	Database* db = this->getDatabase();
-	User* u = db->getUser(username);
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	delete u;
+	if (res != ""){
+		return res;
+	}
 	Json::Value rootValue = Json::Value();
-	if (u == NULL){
-		rootValue["result"] = ServiceLayer::ERROR_STRING;
-		rootValue["code"] = ServiceLayer::INVALID_USERNAME;
-		delete u;
-		return db->getJsonStringFromValue(rootValue);
-	}
-	if (u->getToken() != token){
-		rootValue["result"] = ServiceLayer::ERROR_STRING;
-		rootValue["code"] = ServiceLayer::INVALID_TOKEN;
-		delete u;
-		return db->getJsonStringFromValue(rootValue);
-	}
 	Json::Value value = this->getDatabase()->getJsonValueFromString(jsonMessage);
 	Message* m = new Message(value);
-	delete u;
 	bool result = this->getDatabase()->saveMessage(m);
 	if (result){
 		rootValue["result"] = ServiceLayer::OK_STRING;
@@ -92,4 +100,27 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	}
 	delete m;
 	return db->getJsonStringFromValue(rootValue);
+}
+
+string ServiceLayer::getConversations(string username, string token){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	if (res != ""){
+		delete u;
+		return res;
+	}
+	Json::Value value = Json::Value();
+	vector<Conversation*> conversations = this->getDatabase()->getConversations(u);
+	Json::Value rootValue = Json::Value();
+	Json::Value conversationsValue = Json::Value();
+	for(size_t i = 0 ; i< conversations.size() ; i++){
+		Conversation* c = conversations[i];
+		string conversationJsonString = c->toJsonString();
+		conversationsValue.append(conversationJsonString);
+		delete c;
+	}
+	rootValue["result"] = ServiceLayer::OK_STRING;
+	rootValue["data"] = conversationsValue;
+	delete u;
+	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }

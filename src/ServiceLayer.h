@@ -19,8 +19,11 @@ public:
 
 	string login(string username, string password);
 	string logout(string username, string token);
+	string validateToken(User* user,string token);
 
 	string sendMessage(string username, string token, string json);
+
+	string getConversations(string username,string token);
 
 	static string ERROR_STRING;
 	static string OK_STRING;

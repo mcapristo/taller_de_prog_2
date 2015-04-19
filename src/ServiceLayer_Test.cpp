@@ -17,7 +17,9 @@ TEST(TestsServiceLayer,TestUserValidLogin){
 	Database* d = sl.getDatabase();
 	d->saveUser(u);
 	string response = sl.login(user,pass);
-	Json::Value valueResponse = d->getJsonValueFromString(response);
+	Json::Value rootValue = d->getJsonValueFromString(response);
+	ASSERT_EQ(ServiceLayer::OK_STRING, rootValue["result"].asString());
+	Json::Value valueResponse = rootValue["data"];
 	ASSERT_NE(valueResponse["token"].asString(), "");
 	ASSERT_TRUE(valueResponse["online"].asBool());
 
@@ -66,7 +68,8 @@ TEST(TestsServiceLayer,TestUserValidLogout){
 	d->saveUser(u);
 	string responseLogin = sl.login(user,pass);
 	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
-	string token = valueResponseLogin["token"].asString();
+	Json::Value userValue = valueResponseLogin["data"];
+	string token = userValue["token"].asString();
 	string responseLogout = sl.logout(user,token);
 	Json::Value valueResponseLogout = d->getJsonValueFromString(responseLogout);
 
@@ -89,7 +92,7 @@ TEST(TestsServiceLayer,TestUserInvalidLogoutBecauseOfInvalidUsername){
 	d->saveUser(u);
 	string responseLogin = sl.login(user,pass);
 	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
-	string token = valueResponseLogin["token"].asString();
+	string token = valueResponseLogin["data"]["token"].asString();
 	string responseLogout = sl.logout(user+"1",token);
 	Json::Value valueResponseLogout = d->getJsonValueFromString(responseLogout);
 
@@ -109,7 +112,7 @@ TEST(TestsServiceLayer,TestUserInvalidLogoutBecauseOfInvalidToken){
 	d->saveUser(u);
 	string responseLogin = sl.login(user,pass);
 	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
-	string token = valueResponseLogin["token"].asString();
+	string token = valueResponseLogin["data"]["token"].asString();
 	string responseLogout = sl.logout(user,token+"1");
 	Json::Value valueResponseLogout = d->getJsonValueFromString(responseLogout);
 
@@ -131,7 +134,7 @@ TEST(TestsServiceLayer,TestSendValidMessage){
 	d->saveUser(u1);
 	string responseLogin = sl.login(user1,pass);
 	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
-	string token = valueResponseLogin["token"].asString();
+	string token = valueResponseLogin["data"]["token"].asString();
 
 	Message* m = new Message(u1,u2,"primer mensaje");
 
@@ -143,4 +146,51 @@ TEST(TestsServiceLayer,TestSendValidMessage){
 	Json::Value dataJsonValue = sl.getDatabase()->getJsonValueFromString(dataString);
 	ASSERT_EQ(user1,dataJsonValue["emisor"].asString());
 	ASSERT_EQ(user2,dataJsonValue["receptor"].asString());
+	delete u1;
+	delete u2;
+}
+
+TEST(TestsServiceLayer,TestGetUserConversations){
+	UserFactory uf = UserFactory();
+	string user1 = "emisor";
+	string user2 = "receptor1";
+	string user3 = "receptor2";
+	string user4 = "receptor3";
+	string pass = "contrasenia";
+	User* emisor = uf.createUser(user1,pass);
+	User* u1 = uf.createUser(user2,pass);
+	User* u2 = uf.createUser(user3,pass);
+	User* u3 = uf.createUser(user4,pass);
+	ServiceLayer sl = ServiceLayer();
+	Database* d = sl.getDatabase();
+	d->saveUser(emisor);
+	d->saveUser(u1);
+	d->saveUser(u2);
+	d->saveUser(u3);
+	string responseLogin = sl.login(user1,pass);
+	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	Message* m11 = new Message(emisor,u1,"mensaje1 al receptor1");
+	Message* m21 = new Message(emisor,u1,"mensaje2 al receptor1");
+	Message* m12 = new Message(emisor,u2,"mensaje1 al receptor2");
+	Message* m13 = new Message(emisor,u3,"mensaje1 al receptor3");
+
+	sl.sendMessage(user1,token,m11->toJsonString());
+	sl.sendMessage(user1,token,m21->toJsonString());
+	sl.sendMessage(user1,token,m12->toJsonString());
+	sl.sendMessage(user1,token,m13->toJsonString());
+
+	string conversationsJson = sl.getConversations(user1,token);
+	Json::Value conversationValue = d->getJsonValueFromString(conversationsJson);
+	ASSERT_EQ(ServiceLayer::OK_STRING,conversationValue["result"].asString());
+	Json::Value dataValue = conversationValue["data"];
+	ASSERT_EQ(3,dataValue.size());
+	cout<<dataValue.toStyledString()<<endl;
+
+
+	delete u1;
+	delete u2;
+	delete u3;
+	delete emisor;
 }

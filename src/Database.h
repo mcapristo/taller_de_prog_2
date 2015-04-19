@@ -42,8 +42,10 @@ public:
 	string getJsonStringFromValue(Json::Value);
 
 	Conversation* getConversation(User* u1, User* u2);
+	vector<Conversation*> getConversations(User* user);
 	bool saveConversation(Conversation* conv);
 
+	vector<User*> getUsers();
 	string getUsersJsonString();
 	Json::Value getUsersJsonValue();
 
