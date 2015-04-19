@@ -39,7 +39,7 @@ int Logger::log(int type, string message) {
 			case 3://error
 				logFile << "ERROR " << " " << message;
 				break;
-			case 4://error
+			case 4://debug
 				logFile << "DEBUG " << " " << message;
 				break;
 		}
