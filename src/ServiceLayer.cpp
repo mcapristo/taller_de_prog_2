@@ -109,7 +109,6 @@ string ServiceLayer::getConversations(string username, string token){
 		delete u;
 		return res;
 	}
-	Json::Value value = Json::Value();
 	vector<Conversation*> conversations = this->getDatabase()->getConversations(u);
 	Json::Value rootValue = Json::Value();
 	Json::Value conversationsValue = Json::Value();
@@ -122,5 +121,28 @@ string ServiceLayer::getConversations(string username, string token){
 	rootValue["result"] = ServiceLayer::OK_STRING;
 	rootValue["data"] = conversationsValue;
 	delete u;
+	return this->getDatabase()->getJsonStringFromValue(rootValue);
+}
+
+string ServiceLayer::getMessages(string username, string token, string user2){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	if (res != ""){
+		delete u;
+		return res;
+	}
+	Json::Value rootValue = Json::Value();
+	User* u2 = this->getDatabase()->getUser(user2);
+	if (u2 == NULL){
+		rootValue["result"] = ServiceLayer::OK_STRING;
+		rootValue["data"].append("");
+	}
+	else{
+		Conversation* conv = this->getDatabase()->getConversation(u,u2);
+		rootValue["result"] = ServiceLayer::OK_STRING;
+		rootValue["data"] = this->getDatabase()->getMessagesJsonValue(conv);
+	}
+	delete u;
+	delete u2;
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }

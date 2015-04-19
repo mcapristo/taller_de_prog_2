@@ -174,7 +174,7 @@ Conversation* Database::getConversation(User* u1, User* u2){
 		string key2 = u2->getUsername()+u1->getUsername();
 		string value2 = this->get(this->conversationCF,key2);
 		if (value2 != "" ){
-			Json::Value val = this->getJsonValueFromString(value1);
+			Json::Value val = this->getJsonValueFromString(value2);
 			return new Conversation(val);
 		}
 		else return NULL;
@@ -248,7 +248,6 @@ string Database::getUsersJsonString(){
 
 Json::Value Database::getMessagesJsonValue(Conversation* conv){
 	int tot_msg = conv->getTotalMessages();
-	Json::Value rootValue = Json::Value();
 	Json::Value arrayValue = Json::Value();
 	string conversationID = conv->getId();
 	ColumnFamilyHandle* cf = this->messageCF;
@@ -262,8 +261,7 @@ Json::Value Database::getMessagesJsonValue(Conversation* conv){
 		Json::Value messageValue = this->getJsonValueFromString(messageJson);
 		arrayValue.append(messageValue);
 	}
-	rootValue["messages"] = arrayValue;
-	return rootValue;
+	return arrayValue;
 }
 
 string Database::getMessagesJsonString(Conversation* conv){

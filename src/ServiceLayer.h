@@ -25,6 +25,8 @@ public:
 
 	string getConversations(string username,string token);
 
+	string getMessages(string username, string token, string user2);
+
 	static string ERROR_STRING;
 	static string OK_STRING;
 

@@ -186,11 +186,61 @@ TEST(TestsServiceLayer,TestGetUserConversations){
 	ASSERT_EQ(ServiceLayer::OK_STRING,conversationValue["result"].asString());
 	Json::Value dataValue = conversationValue["data"];
 	ASSERT_EQ(3,dataValue.size());
-	cout<<dataValue.toStyledString()<<endl;
-
 
 	delete u1;
 	delete u2;
 	delete u3;
+	delete emisor;
+	delete m11;
+	delete m12;
+	delete m13;
+	delete m21;
+}
+
+TEST(TestsServiceLayer, TestGetMessagesWithTwoUsers){
+	UserFactory uf = UserFactory();
+	string user1 = "emisor";
+	string user2 = "receptor";
+	string pass = "contrasenia";
+	User* emisor = uf.createUser(user1,pass);
+	User* u1 = uf.createUser(user2,pass);
+	ServiceLayer sl = ServiceLayer();
+	Database* d = sl.getDatabase();
+	d->deleteDatabaseValues();
+	d->saveUser(emisor);
+	d->saveUser(u1);
+	string responseLogin = sl.login(user1,pass);
+	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	string responseLogin2 = sl.login(user2,pass);
+	Json::Value valueResponseLogin2 = d->getJsonValueFromString(responseLogin2);
+	string token2 = valueResponseLogin2["data"]["token"].asString();
+
+	Message* m1 = new Message(emisor,u1,"mensaje1 al receptor1");
+	Message* m2 = new Message(emisor,u1,"mensaje2 al receptor1");
+	Message* m3 = new Message(emisor,u1,"mensaje3 al receptor1");
+	Message* m4 = new Message(emisor,u1,"mensaje4 al receptor1");
+
+	sl.sendMessage(user1,token,m1->toJsonString());
+	sl.sendMessage(user1,token,m2->toJsonString());
+	sl.sendMessage(user1,token,m3->toJsonString());
+	sl.sendMessage(user1,token,m4->toJsonString());
+
+	string messagesJson = sl.getMessages(user1, token, user2);
+	string messagesJson2 = sl.getMessages(user2,token2,user1);
+
+	Json::Value messagesJsonValue1 = sl.getDatabase()->getJsonValueFromString(messagesJson);
+	Json::Value messagesJsonValue2 = sl.getDatabase()->getJsonValueFromString(messagesJson2);
+	ASSERT_EQ(ServiceLayer::OK_STRING, messagesJsonValue1["result"].asString());
+	ASSERT_EQ(4, messagesJsonValue1["data"].size());
+	ASSERT_EQ(4, messagesJsonValue2["data"].size());
+	ASSERT_TRUE(messagesJsonValue1 == messagesJsonValue2);
+
+	delete m1;
+	delete m2;
+	delete m3;
+	delete m4;
+	delete u1;
 	delete emisor;
 }

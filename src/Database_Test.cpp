@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include "Database.h"
 
+
 TEST(TestsDatabase,TestPutAndGetStringFromDatabase){
 	Database d = Database();
 	string key = "clave";
@@ -153,3 +154,4 @@ TEST(TestsDatabase,TestGetMessagesJsonString){
 	delete m3;
 	delete d;
 }
+
