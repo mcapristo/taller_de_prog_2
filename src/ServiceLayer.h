@@ -29,6 +29,8 @@ public:
 
 	string getUserProfile(string username, string token, string userToVisit);
 
+//	string updateProfile(string username, string token, string data);
+
 	static string ERROR_STRING;
 	static string OK_STRING;
 
