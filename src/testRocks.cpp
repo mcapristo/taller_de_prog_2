@@ -6,9 +6,6 @@
 #include "json/json.h"
 #include <gtest/gtest.h>
 
-//#include "User.h"
-//#include "Database.h"
-//#include "Message.h"
 #include "Server.h"
 
 using namespace std;
@@ -18,7 +15,8 @@ using namespace rocksdb;
 int main(int argc, char **argv) {
 	//testing::InitGoogleTest(&argc, argv);
 	//return RUN_ALL_TESTS();
-	Server s = Server();
+	Server* s = new Server();
+	s->run();
 
 
 	return 0;

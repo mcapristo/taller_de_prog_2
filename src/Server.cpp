@@ -7,15 +7,13 @@
 
 #include "Server.h"
 
-
 Server::Server() {
 	this->sl = new ServiceLayer();
 	this->sv = mg_create_server(this, Server::eventHandlerCaller);
-
-	// Create and configure the server
 	mg_set_option(this->sv, "listening_port", "8000");
+}
 
-	// Serve request. Hit Ctrl-C to terminate the program
+void Server::run(){
 	printf("Starting on port %s\n", mg_get_option(this->sv, "listening_port"));
 	for (;;) {
 		mg_poll_server(this->sv, 1000);
@@ -27,22 +25,22 @@ Server::~Server() {
 
 int Server::eventHandlerCaller(mg_connection* conn, enum mg_event ev){
 	Server* s = (Server*) conn->server_param;
-//	cout<<conn->uri<<endl;
 	cout<<"bien ruteada"<<endl;
-	s->ev_handler(conn,ev);
-	return 1;
+	return s->ev_handler(conn,ev);
 }
 
-int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 
-	switch(ev){
-	case MG_AUTH: return MG_TRUE;
-	case MG_REQUEST:
-		if (!strcmp(conn->uri, "/api/login")) {
-			return this->handleLogin(conn);
-		}
-		return MG_TRUE;
-	default: return MG_FALSE;
+int Server::ev_handler(mg_connection* conn, enum mg_event ev){
+	switch (ev) {
+		case MG_AUTH: return MG_TRUE;
+		case MG_REQUEST:
+			if (strcmp("/api/login", conn->uri)==0){
+				mg_printf_data(conn,conn->request_method);
+				this->handleLogin(conn);
+				return MG_TRUE;
+			}
+			return MG_MORE;
+		default: return MG_FALSE;
 	}
 }
 
@@ -50,7 +48,12 @@ int Server::handleLogin(mg_connection* conn){
 	cout<<"login"<<endl;
 	const char* username = mg_get_header(conn,"username");
 	const char* password = mg_get_header(conn,"password");
-	cout<<username<<endl;
-	cout<<password<<endl;
-	return 1;
+	string u,p;
+	if (username) string u(username);
+	else string u("");
+	if (password) string p(password);
+	else string p("");
+	string res = sl->login(u,p);
+	mg_printf_data(conn,res.c_str());
+	return 0;
 }
