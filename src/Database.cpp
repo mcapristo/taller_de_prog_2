@@ -81,7 +81,7 @@ string Database::getJsonStringFromValue(Json::Value value){
 
 User* Database::getUser(string key) {
 	string json = this->get(this->userCF,key);
-	if (json == "") return NULL; //TODO: hacer un manejo de errores
+	if (json == "") return NULL;
 	Json::Value val = this->getJsonValueFromString(json);
 
 	UserFactory uf = UserFactory();

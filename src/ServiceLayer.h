@@ -21,6 +21,8 @@ public:
 	string logout(string username, string token);
 	string validateToken(User* user,string token);
 
+	string createUser(string json);
+
 	string sendMessage(string username, string token, string json);
 
 	string getConversations(string username,string token);
@@ -39,6 +41,8 @@ public:
 	static int INVALID_TOKEN;
 	static int ERROR_SEND_MESSAGE;
 	static int ERROR_USER_PROFILE_DOESNT_EXISTS;
+	static int NO_PASSWORD;
+	static int USERNAME_ALREADY_EXISTS;
 private:
 	Database* db;
 };

@@ -39,6 +39,10 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
+			if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
+				this->handleCreateUser(conn);
+				return MG_TRUE;
+			}
 			return MG_MORE;
 		default: return MG_FALSE;
 	}
@@ -57,3 +61,24 @@ int Server::handleLogin(mg_connection* conn){
 	mg_printf_data(conn,res.c_str());
 	return 0;
 }
+
+string createString(const char* c, size_t len){
+	if (c == NULL) return "";
+	string res = "";
+	for (size_t i = 0; i<len ; i++){
+		res = res + c[i];
+	}
+	return res;
+}
+
+int Server::handleCreateUser(mg_connection* conn){
+	cout<<"create user"<<endl;
+	const char* data = conn->content;
+	size_t len = conn->content_len;
+	string d = createString(data,len);
+	string res = sl->createUser(d);
+	mg_printf_data(conn, res.c_str());
+	return 0;
+}
+
+
