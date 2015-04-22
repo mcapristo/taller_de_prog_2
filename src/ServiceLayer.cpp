@@ -200,3 +200,23 @@ string ServiceLayer::getUserProfile(string username, string token, string userTo
 	}
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }
+
+string ServiceLayer::getUsersProfile(string username, string token){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->validateToken(u,token);
+	if (res != ""){
+		delete u;
+		return res;
+	}
+	Json::Value rootValue = Json::Value();
+	Json::Value vectorValue = Json::Value();
+	vector<User*> users = this->getDatabase()->getUsers();
+	for (size_t i = 0; i < users.size() ; i ++){
+		User* u = users[i];
+		Json::Value userValue = u->getUserProfileJsonValue();
+		vectorValue.append(userValue);
+	}
+	rootValue["result"] = ServiceLayer::OK_STRING;
+	rootValue["data"] = vectorValue;
+	return this->getDatabase()->getJsonStringFromValue(rootValue);
+}

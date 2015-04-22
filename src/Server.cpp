@@ -25,10 +25,8 @@ Server::~Server() {
 
 int Server::eventHandlerCaller(mg_connection* conn, enum mg_event ev){
 	Server* s = (Server*) conn->server_param;
-	cout<<"bien ruteada"<<endl;
 	return s->ev_handler(conn,ev);
 }
-
 
 int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 	switch (ev) {
@@ -38,8 +36,16 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
+			if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
+				this->handleGetUsers(conn);
+				return MG_TRUE;
+			}
 			if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
 				this->handleCreateUser(conn);
+				return MG_TRUE;
+			}
+			if (strcmp("/api/message", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
+				this->handleSendMessage(conn);
 				return MG_TRUE;
 			}
 			return MG_MORE;
@@ -47,20 +53,20 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 	}
 }
 
+string Server::readRequestHeader(mg_connection* conn, string header){
+	const char* headerPointer = mg_get_header(conn, header.c_str());
+	string h = "";
+	if (headerPointer){
+		string h1(headerPointer);
+		h = h1;
+	}
+	return h;
+}
+
 int Server::handleLogin(mg_connection* conn){
 	cout<<"login"<<endl;
-	const char* username = mg_get_header(conn,"username");
-	const char* password = mg_get_header(conn,"password");
-	string u = "";
-	string p = "";
-	if (username){
-		string u1(username);
-		u = u1;
-	}
-	if (password){
-		string p1(password);
-		p = p1;
-	}
+	string u = this->readRequestHeader(conn, "username");
+	string p = this->readRequestHeader(conn, "password");
 	string res = sl->login(u,p);
 	mg_printf_data(conn,res.c_str());
 	return 0;
@@ -75,14 +81,36 @@ string createString(const char* c, size_t len){
 	return res;
 }
 
-int Server::handleCreateUser(mg_connection* conn){
-	cout<<"create user"<<endl;
+string Server::readRequestData(mg_connection* conn){
 	const char* data = conn->content;
 	size_t len = conn->content_len;
 	string d = createString(data,len);
+	return d;
+}
+
+int Server::handleCreateUser(mg_connection* conn){
+	cout<<"create user"<<endl;
+	string d = this->readRequestData(conn);
 	string res = sl->createUser(d);
 	mg_printf_data(conn, res.c_str());
 	return 0;
 }
 
+int Server::handleSendMessage(mg_connection* conn){
+	cout<<"sendMessage"<<endl;
+	string data = this->readRequestData(conn);
+	string username = this->readRequestHeader(conn, "username");
+	string token = this->readRequestHeader(conn, "token");
+	string res = sl->sendMessage(username, token, data);
+	mg_printf_data(conn, res.c_str());
+	return 0;
+}
 
+int Server::handleGetUsers(mg_connection* conn){
+	cout<<"get users"<<endl;
+	string username = this->readRequestHeader(conn, "username");
+	string token = this->readRequestHeader(conn, "token");
+	string res = sl->getUsersProfile(username, token);
+	mg_printf_data(conn,res.c_str());
+	return 0;
+}

@@ -27,6 +27,11 @@ private:
 
 	int handleLogin(mg_connection* conn);
 	int handleCreateUser(mg_connection* conn);
+	int handleSendMessage(mg_connection* conn);
+	int handleGetUsers(mg_connection* conn);
+
+	string readRequestData(mg_connection* conn);
+	string readRequestHeader(mg_connection* conn, string header);
 
 	struct mg_server* sv;
 	ServiceLayer* sl;
