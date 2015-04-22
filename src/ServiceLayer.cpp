@@ -147,8 +147,8 @@ string ServiceLayer::getConversations(string username, string token){
 	Json::Value conversationsValue = Json::Value();
 	for(size_t i = 0 ; i< conversations.size() ; i++){
 		Conversation* c = conversations[i];
-		string conversationJsonString = c->toJsonString();
-		conversationsValue.append(conversationJsonString);
+		Json::Value conversationJsonValue = c->toJsonValue();
+		conversationsValue.append(conversationJsonValue);
 		delete c;
 	}
 	rootValue["result"] = ServiceLayer::OK_STRING;

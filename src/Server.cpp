@@ -40,6 +40,10 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleGetUsers(conn);
 				return MG_TRUE;
 			}
+			if (strcmp("/api/conversation", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
+				this->handleGetConversations(conn);
+				return MG_TRUE;
+			}
 			if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
 				this->handleCreateUser(conn);
 				return MG_TRUE;
@@ -111,6 +115,15 @@ int Server::handleGetUsers(mg_connection* conn){
 	string username = this->readRequestHeader(conn, "username");
 	string token = this->readRequestHeader(conn, "token");
 	string res = sl->getUsersProfile(username, token);
+	mg_printf_data(conn,res.c_str());
+	return 0;
+}
+
+int Server::handleGetConversations(mg_connection* conn){
+	cout<<"getConversations"<<endl;
+	string username = this->readRequestHeader(conn, "username");
+	string token = this->readRequestHeader(conn, "token");
+	string res = sl->getConversations(username,token);
 	mg_printf_data(conn,res.c_str());
 	return 0;
 }
