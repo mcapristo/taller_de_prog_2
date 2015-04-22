@@ -125,7 +125,7 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	bool result = this->getDatabase()->saveMessage(m);
 	if (result){
 		rootValue["result"] = ServiceLayer::OK_STRING;
-		rootValue["data"] = m->toJsonString();
+		rootValue["data"] = m->toJsonValue();
 	}
 	else{
 		rootValue["result"] = ServiceLayer::ERROR_STRING;
