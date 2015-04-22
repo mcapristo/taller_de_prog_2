@@ -287,5 +287,49 @@ TEST(TestsServiceLayer,TestGetOtherUserProfile){
 
 	delete u;
 	delete visitor;
+}
 
+TEST(TestsServiceLayer,TestCreateUser){
+	ServiceLayer sl = ServiceLayer();
+	sl.getDatabase()->deleteDatabaseValues();
+	string jsonString = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\"}";
+	string resultString = sl.createUser(jsonString);
+	Json::Value resultValue = sl.getDatabase()->getJsonValueFromString(resultString);
+	Json::Value userValue = resultValue["data"];
+	ASSERT_EQ(ServiceLayer::OK_STRING, resultValue["result"].asString());
+	ASSERT_EQ("mpalermo",userValue["username"].asString());
+	ASSERT_EQ("contrasenia",userValue["password"].asString());
+	ASSERT_EQ("Martin Palermo", userValue["name"].asString());
+}
+
+TEST(TestsServiceLayer, TestCreateUserWithUsernameThatAlreadyExists){
+	ServiceLayer sl = ServiceLayer();
+	sl.getDatabase()->deleteDatabaseValues();
+	string jsonString1 = "{\"username\":\"mpalermo\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\"}";
+	sl.createUser(jsonString1);
+	string jsonString2 = "{\"username\":\"mpalermo\",\"password\":\"123456\",\"name\":\"Martin Palermo2\"}";
+	string resultString2 = sl.createUser(jsonString2);
+	Json::Value resultValue2 = sl.getDatabase()->getJsonValueFromString(resultString2);
+	ASSERT_EQ(ServiceLayer::ERROR_STRING, resultValue2["result"].asString());
+	ASSERT_EQ(ServiceLayer::USERNAME_ALREADY_EXISTS, resultValue2["code"].asInt());
+}
+
+TEST(TestsServiceLayer, TestCreateUserWithNoUsername){
+	ServiceLayer sl = ServiceLayer();
+	sl.getDatabase()->deleteDatabaseValues();
+	string jsonString = "{\"username\":\"\",\"password\":\"contrasenia\",\"name\":\"Martin Palermo\"}";
+	string resultString = sl.createUser(jsonString);
+	Json::Value resultValue = sl.getDatabase()->getJsonValueFromString(resultString);
+	ASSERT_EQ(ServiceLayer::ERROR_STRING, resultValue["result"].asString());
+	ASSERT_EQ(ServiceLayer::NO_USERNAME, resultValue["code"].asInt());
+}
+
+TEST(TestsServiceLayer, TestCreateUserWithNoPassword){
+	ServiceLayer sl = ServiceLayer();
+	sl.getDatabase()->deleteDatabaseValues();
+	string jsonString = "{\"username\":\"mpalermo\",\"password\":\"\",\"name\":\"Martin Palermo\"}";
+	string resultString = sl.createUser(jsonString);
+	Json::Value resultValue = sl.getDatabase()->getJsonValueFromString(resultString);
+	ASSERT_EQ(ServiceLayer::ERROR_STRING, resultValue["result"].asString());
+	ASSERT_EQ(ServiceLayer::NO_PASSWORD, resultValue["code"].asInt());
 }

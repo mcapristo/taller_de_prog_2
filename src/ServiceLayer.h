@@ -41,6 +41,7 @@ public:
 	static int INVALID_TOKEN;
 	static int ERROR_SEND_MESSAGE;
 	static int ERROR_USER_PROFILE_DOESNT_EXISTS;
+	static int NO_USERNAME;
 	static int NO_PASSWORD;
 	static int USERNAME_ALREADY_EXISTS;
 private:

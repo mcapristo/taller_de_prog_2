@@ -35,7 +35,6 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 		case MG_AUTH: return MG_TRUE;
 		case MG_REQUEST:
 			if (strcmp("/api/login", conn->uri)==0){
-				mg_printf_data(conn,conn->request_method);
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}

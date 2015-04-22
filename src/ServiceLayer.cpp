@@ -17,6 +17,7 @@ int ServiceLayer::ERROR_SEND_MESSAGE = 4;
 int ServiceLayer::ERROR_USER_PROFILE_DOESNT_EXISTS = 5;
 int ServiceLayer::USERNAME_ALREADY_EXISTS = 6;
 int ServiceLayer::NO_PASSWORD = 7;
+int ServiceLayer::NO_USERNAME = 8;
 
 ServiceLayer::ServiceLayer() {
 	this->db = new Database();
@@ -83,22 +84,26 @@ string ServiceLayer::validateToken(User* u, string token){
 }
 
 string ServiceLayer::createUser(string json){
-	//TODO: Unit test del metodo y ver porque falla cuando se chequea la pass
 	UserFactory uf = UserFactory();
 	User* createdUser = uf.createUserFromJsonString(json);
 	Json::Value valueToReturn = Json::Value();
+	string username = createdUser->getUsername();
+	string pass = createdUser->getPassword();
 	if (this->getDatabase()->getUser(createdUser->getUsername()) != NULL){
 		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
 		valueToReturn["code"] = ServiceLayer::USERNAME_ALREADY_EXISTS;
 	}
-//	string pass = createdUser->getPassword();
-//	if (pass == NULL || pass == ""){
-//		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
-//		valueToReturn["code"] = ServiceLayer::NO_PASSWORD;
-//	}
+	else if (username == ""){
+		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
+		valueToReturn["code"] = ServiceLayer::NO_USERNAME;
+	}
+	else if (/*pass == NULL ||*/ pass == ""){
+		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
+		valueToReturn["code"] = ServiceLayer::NO_PASSWORD;
+	}
 	else{
 		this->getDatabase()->saveUser(createdUser);
-		string createdUserJson = createdUser->toJsonString();
+		Json::Value createdUserJson = createdUser->toJsonValue();
 		delete createdUser;
 		valueToReturn["result"] = ServiceLayer::OK_STRING;
 		valueToReturn["data"] = createdUserJson;
