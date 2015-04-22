@@ -51,11 +51,16 @@ int Server::handleLogin(mg_connection* conn){
 	cout<<"login"<<endl;
 	const char* username = mg_get_header(conn,"username");
 	const char* password = mg_get_header(conn,"password");
-	string u,p;
-	if (username) string u(username);
-	else string u("");
-	if (password) string p(password);
-	else string p("");
+	string u = "";
+	string p = "";
+	if (username){
+		string u1(username);
+		u = u1;
+	}
+	if (password){
+		string p1(password);
+		p = p1;
+	}
 	string res = sl->login(u,p);
 	mg_printf_data(conn,res.c_str());
 	return 0;
