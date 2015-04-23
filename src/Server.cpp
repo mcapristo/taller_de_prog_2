@@ -36,19 +36,23 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
-			if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
+			if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
+				this->handleGetUser(conn);
+				return MG_TRUE;
+			}
+			else if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
 				this->handleGetUsers(conn);
 				return MG_TRUE;
 			}
-			if (strcmp("/api/conversation", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
+			else if (strcmp("/api/conversation", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
 				this->handleGetConversations(conn);
 				return MG_TRUE;
 			}
-			if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
+			else if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
 				this->handleCreateUser(conn);
 				return MG_TRUE;
 			}
-			if (strcmp("/api/message", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
+			else if (strcmp("/api/message", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
 				this->handleSendMessage(conn);
 				return MG_TRUE;
 			}
@@ -125,5 +129,22 @@ int Server::handleGetConversations(mg_connection* conn){
 	string token = this->readRequestHeader(conn, "token");
 	string res = sl->getConversations(username,token);
 	mg_printf_data(conn,res.c_str());
+	return 0;
+}
+
+int Server::handleGetUser(mg_connection* conn){
+	const char* queryPointer = conn->query_string;
+	string q = "";
+	if (queryPointer){
+		string h1(queryPointer);
+		q = h1;
+	}
+	char buffer[50];
+	sscanf( q.c_str(), "username=%s", buffer);
+	string userToVisit = string(buffer);
+	string username = this->readRequestHeader(conn, "username");
+	string token = this->readRequestHeader(conn, "token");
+	string res = this->sl->getUserProfile(username,token,userToVisit);
+	mg_printf(conn, res.c_str());
 	return 0;
 }

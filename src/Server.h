@@ -30,6 +30,7 @@ private:
 	int handleSendMessage(mg_connection* conn);
 	int handleGetUsers(mg_connection* conn);
 	int handleGetConversations(mg_connection* conn);
+	int handleGetUser(mg_connection* conn);
 
 	string readRequestData(mg_connection* conn);
 	string readRequestHeader(mg_connection* conn, string header);
