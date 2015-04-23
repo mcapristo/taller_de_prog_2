@@ -1,12 +1,12 @@
 /*
- * Logger.h
+ * Loggero.h
  *
  *  Created on: Apr 13, 2015
  *      Author: rha
  */
 
-#ifndef LOGGER_H_
-#define LOGGER_H_
+#ifndef LOGGERO_H_
+#define LOGGERO_H_
 
 #include <string.h>
 #include <stdlib.h>
@@ -14,14 +14,15 @@
 
 using namespace std;
 
-class Logger {
+class Loggero {
 public:
-	static Logger* getInstnce();
-	virtual ~Logger();
+	static Loggero* getInstnce();
+	virtual ~Loggero();
 	int log(int type, string message);
 private:
-	Logger();
-	static Logger* instance;
+	Loggero();
+	string GetTime();
+	static Loggero* instance;
 };
 
-#endif /* LOGGER_H_ */
+#endif /* LOGGERO_H_ */
