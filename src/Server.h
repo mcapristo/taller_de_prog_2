@@ -11,6 +11,7 @@
 #include <iostream>
 #include "mongoose.h"
 #include "json/json.h"
+#include "Loggero.h"
 #include "ServiceLayer.h"
 
 using namespace std;
@@ -37,6 +38,8 @@ private:
 
 	struct mg_server* sv;
 	ServiceLayer* sl;
+
+	Loggero* logger;
 };
 
 #endif /* SERVER_H_ */
