@@ -37,29 +37,35 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
-			else if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
-				this->handleGetUser(conn);
-				return MG_TRUE;
-			}
-			else if (strcmp("/api/message", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
-				this->handleGetMessagesWithUser(conn);
-				return MG_TRUE;
-			}
-			else if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
-				this->handleGetUsers(conn);
-				return MG_TRUE;
+			if (strcmp("/api/user", conn->uri) == 0){
+				if (strcmp(conn->request_method,"GET") == 0){
+					if (conn->query_string){
+						this->handleGetUser(conn);
+						return MG_TRUE;
+					}
+					else{
+						this->handleGetUsers(conn);
+						return MG_TRUE;
+					}
+				}
+				else if (strcmp(conn->request_method,"POST") == 0){
+					this->handleCreateUser(conn);
+					return MG_TRUE;
+				}
 			}
 			else if (strcmp("/api/conversation", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
 				this->handleGetConversations(conn);
 				return MG_TRUE;
 			}
-			else if (strcmp("/api/user", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
-				this->handleCreateUser(conn);
-				return MG_TRUE;
-			}
-			else if (strcmp("/api/message", conn->uri) == 0 && strcmp(conn->request_method,"POST") == 0){
-				this->handleSendMessage(conn);
-				return MG_TRUE;
+			else if((strcmp("/api/message", conn->uri)==0)){
+				if (strcmp(conn->request_method,"GET") == 0 && conn->query_string){
+					this->handleGetMessagesWithUser(conn);
+					return MG_TRUE;
+				}
+				else if (strcmp(conn->request_method,"POST") == 0){
+					this->handleSendMessage(conn);
+					return MG_TRUE;
+				}
 			}
 			return MG_MORE;
 		default:
