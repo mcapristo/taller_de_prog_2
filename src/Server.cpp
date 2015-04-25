@@ -37,8 +37,12 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
-			if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
+			else if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
 				this->handleGetUser(conn);
+				return MG_TRUE;
+			}
+			else if (strcmp("/api/message", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0 && conn->query_string){
+				this->handleGetMessagesWithUser(conn);
 				return MG_TRUE;
 			}
 			else if (strcmp("/api/user", conn->uri)==0 && strcmp(conn->request_method,"GET") == 0){
@@ -88,16 +92,11 @@ int Server::handleLogin(mg_connection* conn){
 }
 
 string createString(const char* c, size_t len){
-	if (c == NULL) {
-		return "";
-	}
-
+	if (c == NULL) return "";
 	string res = "";
-
 	for (size_t i = 0; i<len ; i++){
 		res = res + c[i];
 	}
-
 	return res;
 }
 
@@ -162,18 +161,36 @@ int Server::handleGetUser(mg_connection* conn){
 
 	const char* queryPointer = conn->query_string;
 	string q = "";
-
 	if (queryPointer){
 		string h1(queryPointer);
 		q = h1;
 	}
-
 	char buffer[50];
 	sscanf( q.c_str(), "username=%s", buffer);
 	string userToVisit = string(buffer);
 	string username = this->readRequestHeader(conn, "username");
 	string token = this->readRequestHeader(conn, "token");
 	string res = this->sl->getUserProfile(username,token,userToVisit);
+	mg_printf(conn, res.c_str());
+
+	return 0;
+}
+
+int Server::handleGetMessagesWithUser(mg_connection* conn){
+	this->logger->log(1,"Get Messages With User");
+
+	const char* queryPointer = conn->query_string;
+	string q = "";
+	if (queryPointer){
+		string h1(queryPointer);
+		q = h1;
+	}
+	char buffer[50];
+	sscanf( q.c_str(), "username=%s", buffer);
+	string user2 = string(buffer);
+	string username = this->readRequestHeader(conn, "username");
+	string token = this->readRequestHeader(conn, "token");
+	string res = this->sl->getMessages(username,token,user2);
 	mg_printf(conn, res.c_str());
 
 	return 0;
