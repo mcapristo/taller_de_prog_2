@@ -1,0 +1,32 @@
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+COMO COMPLILAR Y CORRER EL SERVER CON CMAKE.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+1. Abrimos una nueva consola.
+
+2. Instalamos CMake
+	sudo apt-get install cmake
+
+3. Navegamos hasta la carpeta donde tengamos los fuentes (src) del Server.
+
+4. Ejecutamos el siguiente comando
+	cmake CMakeLists.txt
+   Esto nos va a crear el make.
+
+5. Ejecutamos el make
+	make
+   Esto nos va a compilar el proyecto.
+
+6. Ejecutamos el server
+	./server
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+EXPLICACIÖN ARCHIVO CMAKELISTS.TXT PARA CMAKE.
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+El archivo traté de comentarlo lo más posible.
+Se define un nombre para el proyecto CMake que por lo que vi no influye en nada, se usa sólo para cosas internas de CMake.
+Activamos los flags, esto es lo mismo que hizomos en el proyecto de Eclipse cuando agregamos en miscellaneous.
+Activamos un finder para las librerías externas.
+Creamos un SOURCE para que sea más fácil de leer con todas las clases de nuestro proyecto (.cpp y .h) fijense que las que están en subfolders las agregamos directo, no me maté en hacerlo como decía Gabriel me parecía al dope.
+Seteamos el SOURCE al cmake.
+Agregamos todas las librerías externas, me guié un poco con un ejemplo que tenía Uri que le hizo Gabriel, no entiendo por qué el PTHREAD y LZIP se agregan así. Despúes si ó si esta sección de las librerías externas tiene que ir después del ADD_EXECUTABLE porque sino no anda.
+
