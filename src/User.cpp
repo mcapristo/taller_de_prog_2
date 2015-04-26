@@ -101,3 +101,7 @@ Json::Value User::getUserProfileJsonValue(){
 	return val;
 }
 
+void User::updateUser(Json::Value val){
+	string name = val.get("name","").asString();
+	if (name != "") this->setName(name);
+}

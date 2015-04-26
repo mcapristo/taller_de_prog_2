@@ -56,6 +56,10 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 						return MG_TRUE;
 					}
 				}
+				else if (strcmp(conn->request_method,"PUT") == 0){
+					this->handleUpdateUser(conn);
+					return MG_TRUE;
+				}
 				else if (strcmp(conn->request_method,"POST") == 0){
 					this->handleCreateUser(conn);
 					return MG_TRUE;
@@ -145,12 +149,24 @@ string Server::readRequestData(mg_connection* conn){
 
 int Server::handleCreateUser(mg_connection* conn){
 	// cout<<"create user"<<endl;
-	this->logger->log(1, "Create User");
+	this->logger->log(Constants::INFO, "Create User");
 
 	string d = this->readRequestData(conn);
 	string res = sl->createUser(d);
 	mg_printf_data(conn, res.c_str());
 
+	return 0;
+}
+
+int Server::handleUpdateUser(mg_connection* conn){
+	this->logger->log(Constants::INFO, "Update User");
+
+	string data = this->readRequestData(conn);
+	string u = this->readRequestHeader(conn, "username");
+	string t = this->readRequestHeader(conn, "token");
+
+	string res = this->sl->updateProfile(u,t,data);
+	mg_printf_data(conn,res.c_str());
 	return 0;
 }
 

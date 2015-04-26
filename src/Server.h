@@ -30,6 +30,7 @@ private:
 	int handleLogout(mg_connection* conn);
 	int handleValidateToken(mg_connection* conn);
 	int handleCreateUser(mg_connection* conn);
+	int handleUpdateUser(mg_connection* conn);
 	int handleSendMessage(mg_connection* conn);
 	int handleGetUsers(mg_connection* conn);
 	int handleGetConversations(mg_connection* conn);

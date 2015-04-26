@@ -31,6 +31,7 @@ public:
 	void setToken(string t);
 	void login();
 	void logout();
+	void updateUser(Json::Value val);
 	Json::Value toJsonValue();
 	string toJsonString();
 	Json::Value getUserProfileJsonValue();

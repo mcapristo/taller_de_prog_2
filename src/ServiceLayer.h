@@ -33,7 +33,7 @@ public:
 
 	string getUsersProfile(string username, string token);
 
-//	string updateProfile(string username, string token, string data);
+	string updateProfile(string username, string token, string data);
 
 	static string ERROR_STRING;
 	static string OK_STRING;

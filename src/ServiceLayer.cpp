@@ -126,6 +126,22 @@ string ServiceLayer::createUser(string json){
 
 }
 
+string ServiceLayer::updateProfile(string username, string token, string data){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->isValidToken(u,token);
+	if (res != ""){
+		delete u;
+		return res;
+	}
+	Json::Value input = this->getDatabase()->getJsonValueFromString(data);
+	u->updateUser(input);
+	Json::Value ret = Json::Value();
+	ret["result"] = ServiceLayer::OK_STRING;
+	ret["data"] = u->getUserProfileJsonValue();
+	delete u;
+	return this->getDatabase()->getJsonStringFromValue(ret);
+}
+
 string ServiceLayer::sendMessage(string username, string token, string jsonMessage){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
