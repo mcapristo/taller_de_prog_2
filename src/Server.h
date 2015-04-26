@@ -27,6 +27,7 @@ private:
 	static int eventHandlerCaller(struct mg_connection *conn, enum mg_event ev);
 
 	int handleLogin(mg_connection* conn);
+	int handleLogout(mg_connection* conn);
 	int handleValidateToken(mg_connection* conn);
 	int handleCreateUser(mg_connection* conn);
 	int handleSendMessage(mg_connection* conn);
