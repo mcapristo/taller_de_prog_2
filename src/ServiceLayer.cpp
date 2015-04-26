@@ -54,7 +54,7 @@ string ServiceLayer::login(string username, string password){
 
 string ServiceLayer::logout(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	if (res != ""){
 		delete u;
 		return res;
@@ -68,7 +68,21 @@ string ServiceLayer::logout(string username, string token){
 	return this->getDatabase()->getJsonStringFromValue(value);
 }
 
-string ServiceLayer::validateToken(User* u, string token){
+string ServiceLayer::validateToken(string username, string token){
+	User* u = this->getDatabase()->getUser(username);
+	string res = this->isValidToken(u,token);
+	if (res == ""){
+		Json::Value val = Json::Value();
+		val["result"] = ServiceLayer::OK_STRING;
+		val["data"] = u->toJsonValue();
+		delete u;
+		return this->getDatabase()->getJsonStringFromValue(val);
+	}
+	delete u;
+	return res;
+}
+
+string ServiceLayer::isValidToken(User* u, string token){
 	Json::Value value = Json::Value();
 	if (u == NULL){
 		value["result"] = ServiceLayer::ERROR_STRING;
@@ -114,7 +128,7 @@ string ServiceLayer::createUser(string json){
 
 string ServiceLayer::sendMessage(string username, string token, string jsonMessage){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	delete u;
 	if (res != ""){
 		return res;
@@ -137,7 +151,7 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 
 string ServiceLayer::getConversations(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	if (res != ""){
 		delete u;
 		return res;
@@ -159,7 +173,7 @@ string ServiceLayer::getConversations(string username, string token){
 
 string ServiceLayer::getMessages(string username, string token, string user2){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	if (res != ""){
 		delete u;
 		return res;
@@ -182,7 +196,7 @@ string ServiceLayer::getMessages(string username, string token, string user2){
 
 string ServiceLayer::getUserProfile(string username, string token, string userToVisit){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	if (res != ""){
 		delete u;
 		return res;
@@ -203,7 +217,7 @@ string ServiceLayer::getUserProfile(string username, string token, string userTo
 
 string ServiceLayer::getUsersProfile(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
-	string res = this->validateToken(u,token);
+	string res = this->isValidToken(u,token);
 	if (res != ""){
 		delete u;
 		return res;

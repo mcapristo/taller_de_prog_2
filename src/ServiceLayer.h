@@ -19,7 +19,7 @@ public:
 
 	string login(string username, string password);
 	string logout(string username, string token);
-	string validateToken(User* user,string token);
+	string validateToken(string username, string token);
 
 	string createUser(string json);
 
@@ -47,6 +47,7 @@ public:
 	static int NO_PASSWORD;
 	static int USERNAME_ALREADY_EXISTS;
 private:
+	string isValidToken(User* username,string token);
 	Database* db;
 };
 

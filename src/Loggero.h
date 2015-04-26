@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <iostream>
 
+#include "Constants.h"
+
 using namespace std;
 
 class Loggero {

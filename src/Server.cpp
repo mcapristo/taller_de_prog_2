@@ -37,6 +37,10 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 				this->handleLogin(conn);
 				return MG_TRUE;
 			}
+			if (strcmp("/api/token", conn->uri)==0){
+				this->handleValidateToken(conn);
+				return MG_TRUE;
+			}
 			if (strcmp("/api/user", conn->uri) == 0){
 				if (strcmp(conn->request_method,"GET") == 0){
 					if (conn->query_string){
@@ -94,6 +98,16 @@ int Server::handleLogin(mg_connection* conn){
 	string res = sl->login(u,p);
 	mg_printf_data(conn,res.c_str());
 
+	return 0;
+}
+
+int Server::handleValidateToken(mg_connection* conn){
+	this->logger->log(Constants::INFO, "ValidateLogin");
+
+	string u = this->readRequestHeader(conn, "username");
+	string t = this->readRequestHeader(conn, "token");
+	string res = sl->validateToken(u,t);
+	mg_printf_data(conn, res.c_str());
 	return 0;
 }
 
@@ -177,7 +191,7 @@ int Server::handleGetUser(mg_connection* conn){
 	string username = this->readRequestHeader(conn, "username");
 	string token = this->readRequestHeader(conn, "token");
 	string res = this->sl->getUserProfile(username,token,userToVisit);
-	mg_printf(conn, res.c_str());
+	mg_printf_data(conn, res.c_str());
 
 	return 0;
 }
@@ -197,7 +211,7 @@ int Server::handleGetMessagesWithUser(mg_connection* conn){
 	string username = this->readRequestHeader(conn, "username");
 	string token = this->readRequestHeader(conn, "token");
 	string res = this->sl->getMessages(username,token,user2);
-	mg_printf(conn, res.c_str());
+	mg_printf_data(conn, res.c_str());
 
 	return 0;
 }
