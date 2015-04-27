@@ -108,3 +108,6 @@ Comando: sudo su
 Ejecutar los siguientes comandos
 Comandos: cp -a include/gtest /usr/include
  		  cp -a lib/.libs/* /usr/lib/
+
+
+ 		  
