@@ -142,7 +142,8 @@ TEST(TestsServiceLayer,TestSendValidMessage){
 	delete m;
 	Json::Value responseValueSendMessage = sl.getDatabase()->getJsonValueFromString(responseStringSendMessage);
 	ASSERT_EQ(sl.OK_STRING,responseValueSendMessage["result"].asString());
-	string dataString = responseValueSendMessage["data"].asString();
+	Json::Value lala = responseValueSendMessage["data"];
+	string dataString = sl.getDatabase()->getJsonStringFromValue(lala);
 	Json::Value dataJsonValue = sl.getDatabase()->getJsonValueFromString(dataString);
 	ASSERT_EQ(user1,dataJsonValue["emisor"].asString());
 	ASSERT_EQ(user2,dataJsonValue["receptor"].asString());
