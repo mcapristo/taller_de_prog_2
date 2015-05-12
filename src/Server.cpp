@@ -16,7 +16,7 @@ Server::Server() {
 
 void Server::run(){
 	printf("Starting on port %s\n", mg_get_option(this->sv, "listening_port"));
-	for (;;) {
+	while (sigint_handler.getGracefulQuit() == 0) {
 		mg_poll_server(this->sv, 1000);
 	}
 }

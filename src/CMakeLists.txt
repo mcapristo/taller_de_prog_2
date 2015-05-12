@@ -23,7 +23,7 @@ ADD_EXECUTABLE(server ${SOURCES})
 # Se linkean todas las librerias externas necesarias.
 TARGET_LINK_LIBRARIES(server /usr/local/lib/librocksdb.a)
 TARGET_LINK_LIBRARIES(server /usr/local/lib/libjsoncpp.a)
-TARGET_LINK_LIBRARIES(server /usr/lib/libgtest.a)
+TARGET_LINK_LIBRARIES(server /usr/local/lib/libgtest.a)
 TARGET_LINK_LIBRARIES(server ${CMAKE_THREAD_LIBS_INIT})
 TARGET_LINK_LIBRARIES(server ${ZLIB_LIBRARIES})
 TARGET_LINK_LIBRARIES(server ${BZIP2_LIBRARIES})

@@ -13,10 +13,11 @@
 #include "json/json.h"
 #include "Loggero.h"
 #include "ServiceLayer.h"
+#include "Proceso.h"
 
 using namespace std;
 
-class Server {
+class Server: public Proceso {
 public:
 	Server();
 	virtual ~Server();
