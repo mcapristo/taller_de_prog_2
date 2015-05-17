@@ -15,7 +15,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 INCLUDE(FindPkgConfig)
 
 # Se agregan todas las clases al SOURCE.
-SET(SOURCES jsoncpp.cpp ServiceLayer.cpp Constants.h Loggero.cpp ServiceLayer.h Conversation.cpp Loggero.h ServiceLayer_Test.cpp Conversation.h Message.cpp testRocks.cpp Conversation_Test.cpp Message.h User.cpp Database.cpp Message_Test.cpp UserFactory.cpp Database.h mongoose.c UserFactory.h Database_Test.cpp mongoose.h UserFactory_Test.cpp holaMundoServer.cpp Server.cpp User.h Server.h User_Test.cpp json/json.h json/json-forwards.h)
+SET(SOURCES Loggero.cpp ServiceLayer.h Constants.h Loggero.h ServiceLayer_Test.cpp Conversation.cpp Message.cpp SIGINT_Handler.h Conversation.h Message.h SignalHandler.cpp Conversation_Test.cpp Message_Test.cpp SignalHandler.h Database.cpp mongoose.c testRocks.cpp Database.h mongoose.h User.cpp Database_Test.cpp Proceso.cpp UserFactory.cpp EventHandler.h Proceso.h UserFactory.h holaMundoServer.cpp Server.cpp UserFactory_Test.cpp json/json.h json/json-forwards.h Server.h User.h jsoncpp.cpp ServiceLayer.cpp User_Test.cpp)
 
 # Se crea el make a partir del SOURCE definido.
 ADD_EXECUTABLE(server ${SOURCES})
@@ -23,7 +23,7 @@ ADD_EXECUTABLE(server ${SOURCES})
 # Se linkean todas las librerias externas necesarias.
 TARGET_LINK_LIBRARIES(server /usr/local/lib/librocksdb.a)
 TARGET_LINK_LIBRARIES(server /usr/local/lib/libjsoncpp.a)
-TARGET_LINK_LIBRARIES(server /usr/local/lib/libgtest.a)
+TARGET_LINK_LIBRARIES(server /usr/lib/libgtest.a)
 TARGET_LINK_LIBRARIES(server ${CMAKE_THREAD_LIBS_INIT})
 TARGET_LINK_LIBRARIES(server ${ZLIB_LIBRARIES})
 TARGET_LINK_LIBRARIES(server ${BZIP2_LIBRARIES})
