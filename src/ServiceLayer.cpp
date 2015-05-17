@@ -18,6 +18,7 @@ int ServiceLayer::ERROR_USER_PROFILE_DOESNT_EXISTS = 5;
 int ServiceLayer::USERNAME_ALREADY_EXISTS = 6;
 int ServiceLayer::NO_PASSWORD = 7;
 int ServiceLayer::NO_USERNAME = 8;
+int ServiceLayer::INVALID_JSON = 9;
 
 ServiceLayer::ServiceLayer() {
 	this->db = new Database();
@@ -151,7 +152,18 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	}
 	Json::Value rootValue = Json::Value();
 	Json::Value value = this->getDatabase()->getJsonValueFromString(jsonMessage);
-	Message* m = new Message(value);
+//	Message* m = new Message(value);
+	Message* m = MessageFactory::createMessage(value);
+	if (m == NULL){
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::INVALID_JSON;
+		return db->getJsonStringFromValue(rootValue);
+	}
+	if (m->getEmisor()->getUsername() != username){
+		rootValue["result"] = ServiceLayer::ERROR_STRING;
+		rootValue["code"] = ServiceLayer::ERROR_SEND_MESSAGE;
+		return db->getJsonStringFromValue(rootValue);
+	}
 	bool result = this->getDatabase()->saveMessage(m);
 	if (result){
 		rootValue["result"] = ServiceLayer::OK_STRING;

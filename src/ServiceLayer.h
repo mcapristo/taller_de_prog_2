@@ -9,6 +9,7 @@
 #define SERVICELAYER_H_
 
 #include "Database.h"
+#include "MessageFactory.h"
 
 class ServiceLayer {
 public:
@@ -46,6 +47,7 @@ public:
 	static int NO_USERNAME;
 	static int NO_PASSWORD;
 	static int USERNAME_ALREADY_EXISTS;
+	static int INVALID_JSON;
 private:
 	string isValidToken(User* username,string token);
 	Database* db;

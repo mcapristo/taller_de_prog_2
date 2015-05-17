@@ -334,3 +334,55 @@ TEST(TestsServiceLayer, TestCreateUserWithNoPassword){
 	ASSERT_EQ(ServiceLayer::ERROR_STRING, resultValue["result"].asString());
 	ASSERT_EQ(ServiceLayer::NO_PASSWORD, resultValue["code"].asInt());
 }
+
+TEST(TestsServiceLayer, TestSendMessageWithInvalidJson){
+	UserFactory uf = UserFactory();
+	string user1 = "emisor";
+	string pass = "contrasenia";
+	User* u1 = uf.createUser(user1,pass);
+	ServiceLayer sl = ServiceLayer();
+	Database* d = sl.getDatabase();
+	d->saveUser(u1);
+	string responseLogin = sl.login(user1,pass);
+	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	string messageJsonString = "{}";
+
+	string responseStringSendMessage = sl.sendMessage(user1,token,messageJsonString);
+
+	Json::Value responseValueSendMessage = sl.getDatabase()->getJsonValueFromString(responseStringSendMessage);
+	ASSERT_EQ(sl.ERROR_STRING,responseValueSendMessage["result"].asString());
+	ASSERT_EQ(sl.INVALID_JSON,responseValueSendMessage["code"].asInt());
+
+	delete u1;
+}
+
+TEST(TestsServiceLayer, TestSendMessageWithInvalidEmisor){
+	UserFactory uf = UserFactory();
+	string user1 = "emisor";
+	string user3 = "emisor2";
+	string user2 = "receptor";
+	string pass = "contrasenia";
+	User* u1 = uf.createUser(user1,pass);
+	User* u2 = uf.createUser(user2,pass);
+	User* u3 = uf.createUser(user3,pass);
+	ServiceLayer sl = ServiceLayer();
+	Database* d = sl.getDatabase();
+	d->saveUser(u1);
+	string responseLogin = sl.login(user1,pass);
+	Json::Value valueResponseLogin = d->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	Message* m = new Message(u3,u2,"primer mensaje");
+
+	string responseStringSendMessage = sl.sendMessage(user1,token,m->toJsonString());
+	delete m;
+	Json::Value responseValueSendMessage = sl.getDatabase()->getJsonValueFromString(responseStringSendMessage);
+	ASSERT_EQ(sl.ERROR_STRING,responseValueSendMessage["result"].asString());
+	ASSERT_EQ(sl.ERROR_SEND_MESSAGE,responseValueSendMessage["code"].asInt());
+	delete u1;
+	delete u2;
+	delete u3;
+
+}
