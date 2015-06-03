@@ -48,6 +48,7 @@ public:
 	static int NO_PASSWORD;
 	static int USERNAME_ALREADY_EXISTS;
 	static int INVALID_JSON;
+	static int ERROR_ON_SAVE;
 private:
 	string isValidToken(User* username,string token);
 	Database* db;

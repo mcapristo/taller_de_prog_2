@@ -19,6 +19,7 @@ int ServiceLayer::USERNAME_ALREADY_EXISTS = 6;
 int ServiceLayer::NO_PASSWORD = 7;
 int ServiceLayer::NO_USERNAME = 8;
 int ServiceLayer::INVALID_JSON = 9;
+int ServiceLayer::ERROR_ON_SAVE = 10;
 
 ServiceLayer::ServiceLayer() {
 	this->db = new Database();
@@ -136,9 +137,16 @@ string ServiceLayer::updateProfile(string username, string token, string data){
 	}
 	Json::Value input = this->getDatabase()->getJsonValueFromString(data);
 	u->updateUser(input);
+	bool resultUpdate = this->db->saveUser(u);
 	Json::Value ret = Json::Value();
-	ret["result"] = ServiceLayer::OK_STRING;
-	ret["data"] = u->getUserProfileJsonValue();
+	if (resultUpdate){
+		ret["result"] = ServiceLayer::OK_STRING;
+		ret["data"] = u->getUserProfileJsonValue();
+	}
+	else{
+		ret["result"] = ServiceLayer::ERROR_STRING;
+		ret["code"] = ServiceLayer::ERROR_ON_SAVE;
+	}
 	delete u;
 	return this->getDatabase()->getJsonStringFromValue(ret);
 }
