@@ -215,7 +215,9 @@ string ServiceLayer::getMessages(string username, string token, string user2){
 	else{
 		Conversation* conv = this->getDatabase()->getConversation(u,u2);
 		rootValue["result"] = ServiceLayer::OK_STRING;
-		rootValue["data"] = this->getDatabase()->getMessagesJsonValue(conv);
+
+		if (conv == NULL) rootValue["data"].append("");
+		else rootValue["data"] = this->getDatabase()->getMessagesJsonValue(conv);
 	}
 	delete u;
 	delete u2;
