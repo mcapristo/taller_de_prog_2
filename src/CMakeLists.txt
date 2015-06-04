@@ -15,7 +15,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 INCLUDE(FindPkgConfig)
 
 # Se agregan todas las clases al SOURCE.
-SET(SOURCES Loggero.cpp ServiceLayer.h Constants.h Loggero.h ServiceLayer_Test.cpp Conversation.cpp Message.cpp SIGINT_Handler.h Conversation.h Message.h SignalHandler.cpp Conversation_Test.cpp Message_Test.cpp SignalHandler.h Database.cpp mongoose.c testRocks.cpp Database.h mongoose.h User.cpp Database_Test.cpp Proceso.cpp UserFactory.cpp EventHandler.h Proceso.h UserFactory.h holaMundoServer.cpp Server.cpp UserFactory_Test.cpp json/json.h json/json-forwards.h Server.h User.h jsoncpp.cpp ServiceLayer.cpp User_Test.cpp)
+SET(SOURCES Loggero.h ServiceLayer.h Constants.h Message.cpp ServiceLayer_Test.cpp Conversation.cpp MessageFactory.cpp SIGINT_Handler.h Conversation.h MessageFactory.h SignalHandler.cpp Conversation_Test.cpp Message.h SignalHandler.h Database.cpp Message_Test.cpp testRocks.cpp Database.h mongoose.c User.cpp Database_Test.cpp mongoose.h UserFactory.cpp EventHandler.h Proceso.cpp UserFactory.h holaMundoServer.cpp Proceso.h UserFactory_Test.cpp Server.cpp User.h jsoncpp.cpp Server.h User_Test.cpp Loggero.cpp ServiceLayer.cpp json/json.h json/json-forwards.h)
 
 # Se crea el make a partir del SOURCE definido.
 ADD_EXECUTABLE(server ${SOURCES})
