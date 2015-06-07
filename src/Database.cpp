@@ -20,8 +20,11 @@ Database::Database() {
 
 		s = db->CreateColumnFamily(ColumnFamilyOptions(), "MessageCF", &this->messageCF);
 		assert(s.ok());
+		delete this->userCF;
+		delete this->conversationCF;
+		delete this->messageCF;
+		delete this->db;
 	}
-	else {
 		std::vector<ColumnFamilyDescriptor> column_families;
 		column_families.push_back(ColumnFamilyDescriptor(kDefaultColumnFamilyName,ColumnFamilyOptions()));
 		column_families.push_back(ColumnFamilyDescriptor("UserCF",ColumnFamilyOptions()));
@@ -33,7 +36,6 @@ Database::Database() {
 		this->userCF = handles[1];
 		this->conversationCF = handles[2];
 		this->messageCF = handles[3];
-	}
 }
 
 Database::~Database() {
