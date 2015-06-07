@@ -31,6 +31,10 @@ public:
 	void setToken(string t);
 	string getProfileImage();
 	void setProfileImage(string image);
+	double getLatitud();
+	void setLatitud(double latitud);
+	double getLongitud();
+	void setLongitud(double longitud);
 
 	void login();
 	void logout();
@@ -46,8 +50,8 @@ private:
 	string profileImage;
 	bool online;
 	string token;
-	//UBICACION
-
+	double latitud;
+	double longitud;
 };
 
 #endif /* USER_H_ */

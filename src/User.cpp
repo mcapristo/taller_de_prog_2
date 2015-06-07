@@ -12,6 +12,8 @@ User::User(string username) {
 	this->online = false;
 	this->token = "";
 	this->profileImage = "";
+	this->latitud = 0;
+	this->longitud = 0;
 }
 
 User::~User() {
@@ -69,13 +71,31 @@ void User::setProfileImage(string image){
 	this->profileImage = image;
 }
 
+void User::setLatitud(double latitud){
+	this->latitud = latitud;
+}
+
+double User::getLatitud(){
+	return this->latitud;
+}
+
+void User::setLongitud(double longitud){
+	this->longitud = longitud;
+}
+
+double User::getLongitud(){
+	return this->longitud;
+}
+
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
-	value["password"] = this->password; // La contrasenia no se deberia mandar
+	value["password"] = this->password;
 	value["name"] = this->name;
 	value["online"] = this->online;
 	value["token"] = this->token;
+	value["latitud"] = this->latitud;
+	value["longitud"] = this->longitud;
 	value["profileImage"] = this->profileImage;
 
 	return value;
@@ -108,6 +128,8 @@ Json::Value User::getUserProfileJsonValue(){
 	val["username"] = this->getUsername();
 	val["name"] = this->getName();
 	val["online"] = this->isOnline();
+	val["latitud"] = this->getLatitud();
+	val["longitud"] = this->getLongitud();
 	val["profileImage"] = this->getProfileImage();
 	return val;
 }
@@ -121,4 +143,10 @@ void User::updateUser(Json::Value val){
 
 	string password = val.get("password", "").asString();
 	if (password != "") this->setPassword(password);
+
+	double latitud = val.get("latitud", 0).asDouble();
+	if (latitud != 0) this->setLatitud(latitud);
+
+	double longitud = val.get("longitud", 0).asDouble();
+	if (longitud != 0) this->setLongitud(longitud);
 }
