@@ -11,6 +11,7 @@ User::User(string username) {
 	this->username = username;
 	this->online = false;
 	this->token = "";
+	this->profileImage = "";
 }
 
 User::~User() {
@@ -60,6 +61,14 @@ void User::setToken(string t){
 	this->token = t;
 }
 
+string User::getProfileImage(){
+	return this->profileImage;
+}
+
+void User::setProfileImage(string image){
+	this->profileImage = image;
+}
+
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
@@ -67,6 +76,7 @@ Json::Value User::toJsonValue() {
 	value["name"] = this->name;
 	value["online"] = this->online;
 	value["token"] = this->token;
+	value["profileImage"] = this->profileImage;
 
 	return value;
 }
@@ -98,10 +108,17 @@ Json::Value User::getUserProfileJsonValue(){
 	val["username"] = this->getUsername();
 	val["name"] = this->getName();
 	val["online"] = this->isOnline();
+	val["profileImage"] = this->getProfileImage();
 	return val;
 }
 
 void User::updateUser(Json::Value val){
 	string name = val.get("name","").asString();
 	if (name != "") this->setName(name);
+
+	string profileImage = val.get("profileImage", "").asString();
+	if (profileImage != "") this->setProfileImage(profileImage);
+
+	string password = val.get("password", "").asString();
+	if (password != "") this->setPassword(password);
 }

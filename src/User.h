@@ -29,6 +29,9 @@ public:
 	void setUsername(const string& username);
 	string getToken();
 	void setToken(string t);
+	string getProfileImage();
+	void setProfileImage(string image);
+
 	void login();
 	void logout();
 	void updateUser(Json::Value val);
@@ -40,10 +43,11 @@ private:
 	string username;
 	string password;
 	string name;
-	//UBICACION
-	//FOTO DE PERFIL
+	string profileImage;
 	bool online;
 	string token;
+	//UBICACION
+
 };
 
 #endif /* USER_H_ */

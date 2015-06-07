@@ -27,11 +27,13 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	string name = value.get("name", "").asString();
 	bool online = value.get("online",false).asBool();
 	string token = value.get("token","").asString();
+	string profileImage = value.get("profileImage", "").asString();
 	User* u = new User(username);
 	u->setPassword(password);
 	u->setName(name);
 	u->setOnline(online);
 	u->setToken(token);
+	u->setProfileImage(profileImage);
 	return u;
 }
 
