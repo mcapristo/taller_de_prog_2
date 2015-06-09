@@ -15,6 +15,7 @@ Server::Server() {
 }
 
 void Server::run(){
+	printf("To stop the server: kill -2 %d \n",getpid());
 	printf("Starting on port %s\n", mg_get_option(this->sv, "listening_port"));
 	while (sigint_handler.getGracefulQuit() == 0) {
 		mg_poll_server(this->sv, 1000);
