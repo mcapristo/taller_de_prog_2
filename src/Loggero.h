@@ -21,9 +21,9 @@ public:
 	static Loggero* getInstnce();
 	virtual ~Loggero();
 	int log(int type, string message);
+	static string getTime();
 private:
 	Loggero();
-	string GetTime();
 	static Loggero* instance;
 };
 

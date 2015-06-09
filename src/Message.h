@@ -10,6 +10,7 @@
 
 #include <ctime>
 #include "User.h"
+#include "Loggero.h"
 #include "json/json.h"
 
 using namespace std;
@@ -21,7 +22,7 @@ public:
 	Message(Json::Value);
 	virtual ~Message();
 	const string& getBody() const;
-	time_t getDatetime() const;
+	string getDatetime() const;
 	User* getEmisor();
 	User* getReceptor();
 	Value toJsonValue();
@@ -32,7 +33,7 @@ public:
 private:
 	User* emisor;
 	User* receptor;
-	time_t datetime;
+	string datetime;
 	string body;
 	string id;
 };

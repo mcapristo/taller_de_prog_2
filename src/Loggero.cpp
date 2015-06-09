@@ -25,7 +25,7 @@ Loggero::Loggero(){
 Loggero::~Loggero() {
 }
 
-string Loggero::GetTime() {
+string Loggero::getTime() {
 	time_t now = time(0);
 	struct tm tstruct;
 	char buf[80];
@@ -42,16 +42,16 @@ int Loggero::log(int type, string message) {
 	if(logFile.is_open()){
 		switch (type){
 			case (Constants::INFO) :
-				logFile << this->GetTime() << " - " << "INFO - " << message;
+				logFile << this->getTime() << " - " << "INFO - " << message;
 				break;
 			case (Constants::WARN) :
-				logFile << this->GetTime() << " - " << "WARN - " << message;
+				logFile << this->getTime() << " - " << "WARN - " << message;
 				break;
 			case (Constants::ERROR) :
-				logFile << this->GetTime() << " - " << "ERROR - " << message;
+				logFile << this->getTime() << " - " << "ERROR - " << message;
 				break;
 			case (Constants::DEBUG) :
-				logFile << this->GetTime() << " - " << "DEBUG - " << message;
+				logFile << this->getTime() << " - " << "DEBUG - " << message;
 				break;
 		}
 
