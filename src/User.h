@@ -42,6 +42,7 @@ public:
 	Json::Value toJsonValue();
 	string toJsonString();
 	Json::Value getUserProfileJsonValue();
+	Json::Value getUserLoginProfileJsonValue();
 
 private:
 	string username;

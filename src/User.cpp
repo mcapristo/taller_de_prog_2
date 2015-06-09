@@ -134,6 +134,12 @@ Json::Value User::getUserProfileJsonValue(){
 	return val;
 }
 
+Json::Value User::getUserLoginProfileJsonValue(){
+	Json::Value val = this->getUserProfileJsonValue();
+	val["token"] = this->getToken();
+	return val;
+}
+
 void User::updateUser(Json::Value val){
 	string name = val.get("name","").asString();
 	if (name != "") this->setName(name);

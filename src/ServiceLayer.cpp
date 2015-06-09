@@ -48,7 +48,7 @@ string ServiceLayer::login(string username, string password){
 		u->login();
 		this->db->saveUser(u);
 		value["result"] = ServiceLayer::OK_STRING;
-		value["data"] = u->toJsonValue();
+		value["data"] = u->getUserLoginProfileJsonValue();
 	}
 	delete u;
 	return this->getDatabase()->getJsonStringFromValue(value);
