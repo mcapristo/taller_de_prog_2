@@ -35,6 +35,8 @@ public:
 	void setLatitud(double latitud);
 	double getLongitud();
 	void setLongitud(double longitud);
+	string getLocation();
+	void setLocation(string location);
 
 	void login();
 	void logout();
@@ -53,6 +55,7 @@ private:
 	string token;
 	double latitud;
 	double longitud;
+	string location;
 };
 
 #endif /* USER_H_ */

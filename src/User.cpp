@@ -14,6 +14,7 @@ User::User(string username) {
 	this->profileImage = "";
 	this->latitud = 0;
 	this->longitud = 0;
+	this->location = "";
 }
 
 User::~User() {
@@ -87,6 +88,14 @@ double User::getLongitud(){
 	return this->longitud;
 }
 
+void User::setLocation(string location){
+	this->location = location;
+}
+
+string User::getLocation(){
+	return this->location;
+}
+
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
@@ -97,6 +106,7 @@ Json::Value User::toJsonValue() {
 	value["latitud"] = this->latitud;
 	value["longitud"] = this->longitud;
 	value["profileImage"] = this->profileImage;
+	value["location"] = this->location;
 
 	return value;
 }
@@ -131,6 +141,7 @@ Json::Value User::getUserProfileJsonValue(){
 	val["latitud"] = this->getLatitud();
 	val["longitud"] = this->getLongitud();
 	val["profileImage"] = this->getProfileImage();
+	val["location"] = this->getLocation();
 	return val;
 }
 
@@ -155,4 +166,7 @@ void User::updateUser(Json::Value val){
 
 	double longitud = val.get("longitud", 0).asDouble();
 	if (longitud != 0) this->setLongitud(longitud);
+
+	string location = val.get("location","").asString();
+	if (location != "") this->setLocation(location);
 }
