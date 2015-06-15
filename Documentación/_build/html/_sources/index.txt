@@ -85,7 +85,7 @@ Como usarla paso a paso
 
 **Eleccion de red:**
 
-Como primer paso luego de instalar la aplicación y abrirla desde el dispositivo, se mostrara la pantalla de LogIn. Aquí para configurar la red hay que acceder al menu, opcion IP Configuration y se desplegara la pantalla de eleccion de IP de red para poner la IP del servidor en la red en la que se encuentra conectado (Esta puede encontrarse abriendo la consola de comandos y poniendo el comando "ifconfig -a").
+Como primer paso luego de instalar la aplicación y abrirla desde el dispositivo, se mostrara la pantalla de LogIn. Aquí para configurar la red hay que acceder al menu, opcion Configuración IP y se desplegara la pantalla de eleccion de IP de red para poner la IP del servidor en la red en la que se encuentra conectado (Esta puede encontrarse abriendo la consola de comandos y poniendo el comando "ifconfig -a").
 Una vez ingresada la IP del servidor en el campo de texto del centro de la pantalla, se procede a presionar el boton "Guardar" y si la carga de la direccion IP es correcta una alerta le indicara que esta se guardo con éxito, por lo que al cerrar la alerta puede presionar el boton "Volver" que lo devolvera a la pantalla de LogIn.
 
 **Registro de usuario:**
