@@ -28,12 +28,18 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	bool online = value.get("online",false).asBool();
 	string token = value.get("token","").asString();
 	string profileImage = value.get("profileImage", "").asString();
+	double latitud = value.get("latitud", 0).asDouble();
+	double longitud = value.get("longitud", 0).asDouble();
+	string location = value.get("location","").asString();
 	User* u = new User(username);
 	u->setPassword(password);
 	u->setName(name);
 	u->setOnline(online);
 	u->setToken(token);
 	u->setProfileImage(profileImage);
+	u->setLatitud(latitud);
+	u->setLongitud(longitud);
+	u->setLocation(location);
 	return u;
 }
 
