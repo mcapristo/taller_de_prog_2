@@ -161,6 +161,9 @@ void User::updateUser(Json::Value val){
 	string password = val.get("password", "").asString();
 	if (password != "") this->setPassword(password);
 
+	bool online = val.get("online", false).asBool();
+	this->setOnline(online);
+
 	double latitud = val.get("latitud", 0).asDouble();
 	if (latitud != 0) this->setLatitud(latitud);
 
