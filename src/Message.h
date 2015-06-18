@@ -25,6 +25,7 @@ public:
 	string getDatetime() const;
 	User* getEmisor();
 	User* getReceptor();
+	void setReceptor(User* u);
 	Value toJsonValue();
 	string toJsonString();
 	string getId();

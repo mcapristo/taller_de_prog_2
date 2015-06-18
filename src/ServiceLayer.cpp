@@ -160,7 +160,6 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	}
 	Json::Value rootValue = Json::Value();
 	Json::Value value = this->getDatabase()->getJsonValueFromString(jsonMessage);
-//	Message* m = new Message(value);
 	Message* m = MessageFactory::createMessage(value);
 	if (m == NULL){
 		rootValue["result"] = ServiceLayer::ERROR_STRING;
@@ -171,6 +170,9 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 		rootValue["result"] = ServiceLayer::ERROR_STRING;
 		rootValue["code"] = ServiceLayer::ERROR_SEND_MESSAGE;
 		return db->getJsonStringFromValue(rootValue);
+	}
+	if (m->getReceptor()->getUsername() == ""){
+		return this->sendDiffusionMessage(username, m);
 	}
 	bool result = this->getDatabase()->saveMessage(m);
 	if (result){
@@ -183,6 +185,22 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	}
 	delete m;
 	return db->getJsonStringFromValue(rootValue);
+}
+
+string ServiceLayer::sendDiffusionMessage(string sender, Message* m){
+	Json::Value rootValue = Json::Value();
+	rootValue["result"] = ServiceLayer::OK_STRING;
+	rootValue["data"] = m->toJsonValue();
+	vector<User*> users = this->db->getUsers();
+	size_t i;
+	for (i = 0; i < users.size(); i++){
+		User* receptor = users[i];
+		if (receptor->getUsername() != sender){
+			m->setReceptor(receptor);
+			this->db->saveMessage(m);
+		}
+	}
+	return this->db->getJsonStringFromValue(rootValue);
 }
 
 string ServiceLayer::getConversations(string username, string token){

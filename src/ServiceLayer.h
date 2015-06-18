@@ -51,6 +51,7 @@ public:
 	static int ERROR_ON_SAVE;
 private:
 	string isValidToken(User* username,string token);
+	string sendDiffusionMessage(string sender, Message* m);
 	Database* db;
 };
 

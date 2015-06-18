@@ -21,8 +21,7 @@ Message* MessageFactory::createMessage(Json::Value value){
 	string receptor = value.get("receptor", "").asString();
 	string id = value.get("id", "").asString();
 	string body = value.get("body","").asString();
-	//string datetime = value.get("datetime","").asString();
-	if (emisor == "" || receptor == "" || body == ""){
+	if (emisor == "" || body == ""){
 		return NULL;
 	}
 	Message* m = new Message(new User(emisor), new User(receptor),body);

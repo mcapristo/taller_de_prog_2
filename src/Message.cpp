@@ -47,6 +47,10 @@ User* Message::getReceptor() {
 	return this->receptor;
 }
 
+void Message::setReceptor(User* u){
+	this->receptor = u;
+}
+
 void Message::setId(string id) {
 	this->id = id;
 }
