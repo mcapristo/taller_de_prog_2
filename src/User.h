@@ -9,6 +9,7 @@
 #define USER_H_
 
 #include <iostream>
+#include <string>
 #include <bits/functional_hash.h>
 #include "json/json.h"
 

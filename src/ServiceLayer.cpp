@@ -101,8 +101,16 @@ string ServiceLayer::isValidToken(User* u, string token){
 
 string ServiceLayer::createUser(string json){
 	UserFactory uf = UserFactory();
-	User* createdUser = uf.createUserFromJsonString(json);
 	Json::Value valueToReturn = Json::Value();
+	User* createdUser;
+	try{
+		createdUser = uf.createUserFromJsonString(json);
+	}catch(const std::exception&) {
+		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
+		valueToReturn["code"] = ServiceLayer::INVALID_JSON;
+		return this->getDatabase()->getJsonStringFromValue(valueToReturn);
+	}
+
 	string username = createdUser->getUsername();
 	string pass = createdUser->getPassword();
 	if (this->getDatabase()->getUser(createdUser->getUsername()) != NULL){
@@ -113,7 +121,7 @@ string ServiceLayer::createUser(string json){
 		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
 		valueToReturn["code"] = ServiceLayer::NO_USERNAME;
 	}
-	else if (/*pass == NULL ||*/ pass == ""){
+	else if (pass == ""){
 		valueToReturn["result"] = ServiceLayer::ERROR_STRING;
 		valueToReturn["code"] = ServiceLayer::NO_PASSWORD;
 	}
@@ -136,9 +144,15 @@ string ServiceLayer::updateProfile(string username, string token, string data){
 		return res;
 	}
 	Json::Value input = this->getDatabase()->getJsonValueFromString(data);
-	u->updateUser(input);
-	bool resultUpdate = this->db->saveUser(u);
+	bool resultUpdate = false;
 	Json::Value ret = Json::Value();
+	try{
+		u->updateUser(input);
+		resultUpdate = this->db->saveUser(u);
+	}
+	catch(const std::exception&) {
+		resultUpdate = false;
+	}
 	if (resultUpdate){
 		ret["result"] = ServiceLayer::OK_STRING;
 		ret["data"] = u->getUserProfileJsonValue();
