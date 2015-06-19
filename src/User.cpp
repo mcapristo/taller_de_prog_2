@@ -15,6 +15,8 @@ User::User(string username) {
 	this->latitud = 0;
 	this->longitud = 0;
 	this->location = "";
+	this->checkinDatetime = "";
+	this->lastActivityDatetime = Clock::getTime();
 }
 
 User::~User() {
@@ -90,10 +92,27 @@ double User::getLongitud(){
 
 void User::setLocation(string location){
 	this->location = location;
+	this->setCheckinDatetime(Clock::getTime());
 }
 
 string User::getLocation(){
 	return this->location;
+}
+
+void User::setCheckinDatetime(string datetime){
+	this->checkinDatetime = datetime;
+}
+
+string User::getCheckinDatetime(){
+	return this->checkinDatetime;
+}
+
+void User::setLastActivityDatetime(string datetime){
+	this->lastActivityDatetime = datetime;
+}
+
+string User::getLastActivityDatetime(){
+	return this->lastActivityDatetime;
 }
 
 Json::Value User::toJsonValue() {
@@ -107,6 +126,8 @@ Json::Value User::toJsonValue() {
 	value["longitud"] = this->longitud;
 	value["profileImage"] = this->profileImage;
 	value["location"] = this->location;
+	value["checkinDatetime"] = this->checkinDatetime;
+	value["lastActivityDatetime"] = this->lastActivityDatetime;
 
 	return value;
 }
@@ -142,6 +163,8 @@ Json::Value User::getUserProfileJsonValue(){
 	val["longitud"] = this->getLongitud();
 	val["profileImage"] = this->getProfileImage();
 	val["location"] = this->getLocation();
+	val["checkinDatetime"] = this->getCheckinDatetime();
+	val["lastActivityDatetime"] = this->getLastActivityDatetime();
 	return val;
 }
 
@@ -172,4 +195,10 @@ void User::updateUser(Json::Value val){
 
 	string location = val.get("location","").asString();
 	if (location != "") this->setLocation(location);
+
+	string checkinDatetime = val.get("checkinDatetime","").asString();
+	if (checkinDatetime != "") this->setCheckinDatetime(checkinDatetime);
+
+	string lastActivityDatetime = val.get("lastActivityDatetime","").asString();
+	if (lastActivityDatetime != "") this->setLastActivityDatetime(lastActivityDatetime);
 }

@@ -96,6 +96,10 @@ string ServiceLayer::isValidToken(User* u, string token){
 		value["code"] = ServiceLayer::INVALID_TOKEN;
 		return this->getDatabase()->getJsonStringFromValue(value);
 	}
+	if (u->getToken() == token){
+		u->setLastActivityDatetime(Clock::getTime());
+		this->getDatabase()->saveUser(u);
+	}
 	return "";
 }
 

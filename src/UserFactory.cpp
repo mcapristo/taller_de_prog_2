@@ -31,6 +31,9 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	double latitud = value.get("latitud", 0).asDouble();
 	double longitud = value.get("longitud", 0).asDouble();
 	string location = value.get("location","").asString();
+	string checkinDatetime = value.get("checkinDatetime","").asString();
+	string lastActivityDatetime = value.get("lastActivityDatetime","").asString();
+
 	User* u = new User(username);
 	u->setPassword(password);
 	u->setName(name);
@@ -40,6 +43,8 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	u->setLatitud(latitud);
 	u->setLongitud(longitud);
 	u->setLocation(location);
+	u->setCheckinDatetime(checkinDatetime);
+	u->setLastActivityDatetime(lastActivityDatetime);
 	return u;
 }
 

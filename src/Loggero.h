@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include "Constants.h"
+#include "Clock.h"
 
 using namespace std;
 
@@ -21,7 +22,6 @@ public:
 	static Loggero* getInstnce();
 	virtual ~Loggero();
 	int log(int type, string message);
-	static string getTime();
 private:
 	Loggero();
 	static Loggero* instance;

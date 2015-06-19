@@ -27,7 +27,14 @@ Server::~Server() {
 
 int Server::eventHandlerCaller(mg_connection* conn, enum mg_event ev){
 	Server* s = (Server*) conn->server_param;
-	return s->ev_handler(conn,ev);
+	try{
+		return s->ev_handler(conn,ev);
+	}catch(const std::exception& e) {
+		Loggero::getInstnce()->log(Constants::ERROR,e.what());
+		return 0;
+	}
+	return 0;
+
 }
 
 int Server::ev_handler(mg_connection* conn, enum mg_event ev){

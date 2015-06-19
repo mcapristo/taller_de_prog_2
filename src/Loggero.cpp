@@ -25,16 +25,6 @@ Loggero::Loggero(){
 Loggero::~Loggero() {
 }
 
-string Loggero::getTime() {
-	time_t now = time(0);
-	struct tm tstruct;
-	char buf[80];
-	tstruct = *localtime(&now);
-	strftime(buf, sizeof(buf), "%Y/%m/%d %X", &tstruct);
-
-	return buf;
-}
-
 int Loggero::log(int type, string message) {
 	ofstream logFile;
 	logFile.open ("./log.txt", ios::app);
@@ -42,16 +32,16 @@ int Loggero::log(int type, string message) {
 	if(logFile.is_open()){
 		switch (type){
 			case (Constants::INFO) :
-				logFile << this->getTime() << " - " << "INFO - " << message;
+				logFile << Clock::getTime() << " - " << "INFO - " << message;
 				break;
 			case (Constants::WARN) :
-				logFile << this->getTime() << " - " << "WARN - " << message;
+				logFile << Clock::getTime() << " - " << "WARN - " << message;
 				break;
 			case (Constants::ERROR) :
-				logFile << this->getTime() << " - " << "ERROR - " << message;
+				logFile << Clock::getTime() << " - " << "ERROR - " << message;
 				break;
 			case (Constants::DEBUG) :
-				logFile << this->getTime() << " - " << "DEBUG - " << message;
+				logFile << Clock::getTime() << " - " << "DEBUG - " << message;
 				break;
 		}
 

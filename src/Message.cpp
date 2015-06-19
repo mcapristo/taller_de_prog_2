@@ -11,7 +11,7 @@ Message::Message(User* emisor, User* receptor, string body) {
 	this->emisor = emisor;
 	this->receptor = receptor;
 	this->body = body;
-	this->datetime = Loggero::getTime();
+	this->datetime = Clock::getTime();
 }
 
 Message::Message(Json::Value value){

@@ -13,6 +13,8 @@
 #include <bits/functional_hash.h>
 #include "json/json.h"
 
+#include "Clock.h"
+
 using namespace std;
 
 
@@ -38,6 +40,10 @@ public:
 	void setLongitud(double longitud);
 	string getLocation();
 	void setLocation(string location);
+	string getCheckinDatetime();
+	void setCheckinDatetime(string datetime);
+	string getLastActivityDatetime();
+	void setLastActivityDatetime(string datetime);
 
 	void login();
 	void logout();
@@ -57,6 +63,8 @@ private:
 	double latitud;
 	double longitud;
 	string location;
+	string checkinDatetime;
+	string lastActivityDatetime;
 };
 
 #endif /* USER_H_ */
