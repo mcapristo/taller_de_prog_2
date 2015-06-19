@@ -255,12 +255,175 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <h1>Documentación de administrador<a class="headerlink" href="#documentacion-de-administrador" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="get-started">
 <h2>Get started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>El Server está desarrollado en C++, utiliza las librerías Mongoose para la gestión de http request, RocksDB para la base de datos (NoSQL), jsoncpp para la utilización del formato JSON y gTest para realizar los test.</p>
+<p>Para la compilación y ejecución del Server se utiliza la herramienta CMake.</p>
 </div>
 <div class="section" id="instalacon-y-configuracion">
 <h2>Instalacón y configuración<a class="headerlink" href="#instalacon-y-configuracion" title="Permalink to this headline">¶</a></h2>
+<p><strong>Instalación de la librería RocksDB</strong></p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Descargamos los fuentes del RocksDB desde el siguiente link</dt>
+<dd><ol class="first last loweralpha simple">
+<li><a class="reference external" href="https://github.com/facebook/rocksdb/archive/master.zip">https://github.com/facebook/rocksdb/archive/master.zip</a></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Descomprimir el archivo &#8220;rocksdb-master.zip&#8221;</p>
+</li>
+<li><p class="first">Ingresar a la carpeta &#8220;rocksdb-master&#8221; a partir de una nueva terminal</p>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando</dt>
+<dd><ol class="first last loweralpha simple">
+<li>make all</li>
+<li>install</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar los siguientes comandos</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo apt-get install libgflags-dev</li>
+<li>sudo apt-get install libsnappy-dev</li>
+<li>sudo apt-get install zlib1g-dev</li>
+<li>sudo apt-get install libbz2-dev</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Instalación de la librería jsoncpp</strong></p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Descargamos los fuentes de jsoncpp desde el siguiente link</dt>
+<dd><ol class="first last loweralpha simple">
+<li><a class="reference external" href="https://github.com/open-source-parsers/jsoncpp/archive/master.zip">https://github.com/open-source-parsers/jsoncpp/archive/master.zip</a></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Descomprimir el archivo &#8220;jsoncpp-master&#8221;</p>
+</li>
+<li><p class="first">Ingresar a la carpeta &#8220;jsoncpp-master&#8221; a partir de una nueva terminal</p>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar los siguientes comandos</dt>
+<dd><ol class="first last loweralpha simple">
+<li>mkdir -p build/debug</li>
+<li>cd build/debug</li>
+<li>cmake -DCMAKE_BUILD_TYPE=debug -DJSONCPP_LIB_BUILD_STATIC=ON -DJSONCPP_LIB_BUILD_SHARED=OFF -G &#8220;Unix Makefiles&#8221; ../..</li>
+<li>make</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Ingresar a la carpeta &#8220;/src/lib_json&#8221;</p>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando para tener permisos de administrador</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo su</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando</dt>
+<dd><ol class="first last loweralpha simple">
+<li>cp -a libjsoncpp.a /usr/local/lib</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Instalación de la librería gTest</strong></p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Descargamos los fuentes de gTest desde el siguiente link</dt>
+<dd><ol class="first last loweralpha simple">
+<li><a class="reference external" href="https://googletest.googlecode.com/files/gtest-1.7.0.zip">https://googletest.googlecode.com/files/gtest-1.7.0.zip</a></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p class="first">Descomprimir el archivo &#8220;gtest-1.7.0.zip&#8221;</p>
+</li>
+<li><p class="first">Ingresar a la carpeta &#8220;gtest-1.7.0&#8221; a partir de una nueva terminal</p>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar los siguientes comandos</dt>
+<dd><ol class="first last loweralpha simple">
+<li>Comandos: ./configure</li>
+<li>make</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando para tener permisos de administrador</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo su</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutar los siguientes comandos</dt>
+<dd><ol class="first last loweralpha simple">
+<li>cp -a include/gtest /usr/include</li>
+<li>cp -a lib/.libs/* /usr/lib/</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<p><strong>Instalamos CMake</strong></p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando a partir de una nueva terminal</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo apt-get install cmake</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
 <div class="section" id="forma-de-uso">
 <h2>Forma de uso<a class="headerlink" href="#forma-de-uso" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Abrimos una nueva terminal</p>
+</li>
+<li><p class="first">Ingresamos a la carpeta &#8220;src&#8221; donde tengamos los fuentes del Server</p>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutamos el siguiente comando</dt>
+<dd><ol class="first last loweralpha simple">
+<li>cmake CMakeLists.txt</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutamos el make</dt>
+<dd><ol class="first last loweralpha simple">
+<li>make</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Ejecutamos el server</dt>
+<dd><ol class="first last loweralpha simple">
+<li>./server</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
 <div class="section" id="mantenimiento">
 <h2>Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permalink to this headline">¶</a></h2>
