@@ -104,7 +104,7 @@ Manual de usuario del cliente
 Intro general de la app
 --------------------------------------------
 
-La aplicación MensajerO es una aplicacón de mensajería instantanea, que nos permite mantener conversaciones con distintos usuarios registrados, mantener información acerca de nuestro perfil, y compartir nuestra ubicación al resto de los contactos.
+La aplicación MensajerO es una aplicacón de mensajería instantanea, que nos permite mantener conversaciones con distintos usuarios registrados, mantener información acerca de nuestro perfil, y compartir nuestra ubicación al resto de los contactos asi como ver el perfil del resto de nuestros contactos y enviarle mensajes a todos al mismo tiempo.
 Podremos diferenciar entre aquellos contactos con los que ya hemos mantenido conversaciones y aquellos con los que no lo hemos hecho.
 
 Features incluidos
@@ -115,7 +115,7 @@ Entre los features incluidos podemos encontrar:
 + Eleccion de red
 + Registro de usuarios
 + Servicio de LogIn, con validacion de datos
-+ Vista de contactos
++ Vista de contactos con su estado
 	- Tab de contactos con chat abierto
 	- Tab de todos los contactos registrados
 + Edicion de perfil
@@ -127,6 +127,7 @@ Entre los features incluidos podemos encontrar:
 	- Estado
 + Compartir ubicación actual (Tomada por GPS)
 + Visualización del perfil de otros contactos
++ Recuerda datos de sesión
 
 Instalación y configuracón
 --------------------------------------------
@@ -138,6 +139,7 @@ Como usarla paso a paso
 
 Como primer paso luego de instalar la aplicación y abrirla desde el dispositivo, se mostrara la pantalla de LogIn. Aquí para configurar la red hay que acceder al menu, opcion Configuración IP y se desplegara la pantalla de eleccion de IP de red para poner la IP del servidor en la red en la que se encuentra conectado (Esta puede encontrarse abriendo la consola de comandos y poniendo el comando "ifconfig -a").
 Una vez ingresada la IP del servidor en el campo de texto del centro de la pantalla, se procede a presionar el boton "Guardar" y si la carga de la direccion IP es correcta una alerta le indicara que esta se guardo con éxito, por lo que al cerrar la alerta puede presionar el boton "Volver" que lo devolvera a la pantalla de LogIn.
+Una vez hecho este paso los datos ingresados se mantendran guardados hasta tanto apague el dispositivo.
 
 **Registro de usuario:**
 
@@ -150,6 +152,7 @@ Al crear un usuario si este se registro correctamente se abrira la pantalla de b
 
 Para iniciar sesión debe tener un usuario registrado. En ese caso en la pantalla de LogIn debe ingresar su username y password en los campos de texto que así lo indican en el centro de la pantalla y luego presionar el boton "Iniciar Sesión".
 De haber algun problema en el inicio de sesión una alerta se lo indicara, de lo contrario se iniciara sesión y sera redirigido a la pantalla principal con las listas de contactos para comenzar conversaciones.
+Una vez hecho este paso los datos ingresados se mantendran guardados hasta tanto apague el dispositivo, por lo que al volver a abrir la aplicacion se hara el inicio de sesion automatico con los datos ingresados.
 
 **Lista de contactos:**
 
@@ -177,7 +180,7 @@ Vale aclarar que el contacto difusion no guarda el historial de mensajes
 Para ver el perfil del contacto con el que estamos conversando, se debe abrir desde las listas de contactos el chat con el mismo.
 Una vez abierto ingresar al menu y presionar la opción "Ver perfil".
 Esto nos redireccionara a la pantalla del perfil del contacto seleccionado.
-En esta se podra visualizar la foto de perfil del mismo, junto con su nombre de contacto (el mostrado en la lista) y su nombre de usuario.
+En esta se podra visualizar la foto de perfil del mismo, junto con su nombre de contacto (el mostrado en la lista), su nombre de usuario y el estado de conexión del contacto.
 Para volver a la conversación se debe presionar la tecla de atras del dispositivo.
 
 **Editar mi perfil:**
