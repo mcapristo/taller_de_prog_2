@@ -205,8 +205,64 @@ En este perfil se debera presionar el boton "Compartir ubicación" y en ese mome
 Si se desea no compartir mas la ubicación al resto de los contactos se debe presionar el boton "Dejar de compartir" y el cuadro "Última ubicación compartida" quedará vacío, y la alerta nos indicara que el cambio fue guardado.
 Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambio es automaticamente guardado en el perfil del usuario sin necesidad de presionar el boton guardar de la edición de perfil.
 
+
 Screenshots
 --------------------------------------------
+
+Nos dirigimos al menú del teléfono e iniciamos la aplicación.
+
+.. image:: Screenshots/0.png
+
+Una vez iniciada la aplicación nos dirigimos a la pantalla "Configuración IP" a partir del menú de opcíones, en ella podremos configurar nuestra IP para conectarnos con el server (el mismo debe estar corriendo. VER: Documentación de administrador).
+Una vez configurada y salvada presionamos el botón "Volver".
+
+.. image:: Screenshots/1.1.png
+.. image:: Screenshots/1.2.png
+.. image:: Screenshots/1.3.png
+
+Otra vez en la pantalla de "Login" presionamos "Regristarse" y colocamos el usuario a crear y presionamos el botón "Crear". Cuando aparezca la pantalla de bienvenida presionaremos el botón "Volver".
+
+.. image:: Screenshots/2.png
+.
+
+.. image:: Screenshots/3.1.png
+.. image:: Screenshots/3.2.png
+.. image:: Screenshots/3.3.png
+
+En la pantalla de "Login" ingresaremos con el usuario recientemente creado y presionaremos el botón "Iniciar Sesión".
+
+.. image:: Screenshots/4.png
+
+En la pestaña de "Contactos" podremos ver a todos los usuarios conectados y no conectados.
+
+.. image:: Screenshots/7.png
+
+Podremos mandar mensajes a de forma individual a un usuario ó a partir de una "Difusión".
+
+.. image:: Screenshots/8.1.png
+.. image:: Screenshots/8.2.png
+.. image:: Screenshots/11.2.png
+
+Dentro de la pantalla de conversación con un contacto si presionamos la opción "Ver Perfil" desde el botón de menú podremos ver el perfil completo del usuario.
+
+.. image:: Screenshots/11.3.png
+
+Si presionamos la opción "Editar Perfil" desde el botón de menú en la pantalla de Chats/Contactos podremos actualizar nuestros datos, cambiar la foto de perfil y compartir nuestra ubicación mediante GPS.
+
+.. image:: Screenshots/10.1.png
+.. image:: Screenshots/10.2.png
+.. image:: Screenshots/10.4.png
+.
+
+.. image:: Screenshots/10.6.png
+.. image:: Screenshots/10.7.png
+.. image:: Screenshots/11.1.png
+
+Una vez que querramos desloguearnos de la aplicación desde la opción "Cerrar Sesión" desde el botón de menú podremos hacerlo.
+
+.. image:: Screenshots/12.1.png
+.. image:: Screenshots/12.2.png
+
 
 Known issues
 --------------------------------------------
