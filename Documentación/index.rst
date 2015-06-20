@@ -131,6 +131,14 @@ Entre los features incluidos podemos encontrar:
 Instalación y configuracón
 --------------------------------------------
 
+1. Conectar el teléfono a la pc a través del cable de USB.
+2. Copiar a la memoria interna ó tarjeta micro SD del teléfono la aplicación "Grupo3-MensajerO.apk".
+3. Desconectar el teléfono de la pc.
+4. Navegar a la carpeta que se copió la aplicación a partir del explorador de carpetas del teléfono.
+5. Presionar la aplicación y completar la acción mediante "Packege installer".
+6. Aceptar los terminos y condiciones.
+7. Ejecutar la aplicación.
+
 Como usarla paso a paso
 --------------------------------------------
 
