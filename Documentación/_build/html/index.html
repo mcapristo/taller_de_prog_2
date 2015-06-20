@@ -260,6 +260,18 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 </div>
 <div class="section" id="instalacon-y-configuracion">
 <h2>Instalacón y configuración<a class="headerlink" href="#instalacon-y-configuracion" title="Permalink to this headline">¶</a></h2>
+<p><strong>Instalamos CMake</strong></p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando a partir de una nueva terminal</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo su</li>
+<li>apt-get install cmake</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
 <p><strong>Instalación de la librería RocksDB</strong></p>
 <ol class="arabic">
 <li><dl class="first docutils">
@@ -275,10 +287,18 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <li><p class="first">Ingresar a la carpeta &#8220;rocksdb-master&#8221; a partir de una nueva terminal</p>
 </li>
 <li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando para tener permisos de administrador</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo su</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt>Ejecutar el siguiente comando</dt>
 <dd><ol class="first last loweralpha simple">
 <li>make all</li>
-<li>install</li>
+<li>make install</li>
 </ol>
 </dd>
 </dl>
@@ -286,10 +306,10 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <li><dl class="first docutils">
 <dt>Ejecutar los siguientes comandos</dt>
 <dd><ol class="first last loweralpha simple">
-<li>sudo apt-get install libgflags-dev</li>
-<li>sudo apt-get install libsnappy-dev</li>
-<li>sudo apt-get install zlib1g-dev</li>
-<li>sudo apt-get install libbz2-dev</li>
+<li>apt-get install libgflags-dev</li>
+<li>apt-get install libsnappy-dev</li>
+<li>apt-get install zlib1g-dev</li>
+<li>apt-get install libbz2-dev</li>
 </ol>
 </dd>
 </dl>
@@ -310,6 +330,14 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <li><p class="first">Ingresar a la carpeta &#8220;jsoncpp-master&#8221; a partir de una nueva terminal</p>
 </li>
 <li><dl class="first docutils">
+<dt>Ejecutar el siguiente comando a partir de una nueva terminal</dt>
+<dd><ol class="first last loweralpha simple">
+<li>sudo su</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt>Ejecutar los siguientes comandos</dt>
 <dd><ol class="first last loweralpha simple">
 <li>mkdir -p build/debug</li>
@@ -321,14 +349,6 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 </dl>
 </li>
 <li><p class="first">Ingresar a la carpeta &#8220;/src/lib_json&#8221;</p>
-</li>
-<li><dl class="first docutils">
-<dt>Ejecutar el siguiente comando para tener permisos de administrador</dt>
-<dd><ol class="first last loweralpha simple">
-<li>sudo su</li>
-</ol>
-</dd>
-</dl>
 </li>
 <li><dl class="first docutils">
 <dt>Ejecutar el siguiente comando</dt>
@@ -354,15 +374,6 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <li><p class="first">Ingresar a la carpeta &#8220;gtest-1.7.0&#8221; a partir de una nueva terminal</p>
 </li>
 <li><dl class="first docutils">
-<dt>Ejecutar los siguientes comandos</dt>
-<dd><ol class="first last loweralpha simple">
-<li>Comandos: ./configure</li>
-<li>make</li>
-</ol>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
 <dt>Ejecutar el siguiente comando para tener permisos de administrador</dt>
 <dd><ol class="first last loweralpha simple">
 <li>sudo su</li>
@@ -373,19 +384,17 @@ Vale aclarar que al presionar compartir o dejar de compartir ubicación el cambi
 <li><dl class="first docutils">
 <dt>Ejecutar los siguientes comandos</dt>
 <dd><ol class="first last loweralpha simple">
-<li>cp -a include/gtest /usr/include</li>
-<li>cp -a lib/.libs/* /usr/lib/</li>
+<li>./configure</li>
+<li>make</li>
 </ol>
 </dd>
 </dl>
 </li>
-</ol>
-<p><strong>Instalamos CMake</strong></p>
-<ol class="arabic">
 <li><dl class="first docutils">
-<dt>Ejecutar el siguiente comando a partir de una nueva terminal</dt>
+<dt>Ejecutar los siguientes comandos</dt>
 <dd><ol class="first last loweralpha simple">
-<li>sudo apt-get install cmake</li>
+<li>cp -a include/gtest /usr/include</li>
+<li>cp -a lib/.libs/* /usr/lib/</li>
 </ol>
 </dd>
 </dl>

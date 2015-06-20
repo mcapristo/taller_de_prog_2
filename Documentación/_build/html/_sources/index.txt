@@ -222,6 +222,13 @@ Para la compilación y ejecución del Server se utiliza la herramienta CMake.
 Instalacón y configuración
 --------------------------------------------
 
+**Instalamos CMake**
+
+1. Ejecutar el siguiente comando a partir de una nueva terminal
+	a. sudo su
+	b. apt-get install cmake
+
+
 **Instalación de la librería RocksDB**
 
 1. Descargamos los fuentes del RocksDB desde el siguiente link
@@ -231,15 +238,18 @@ Instalacón y configuración
 
 3. Ingresar a la carpeta "rocksdb-master" a partir de una nueva terminal
 
-4. Ejecutar el siguiente comando 
-	a. make all
-	b. install
+4. Ejecutar el siguiente comando para tener permisos de administrador 
+	a. sudo su
 
-5. Ejecutar los siguientes comandos
-	a. sudo apt-get install libgflags-dev
-	b. sudo apt-get install libsnappy-dev
-	c. sudo apt-get install zlib1g-dev
-	d. sudo apt-get install libbz2-dev
+5. Ejecutar el siguiente comando 
+	a. make all
+	b. make install
+
+6. Ejecutar los siguientes comandos
+	a. apt-get install libgflags-dev
+	b. apt-get install libsnappy-dev
+	c. apt-get install zlib1g-dev
+	d. apt-get install libbz2-dev
 
 
 **Instalación de la librería jsoncpp** 
@@ -251,16 +261,16 @@ Instalacón y configuración
 
 3. Ingresar a la carpeta "jsoncpp-master" a partir de una nueva terminal
 
-4. Ejecutar los siguientes comandos
+4. Ejecutar el siguiente comando a partir de una nueva terminal
+	a. sudo su
+
+5. Ejecutar los siguientes comandos
 	a. mkdir -p build/debug
 	b. cd build/debug
 	c. cmake -DCMAKE_BUILD_TYPE=debug -DJSONCPP_LIB_BUILD_STATIC=ON -DJSONCPP_LIB_BUILD_SHARED=OFF -G "Unix Makefiles" ../..
 	d. make
 
-5. Ingresar a la carpeta "/src/lib_json"
-
-6. Ejecutar el siguiente comando para tener permisos de administrador 
-	a. sudo su
+6. Ingresar a la carpeta "/src/lib_json"
 
 7. Ejecutar el siguiente comando 
 	a. cp -a libjsoncpp.a /usr/local/lib
@@ -275,22 +285,17 @@ Instalacón y configuración
 
 3. Ingresar a la carpeta "gtest-1.7.0" a partir de una nueva terminal
 
-4. Ejecutar los siguientes comandos
-	a. Comandos: ./configure
-	b. make
-
-5. Ejecutar el siguiente comando para tener permisos de administrador 
+4. Ejecutar el siguiente comando para tener permisos de administrador 
 	a. sudo su
+
+5. Ejecutar los siguientes comandos
+	a. ./configure
+	b. make
 
 6. Ejecutar los siguientes comandos
 	a. cp -a include/gtest /usr/include
 	b. cp -a lib/.libs/* /usr/lib/
 
-
-**Instalamos CMake**
-
-1. Ejecutar el siguiente comando a partir de una nueva terminal
-	a. sudo apt-get install cmake
 
 Forma de uso
 --------------------------------------------
