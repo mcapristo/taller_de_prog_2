@@ -8,8 +8,7 @@ Instalacón y configuración
 
 1. Ejecutar el siguiente comando a partir de una nueva terminal
 
-a. sudo su
-
+	a. sudo su
 b. apt-get install cmake
 
 
