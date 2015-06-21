@@ -50,10 +50,6 @@ string User::getUsername(){
 	return username;
 }
 
-void User::setUsername(const string& username) {
-	this->username = username;
-}
-
 string User::getToken(){
 	return this->token;
 }

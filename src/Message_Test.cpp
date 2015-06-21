@@ -55,3 +55,17 @@ TEST(MessageTests,TestMessageToJsonValueAndNextToMessage){
 	delete m2;
 }
 
+TEST(MessageTests, TestMessageSettersAndGetters){
+	User u1 = User("tevez");
+	User u2 = User("carlo");
+	User u3 = User("osvaldo");
+	string body = "veni a boca mostro";
+	Message m = Message(&u1,&u2,body);
+	ASSERT_EQ(u1.getUsername(),m.getEmisor()->getUsername());
+	ASSERT_EQ(u2.getUsername(),m.getReceptor()->getUsername());
+
+	m.setReceptor(&u3);
+	ASSERT_EQ(u3.getUsername(),m.getReceptor()->getUsername());
+	ASSERT_TRUE(m.getDatetime() != "");
+}
+

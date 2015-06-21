@@ -29,7 +29,6 @@ public:
 	string getPassword();
 	void setPassword(const string& password);
 	string getUsername();
-	void setUsername(const string& username);
 	string getToken();
 	void setToken(string t);
 	string getProfileImage();
