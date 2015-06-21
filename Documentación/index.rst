@@ -192,6 +192,12 @@ Aplicación móvil
 - Cobertura: Jacoco
 	+ Nivel de cobertura: 
 
+Rest API
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- Librería utilizada: gtest (https://code.google.com/p/googletest/)
+- Cobertura: gcov (https://gcc.gnu.org/onlinedocs/gcc/Gcov.html)
+	+ Nivel de cobertura: 
+
 
 Manual de usuario del cliente
 ============================================
