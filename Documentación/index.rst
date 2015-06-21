@@ -79,24 +79,119 @@ Documentacion técnica
 
 Doc ambiente de desarrollo
 --------------------------------------------
+Para el desarrollo de la aplicación, se usaron las siguientes herramientas para el armado del ambiente.
+
+Aplicación Móvil
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- Lenguaje: Java
+- IDE: Android Studio
+- Android SDK
+
+Rest API
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<	
+- Lenguaje: C++
+- IDE: Eclipse
+
 
 Doc de librerias y compilación
 --------------------------------------------
+Aplicación Móvil
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- Volley (https://developer.android.com/training/volley/index.html)
+- Gson (https://code.google.com/p/google-gson/)
+
+Rest API
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- Mongoose (https://github.com/Gregwar/mongoose-cpp)
+- RocksDB (http://rocksdb.org/)
+- Json Cpp (https://github.com/open-source-parsers/jsoncpp)
+- Google test (https://code.google.com/p/googletest/)
+
 
 Doc de arquitectura/diseño
 --------------------------------------------
+.. image:: Screenshots/arquitectura.png
 
 Doc de clases
 --------------------------------------------
 
 Doc de código
 --------------------------------------------
+`Aplicación mobile <../../javadocs/index.html>`_
+
 
 Doc de REST API
 --------------------------------------------
+Todas las llamadas a la api tienen una respuesta json con el siguiente formato: 
+{result: ["OK", "ERROR"], code:[<<sólo presente si el result es ERROR], data: <<Json con datos de respuesta en caso de result: "OK">>}
+- /api/login
+ + Tipo: GET
+ + params: username, password
+ + response data: {token}
+
+- /api/logout
+ + Tipo: GET
+ + params: username, token
+ + response data: 
+
+- /api/validateToken
+ + Tipo: 
+ + params: 
+ + response data: 
+
+- /api/isValidToken
+ + Tipo: 
+ + params: 
+ + response data: 
+
+- /api/createUser
+ + Tipo: 
+ + params: 
+ + response data: 
+
+- /api/updateProfile
+ + Tipo: 
+ + params: 
+ + response data:  
+
+- /api/sendMessage
+ + Tipo: 
+ + params: 
+ + response data:   
+
+- /api/sendDiffusionMessage
+ + Tipo: 
+ + params: 
+ + response data:   
+
+- /api/getConversations
+ + Tipo: 
+ + params: 
+ + response data:     
+
+- /api/getMessages
+ + Tipo: 
+ + params: 
+ + response data: 
+
+- /api/getUserProfile
+ + Tipo: 
+ + params: 
+ + response data:  
+
+- /api/getUsersProfile
+ + Tipo: 
+ + params: 
+ + response data:    
 
 Doc de pruebas
 --------------------------------------------
+Aplicación móvil
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+- Librería utilizada: JUnit
+- Cobertura: Jacoco
+	+ Nivel de cobertura: 
+
 
 Manual de usuario del cliente
 ============================================
