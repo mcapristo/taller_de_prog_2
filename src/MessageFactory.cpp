@@ -7,14 +7,6 @@
 
 #include "MessageFactory.h"
 
-MessageFactory::MessageFactory() {
-	// TODO Auto-generated constructor stub
-
-}
-
-MessageFactory::~MessageFactory() {
-	// TODO Auto-generated destructor stub
-}
 
 Message* MessageFactory::createMessage(Json::Value value){
 	string emisor = value.get("emisor","").asString();

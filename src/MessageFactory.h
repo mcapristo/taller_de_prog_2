@@ -14,8 +14,6 @@
 
 class MessageFactory {
 public:
-	MessageFactory();
-	virtual ~MessageFactory();
 	static Message* createMessage(Json::Value value);
 };
 

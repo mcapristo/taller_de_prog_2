@@ -14,9 +14,6 @@ using namespace std;
 
 class Clock {
 public:
-	Clock();
-	virtual ~Clock();
-
 	static string getTime();
 };
 

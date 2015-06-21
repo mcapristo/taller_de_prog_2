@@ -386,3 +386,43 @@ TEST(TestsServiceLayer, TestSendMessageWithInvalidEmisor){
 	delete u3;
 
 }
+
+TEST(TestsServiceLayer, TestUpdateUser){
+	ServiceLayer sl = ServiceLayer();
+	Json::Value val = Json::Value();
+	string username = "tevez";
+	string password = "messicagon";
+	val["username"] = username;
+	val["password"] = password;
+
+	sl.createUser(sl.getDatabase()->getJsonStringFromValue(val));
+	string responseLogin = sl.login(username, password);
+	Json::Value valueResponseLogin = sl.getDatabase()->getJsonValueFromString(responseLogin);
+	string token = valueResponseLogin["data"]["token"].asString();
+
+	Json::Value val2 = Json::Value();
+	string name = "carlos tevez";
+	bool online = true;
+	double latitud = 90;
+	double longitud = 20;
+	string profileImage = "hereshoudbeaimageinhex64asaveryfuckinglongstring";
+	string location = "fuerte apache";
+	val2["name"] = name;
+	val2["online"] = online;
+	val2["latitud"] = latitud;
+	val2["longitud"] = longitud;
+	val2["profileImage"] = profileImage;
+	val2["location"] = location;
+
+	string responseUpdate = sl.updateProfile(username, token, sl.getDatabase()->getJsonStringFromValue(val2));
+	Json::Value valueResponseUpdate = sl.getDatabase()->getJsonValueFromString(responseUpdate);
+
+	ASSERT_EQ(name, valueResponseUpdate["data"]["name"].asString());
+	ASSERT_EQ(online, valueResponseUpdate["data"]["online"].asBool());
+	ASSERT_EQ(latitud, valueResponseUpdate["data"]["latitud"].asDouble());
+	ASSERT_EQ(longitud, valueResponseUpdate["data"]["longitud"].asDouble());
+	ASSERT_EQ(profileImage, valueResponseUpdate["data"]["profileImage"].asString());
+	ASSERT_EQ(location, valueResponseUpdate["data"]["location"].asString());
+
+
+}

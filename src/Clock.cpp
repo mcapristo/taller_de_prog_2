@@ -7,15 +7,6 @@
 
 #include "Clock.h"
 
-Clock::Clock() {
-	// TODO Auto-generated constructor stub
-
-}
-
-Clock::~Clock() {
-	// TODO Auto-generated destructor stub
-}
-
 string Clock::getTime() {
 	time_t now = time(0);
 	struct tm tstruct;

@@ -33,3 +33,28 @@ TEST(UserTests,TestUserToJsonValue){
 	ASSERT_EQ(true, online);
 	delete u;
 }
+
+TEST(UserTests, TestUserUpdate){
+	Json::Value val = Json::Value();
+	User u = User("tevez");
+
+	string name = "carlos tevez";
+	bool online = true;
+	double latitud = 90;
+	double longitud = 20;
+	string profileImage = "hereshoudbeaimageinhex64asaveryfuckinglongstring";
+	string location = "fuerte apache";
+	val["name"] = name;
+	val["online"] = online;
+	val["latitud"] = latitud;
+	val["longitud"] = longitud;
+	val["profileImage"] = profileImage;
+	val["location"] = location;
+	u.updateUser(val);
+	ASSERT_EQ(u.getName(), name);
+	ASSERT_EQ(u.isOnline(), online);
+	ASSERT_EQ(u.getLatitud(), latitud);
+	ASSERT_EQ(u.getLongitud(), longitud);
+	ASSERT_EQ(u.getProfileImage(), profileImage);
+	ASSERT_EQ(u.getLocation(), location);
+}
