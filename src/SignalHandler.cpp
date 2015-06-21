@@ -42,8 +42,3 @@ void SignalHandler :: dispatcher ( int signum ) {
 		SignalHandler :: signal_handlers [ signum ]->handleSignal ( signum );
 }
 
-int SignalHandler :: removerHandler ( int signum ) {
-
-	SignalHandler :: signal_handlers [ signum ] = NULL;
-	return 0;
-}

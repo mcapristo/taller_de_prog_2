@@ -13,12 +13,14 @@ using namespace rocksdb;
 
 
 int main(int argc, char **argv) {
-	testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
+	int resTests = 0;
+//	testing::InitGoogleTest(&argc, argv);
+//	resTests = RUN_ALL_TESTS();
 
-//	Server* s = new Server();
-//	s->run();
+	Server* s = new Server();
+	s->run();
+	delete s;
 
 
-	return 0;
+	return resTests;
 }
