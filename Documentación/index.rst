@@ -491,7 +491,7 @@ Instalacón y configuración
 
 6. Ejecutar los siguientes comandos
 	a. cp -a include/gtest /usr/include
-	b. 	
+	b. cp -a lib/.libs/* /usr/lib/
 
 
 Forma de uso
