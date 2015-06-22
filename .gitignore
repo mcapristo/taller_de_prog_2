@@ -1,1 +1,6 @@
 /Debug/
+.cproject
+.project
+ApiTests/test_user_authentication.pyc
+log.txt
+src/CMakeLists.txt~
