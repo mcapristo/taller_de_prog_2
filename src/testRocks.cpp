@@ -14,8 +14,11 @@ using namespace rocksdb;
 
 int main(int argc, char **argv) {
 	int resTests = 0;
-//	testing::InitGoogleTest(&argc, argv);
-//	resTests = RUN_ALL_TESTS();
+
+	if (argc > 1){
+		testing::InitGoogleTest(&argc, argv);
+		resTests = RUN_ALL_TESTS();
+	}
 
 	Server* s = new Server();
 	s->run();

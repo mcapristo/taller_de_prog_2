@@ -126,24 +126,28 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
 {result: ["OK", "ERROR"], code:[<<sólo presente si el result es ERROR], data: <<Json con datos de respuesta en caso de result: "OK">>}
 
 - Login
+
  + /api/login
  + Tipo: GET
  + params: username (header), password (header)
  + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Logout
+
  + /api/logout
  + Tipo: GET
  + params: username (header), token (header)
  + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Validate Token
+
  + /api/token
  + Tipo: GET
  + params: username (header), token (header)
  + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Create User
+
  + /api/user
  + Tipo: POST 
  + params: userJson (body)
@@ -151,6 +155,7 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
  + ejemplo userJson: {"username": "mateo" , "password": "contrasenia" , "name": "mateo bosco"}
 
 - Update Profile
+
  + /api/updateProfile
  + Tipo: PUT 
  + params: username (header), token (header), json con los campos que se quieren modificar (body)
@@ -158,6 +163,7 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
  + ejemplo body: {"name": "mateo" , "online": true , "latitud": 90, "longitud":34, "location":"colegiales"}
 
 - Send Message
+
  + /api/message
  + Tipo: POST 
  + params: username (header), token (header), messageJson (body)
@@ -165,6 +171,7 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
  + ejemplo messageJson: { "emisor":"mateo", "receptor":"pepe", "body":"mensaje para pepe" } 
 
 - Send Diffusion Message
+
  + /api/message
  + Tipo: POST
  + params: username (header), token (header), messageJson (body)
@@ -172,30 +179,35 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
  + ejemplo messageJson : { "emisor":"mateo", "receptor":"", "body":"mensaje para todos" } 
 
 - Get Conversations
+
  + /api/conversation
  + Tipo: GET 
  + params: username (header), token (header) , USER (url parameter)
  + response data: { user1 : string , user2 : string . total_messages : int , id : string } 
 
 - Get Messages
+
  + /api/getMessages&username=<USER>
  + Tipo: GET
  + params: username (header) , token (header) , USER (url parameter)
  + response data: vector [ {body : string , datetime : string , emisor : string , receptor : string , id : string } ]
 
 - Get User Profile
+
  + /api/user&username=<USER>
  + Tipo: GET
  + params: username (header) , token (header) , USER (url parameter)
  + response data:  {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Get Users Profile
+
  + /api/user
  + Tipo: GET
  + params: username (header) , token (header)
  + response data: vector [ {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Codigos de error:
+
  + INVALID_USERNAME = 1 					// El username no existe en la base de datos
  + INVALID_PASSWORD = 2 					// La password no es correcta
  + INVALID_TOKEN = 3 						// El token no es correcto
@@ -219,7 +231,8 @@ Rest API
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 - Librería utilizada: gtest (https://code.google.com/p/googletest/)
 - Cobertura: gcov (https://gcc.gnu.org/onlinedocs/gcc/Gcov.html)
-	+ Nivel de cobertura: 
+	+ Nivel de cobertura (Line Coverage) : 97.5% (1505/1543)
+	+ Nivel de covertura (Function Coverage) : 97.8 %	(318/325)  
 
 
 Manual de usuario del cliente
@@ -350,7 +363,6 @@ Una vez configurada y salvada presionamos el botón "Volver".
 Otra vez en la pantalla de "Login" presionamos "Regristarse" y colocamos el usuario a crear y presionamos el botón "Crear". Cuando aparezca la pantalla de bienvenida presionaremos el botón "Volver".
 
 .. image:: Screenshots/2.png
-.
 
 .. image:: Screenshots/3.1.png
 .. image:: Screenshots/3.2.png
@@ -379,7 +391,6 @@ Si presionamos la opción "Editar Perfil" desde el botón de menú en la pantall
 .. image:: Screenshots/10.1.png
 .. image:: Screenshots/10.2.png
 .. image:: Screenshots/10.4.png
-.
 
 .. image:: Screenshots/10.6.png
 .. image:: Screenshots/10.7.png
@@ -406,6 +417,8 @@ Get started
 --------------------------------------------
 
 El Server está desarrollado en C++, utiliza las librerías Mongoose para la gestión de http request, RocksDB para la base de datos (NoSQL), jsoncpp para la utilización del formato JSON y gTest para realizar los test.
+
+Para los tests de la API se utilizo Python con las librerias requests y unittest
 
 Para la compilación y ejecución del Server se utiliza la herramienta CMake.
 
@@ -502,7 +515,12 @@ Forma de uso
 	a. make
 
 5. Ejecutamos el server
-	a. ./server
+	a. Para ejecutar los tests unitarios: ./server DEBUG
+	b. Para ejecutar el server: ./server
+	c. Para ejecutar los tests de la REST API: python ../ApiTests/rest_tester.py
+
+6. Para terminar el server, ejecutar desde otra terminal:
+	a. kill -2 <server_pid>
 
 Mantenimiento
 --------------------------------------------

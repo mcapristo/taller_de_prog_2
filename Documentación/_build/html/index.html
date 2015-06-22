@@ -332,7 +332,8 @@ Se utilizaron dos repositorios distintos, uno para el proyecto de servidor y otr
 <li><dl class="first docutils">
 <dt>Cobertura: gcov (<a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">https://gcc.gnu.org/onlinedocs/gcc/Gcov.html</a>)</dt>
 <dd><ul class="first last simple">
-<li>Nivel de cobertura:</li>
+<li>Nivel de cobertura (Line Coverage) : 97.5% (1505/1543)</li>
+<li>Nivel de covertura (Function Coverage) : 97.8 %       (318/325)</li>
 </ul>
 </dd>
 </dl>
@@ -470,7 +471,6 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <img alt="_images/1.3.png" src="_images/1.3.png" />
 <p>Otra vez en la pantalla de &#8220;Login&#8221; presionamos &#8220;Regristarse&#8221; y colocamos el usuario a crear y presionamos el botón &#8220;Crear&#8221;. Cuando aparezca la pantalla de bienvenida presionaremos el botón &#8220;Volver&#8221;.</p>
 <img alt="_images/2.png" src="_images/2.png" />
-<p>.</p>
 <img alt="_images/3.1.png" src="_images/3.1.png" />
 <img alt="_images/3.2.png" src="_images/3.2.png" />
 <img alt="_images/3.3.png" src="_images/3.3.png" />
@@ -488,7 +488,6 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <img alt="_images/10.1.png" src="_images/10.1.png" />
 <img alt="_images/10.2.png" src="_images/10.2.png" />
 <img alt="_images/10.4.png" src="_images/10.4.png" />
-<p>.</p>
 <img alt="_images/10.6.png" src="_images/10.6.png" />
 <img alt="_images/10.7.png" src="_images/10.7.png" />
 <img alt="_images/11.1.png" src="_images/11.1.png" />
@@ -511,6 +510,7 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <div class="section" id="get-started">
 <h2>Get started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
 <p>El Server está desarrollado en C++, utiliza las librerías Mongoose para la gestión de http request, RocksDB para la base de datos (NoSQL), jsoncpp para la utilización del formato JSON y gTest para realizar los test.</p>
+<p>Para los tests de la API se utilizo Python con las librerias requests y unittest</p>
 <p>Para la compilación y ejecución del Server se utiliza la herramienta CMake.</p>
 </div>
 <div class="section" id="instalacon-y-configuracion">
@@ -682,7 +682,17 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <li><dl class="first docutils">
 <dt>Ejecutamos el server</dt>
 <dd><ol class="first last loweralpha simple">
-<li>./server</li>
+<li>Para ejecutar los tests unitarios: ./server DEBUG</li>
+<li>Para ejecutar el server: ./server</li>
+<li>Para ejecutar los tests de la REST API: python ../ApiTests/rest_tester.py</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Para terminar el server, ejecutar desde otra terminal:</dt>
+<dd><ol class="first last loweralpha simple">
+<li>kill -2 &lt;server_pid&gt;</li>
 </ol>
 </dd>
 </dl>
