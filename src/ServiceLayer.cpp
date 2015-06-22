@@ -65,6 +65,7 @@ string ServiceLayer::logout(string username, string token){
 	u->logout();
 	this->getDatabase()->saveUser(u);
 	Json::Value json = u->getUserProfileJsonValue();
+	value["result"] = ServiceLayer::OK_STRING;
 	value["data"] = json;
 	delete u;
 	return this->getDatabase()->getJsonStringFromValue(value);
