@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - resultsFiltered.info - src/User_Test.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - User_Test.cpp<span style="font-size: 80%;"> (source / <a href="User_Test.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">resultsFiltered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-06-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;User.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;json/json.h&quot;
+<a name="3"><span class="lineNum">       3 </span>            : #include &lt;gtest/gtest.h&gt;</a>
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span><span class="lineCov">         21 : TEST(UserTests,TestUserCreation){</span>
+<span class="lineNum">       6 </span><span class="lineCov">          4 :         string username = &quot;mpalermo&quot;;</span>
+<span class="lineNum">       7 </span><span class="lineCov">          4 :         User* user = new User(username);</span>
+<span class="lineNum">       8 </span><span class="lineCov">          8 :         string password = &quot;password&quot;;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          4 :         user-&gt;setPassword(password);</span>
+<span class="lineNum">      10 </span><span class="lineCov">          8 :         string name = &quot;Martin Palermo&quot;;</span>
+<span class="lineNum">      11 </span><span class="lineCov">          4 :         user-&gt;setName(name);</span>
+<span class="lineNum">      12 </span><span class="lineCov">          4 :         user-&gt;setOnline(true);</span>
+<span class="lineNum">      13 </span><span class="lineCov">          4 :         ASSERT_EQ(username,user-&gt;getUsername());</span>
+<span class="lineNum">      14 </span><span class="lineCov">          4 :         ASSERT_EQ(password,user-&gt;getPassword());</span>
+<span class="lineNum">      15 </span><span class="lineCov">          4 :         ASSERT_EQ(name, user-&gt;getName());</span>
+<span class="lineNum">      16 </span><span class="lineCov">          4 :         ASSERT_EQ(true, user-&gt;isOnline());</span>
+<span class="lineNum">      17 </span><span class="lineCov">          8 :         delete user;</span>
+<a name="18"><span class="lineNum">      18 </span>            : }</a>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">         21 : TEST(UserTests,TestUserToJsonValue){</span>
+<span class="lineNum">      21 </span><span class="lineCov">          4 :         User* u = new User(&quot;mpalermo&quot;);</span>
+<span class="lineNum">      22 </span><span class="lineCov">          4 :         u-&gt;setPassword(&quot;contrasenia&quot;);</span>
+<span class="lineNum">      23 </span><span class="lineCov">          4 :         u-&gt;setName(&quot;Martin Palermo&quot;);</span>
+<span class="lineNum">      24 </span><span class="lineCov">          4 :         u-&gt;setOnline(true);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          4 :         Json::Value value = u-&gt;toJsonValue();</span>
+<span class="lineNum">      26 </span><span class="lineCov">          8 :         string username = value.get(&quot;username&quot;,&quot;&quot;).asString();</span>
+<span class="lineNum">      27 </span><span class="lineCov">          8 :         string password = value.get(&quot;password&quot;, &quot;&quot;).asString();</span>
+<span class="lineNum">      28 </span><span class="lineCov">          8 :         string name = value.get(&quot;name&quot;, &quot;&quot;).asString();</span>
+<span class="lineNum">      29 </span><span class="lineCov">          4 :         bool online = value.get(&quot;online&quot;,&quot;0&quot;).asBool();</span>
+<span class="lineNum">      30 </span><span class="lineCov">          4 :         ASSERT_EQ(&quot;mpalermo&quot;, username);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          4 :         ASSERT_EQ(&quot;contrasenia&quot;,password);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          4 :         ASSERT_EQ(&quot;Martin Palermo&quot;, name);</span>
+<span class="lineNum">      33 </span><span class="lineCov">          4 :         ASSERT_EQ(true, online);</span>
+<span class="lineNum">      34 </span><span class="lineCov">          8 :         delete u;</span>
+<a name="35"><span class="lineNum">      35 </span>            : }</a>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span><span class="lineCov">         21 : TEST(UserTests, TestUserUpdate){</span>
+<span class="lineNum">      38 </span><span class="lineCov">          4 :         Json::Value val = Json::Value();</span>
+<span class="lineNum">      39 </span><span class="lineCov">          8 :         User u = User(&quot;tevez&quot;);</span>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">          8 :         string name = &quot;carlos tevez&quot;;</span>
+<span class="lineNum">      42 </span><span class="lineCov">          4 :         bool online = true;</span>
+<span class="lineNum">      43 </span><span class="lineCov">          4 :         double latitud = 90;</span>
+<span class="lineNum">      44 </span><span class="lineCov">          4 :         double longitud = 20;</span>
+<span class="lineNum">      45 </span><span class="lineCov">          8 :         string profileImage = &quot;hereshoudbeaimageinhex64asaveryfuckinglongstring&quot;;</span>
+<span class="lineNum">      46 </span><span class="lineCov">          8 :         string location = &quot;fuerte apache&quot;;</span>
+<span class="lineNum">      47 </span><span class="lineCov">          4 :         val[&quot;name&quot;] = name;</span>
+<span class="lineNum">      48 </span><span class="lineCov">          4 :         val[&quot;online&quot;] = online;</span>
+<span class="lineNum">      49 </span><span class="lineCov">          4 :         val[&quot;latitud&quot;] = latitud;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          4 :         val[&quot;longitud&quot;] = longitud;</span>
+<span class="lineNum">      51 </span><span class="lineCov">          4 :         val[&quot;profileImage&quot;] = profileImage;</span>
+<span class="lineNum">      52 </span><span class="lineCov">          4 :         val[&quot;location&quot;] = location;</span>
+<span class="lineNum">      53 </span><span class="lineCov">          4 :         u.updateUser(val);</span>
+<span class="lineNum">      54 </span><span class="lineCov">          4 :         ASSERT_EQ(u.getName(), name);</span>
+<span class="lineNum">      55 </span><span class="lineCov">          4 :         ASSERT_EQ(u.isOnline(), online);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          4 :         ASSERT_EQ(u.getLatitud(), latitud);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          4 :         ASSERT_EQ(u.getLongitud(), longitud);</span>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">          4 :         ASSERT_EQ(u.getProfileImage(), profileImage);</span></a>
+<span class="lineNum">      59 </span><span class="lineCov">          8 :         ASSERT_EQ(u.getLocation(), location);</span>
+<span class="lineNum">      60 </span><span class="lineCov">         15 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

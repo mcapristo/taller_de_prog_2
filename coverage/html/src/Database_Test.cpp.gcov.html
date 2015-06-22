@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - resultsFiltered.info - src/Database_Test.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - Database_Test.cpp<span style="font-size: 80%;"> (source / <a href="Database_Test.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">resultsFiltered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">128</td>
+            <td class="headerCovTableEntry">128</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-06-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*</a>
+<span class="lineNum">       2 </span>            :  * Database_Test.cpp
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  *  Created on: 11/4/2015
+<span class="lineNum">       5 </span>            :  *      Author: mateo
+<span class="lineNum">       6 </span>            :  */
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : #include &lt;gtest/gtest.h&gt;
+<span class="lineNum">       9 </span>            : #include &quot;Database.h&quot;
+<a name="10"><span class="lineNum">      10 </span>            : </a>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestPutAndGetStringFromDatabase){</span>
+<span class="lineNum">      13 </span><span class="lineCov">          4 :         Database d = Database();</span>
+<span class="lineNum">      14 </span><span class="lineCov">          8 :         string key = &quot;clave&quot;;</span>
+<span class="lineNum">      15 </span><span class="lineCov">          8 :         string value = &quot;valor&quot;;</span>
+<span class="lineNum">      16 </span><span class="lineCov">          4 :         bool res = d.put(key,value);</span>
+<span class="lineNum">      17 </span><span class="lineCov">          4 :         ASSERT_EQ(true, res);</span>
+<span class="lineNum">      18 </span><span class="lineCov">          4 :         string valueFromDatabase = d.get(key);</span>
+<span class="lineNum">      19 </span><span class="lineCov">          8 :         ASSERT_EQ(value,valueFromDatabase);</span>
+<a name="20"><span class="lineNum">      20 </span>            : }</a>
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestPutToTimesShouldOverride){</span>
+<span class="lineNum">      23 </span><span class="lineCov">          4 :         Database d = Database();</span>
+<span class="lineNum">      24 </span><span class="lineCov">          8 :         string key = &quot;clave&quot;;</span>
+<span class="lineNum">      25 </span><span class="lineCov">          8 :         string value = &quot;valor&quot;;</span>
+<span class="lineNum">      26 </span><span class="lineCov">          8 :         string value2 = &quot;valor2&quot;;</span>
+<span class="lineNum">      27 </span><span class="lineCov">          4 :         bool res = d.put(key,value);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          4 :         ASSERT_EQ(true, res);</span>
+<span class="lineNum">      29 </span><span class="lineCov">          4 :         string valueFromDatabase = d.get(key);</span>
+<span class="lineNum">      30 </span><span class="lineCov">          4 :         ASSERT_EQ(value,valueFromDatabase);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          4 :         bool res2 = d.put(key,value2);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          4 :         ASSERT_EQ(true, res2);</span>
+<span class="lineNum">      33 </span><span class="lineCov">          4 :         string valueFromDatabase2 = d.get(key);</span>
+<span class="lineNum">      34 </span><span class="lineCov">          8 :         ASSERT_EQ(value2,valueFromDatabase2);</span>
+<a name="35"><span class="lineNum">      35 </span>            : }</a>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestPutAndGetUserFromDatabase){</span>
+<span class="lineNum">      38 </span><span class="lineCov">          4 :         Database d = Database();</span>
+<span class="lineNum">      39 </span><span class="lineCov">          8 :         UserFactory uf = UserFactory();</span>
+<span class="lineNum">      40 </span><span class="lineCov">          8 :         string json = &quot;{\&quot;username\&quot;:\&quot;mpalermo\&quot;,\&quot;password\&quot;:\&quot;contrasenia\&quot;,\&quot;name\&quot;:\&quot;Martin Palermo\&quot;,\&quot;online\&quot;:true}&quot;;</span>
+<span class="lineNum">      41 </span><span class="lineCov">          4 :         User* user = uf.createUserFromJsonString(json);</span>
+<span class="lineNum">      42 </span><span class="lineCov">          4 :         bool res = d.saveUser(user);</span>
+<span class="lineNum">      43 </span><span class="lineCov">          4 :         ASSERT_EQ(true,res);</span>
+<span class="lineNum">      44 </span><span class="lineCov">          4 :         User* userFromDatabase = d.getUser(&quot;mpalermo&quot;);</span>
+<span class="lineNum">      45 </span><span class="lineCov">          4 :         ASSERT_EQ(user-&gt;getName(),userFromDatabase-&gt;getName());</span>
+<span class="lineNum">      46 </span><span class="lineCov">          4 :         ASSERT_EQ(user-&gt;getUsername(), userFromDatabase-&gt;getUsername());</span>
+<span class="lineNum">      47 </span><span class="lineCov">          4 :         ASSERT_EQ(user-&gt;getPassword(),userFromDatabase-&gt;getPassword());</span>
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span><span class="lineCov">          4 :         delete user;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          8 :         delete userFromDatabase;</span>
+<a name="51"><span class="lineNum">      51 </span>            : }</a>
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestPutAndGetMessageFromDatabase){</span>
+<span class="lineNum">      54 </span><span class="lineCov">          4 :         Database d = Database();</span>
+<span class="lineNum">      55 </span><span class="lineCov">          8 :         User u1 = User(&quot;cordoba&quot;);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          8 :         User u2 = User(&quot;chicho&quot;);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          8 :         Message m = Message(&amp;u1,&amp;u2,&quot;first message&quot;);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          4 :         bool res = d.saveMessage(&amp;m);</span>
+<span class="lineNum">      59 </span><span class="lineCov">          4 :         ASSERT_EQ(true,res);</span>
+<span class="lineNum">      60 </span><span class="lineCov">          4 :         string new_id = m.getId();</span>
+<span class="lineNum">      61 </span><span class="lineCov">          4 :         Message* m2 = d.getMessage(new_id);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          4 :         ASSERT_EQ(m.getEmisor()-&gt;getUsername(),m2-&gt;getEmisor()-&gt;getUsername());</span>
+<span class="lineNum">      63 </span><span class="lineCov">          4 :         ASSERT_EQ(m.getReceptor()-&gt;getUsername(),m2-&gt;getReceptor()-&gt;getUsername());</span>
+<span class="lineNum">      64 </span><span class="lineCov">          4 :         ASSERT_EQ(m.getBody(),m2-&gt;getBody());</span>
+<span class="lineNum">      65 </span><span class="lineCov">          4 :         ASSERT_EQ(m.getId(),m2-&gt;getId());</span>
+<span class="lineNum">      66 </span><span class="lineCov">          8 :         delete m2;</span>
+<a name="67"><span class="lineNum">      67 </span>            : }</a>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestDeleteDatabase){</span>
+<span class="lineNum">      70 </span><span class="lineCov">          4 :         Database* d = new Database();</span>
+<span class="lineNum">      71 </span><span class="lineCov">          4 :         int res = d-&gt;deleteDatabaseValues();</span>
+<span class="lineNum">      72 </span><span class="lineCov">          4 :         d-&gt;put(&quot;a&quot;,&quot;b&quot;);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          4 :         res = d-&gt;deleteDatabaseValues();</span>
+<span class="lineNum">      74 </span><span class="lineCov">          8 :         ASSERT_EQ(1,res);</span>
+<span class="lineNum">      75 </span><span class="lineCov">          4 :         delete d;</span>
+<a name="76"><span class="lineNum">      76 </span>            : }</a>
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestPut3Messages){</span>
+<span class="lineNum">      79 </span><span class="lineCov">          4 :         Database* d = new Database();</span>
+<span class="lineNum">      80 </span><span class="lineCov">          4 :         d-&gt;deleteDatabaseValues();</span>
+<span class="lineNum">      81 </span><span class="lineCov">          4 :         User u1 = User(&quot;user1&quot;);</span>
+<span class="lineNum">      82 </span><span class="lineCov">          8 :         User u2 = User(&quot;user2&quot;);</span>
+<span class="lineNum">      83 </span><span class="lineCov">          4 :         Message* m1 = new Message(&amp;u1,&amp;u2,&quot;test message1&quot;);</span>
+<span class="lineNum">      84 </span><span class="lineCov">          4 :         Message* m2 = new Message(&amp;u1,&amp;u2,&quot;test message2&quot;);</span>
+<span class="lineNum">      85 </span><span class="lineCov">          4 :         Message* m3 = new Message(&amp;u1,&amp;u2,&quot;test message3&quot;);</span>
+<span class="lineNum">      86 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m1);</span>
+<span class="lineNum">      87 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m2);</span>
+<span class="lineNum">      88 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m3);</span>
+<span class="lineNum">      89 </span><span class="lineCov">          4 :         Conversation* c = d-&gt;getConversation(&amp;u1,&amp;u2);</span>
+<span class="lineNum">      90 </span><span class="lineCov">          8 :         ASSERT_EQ(3,c-&gt;getTotalMessages());</span>
+<span class="lineNum">      91 </span><span class="lineCov">          4 :         delete m1;</span>
+<span class="lineNum">      92 </span><span class="lineCov">          4 :         delete m2;</span>
+<span class="lineNum">      93 </span><span class="lineCov">          4 :         delete m3;</span>
+<span class="lineNum">      94 </span><span class="lineCov">          8 :         delete d;</span>
+<span class="lineNum">      95 </span>            : }
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestGetUsersJsonString){</span>
+<span class="lineNum">      99 </span><span class="lineCov">          4 :         Database* d = new Database();</span>
+<span class="lineNum">     100 </span><span class="lineCov">          4 :         d-&gt;deleteDatabaseValues();</span>
+<span class="lineNum">     101 </span><span class="lineCov">          4 :         User u1 = User(&quot;user1&quot;);</span>
+<span class="lineNum">     102 </span><span class="lineCov">          8 :         User u2 = User(&quot;user2&quot;);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          8 :         User u3 = User(&quot;user3&quot;);</span>
+<span class="lineNum">     104 </span><span class="lineCov">          8 :         User u4 = User(&quot;user4&quot;);</span>
+<span class="lineNum">     105 </span><span class="lineCov">          8 :         vector&lt;User*&gt; usersFromTest;</span>
+<span class="lineNum">     106 </span><span class="lineCov">          4 :         usersFromTest.push_back(&amp;u1);</span>
+<span class="lineNum">     107 </span><span class="lineCov">          4 :         usersFromTest.push_back(&amp;u2);</span>
+<span class="lineNum">     108 </span><span class="lineCov">          4 :         usersFromTest.push_back(&amp;u3);</span>
+<span class="lineNum">     109 </span><span class="lineCov">          4 :         usersFromTest.push_back(&amp;u4);</span>
+<span class="lineNum">     110 </span><span class="lineCov">          4 :         d-&gt;saveUser(&amp;u1);</span>
+<span class="lineNum">     111 </span><span class="lineCov">          4 :         d-&gt;saveUser(&amp;u2);</span>
+<span class="lineNum">     112 </span><span class="lineCov">          4 :         d-&gt;saveUser(&amp;u3);</span>
+<span class="lineNum">     113 </span><span class="lineCov">          4 :         d-&gt;saveUser(&amp;u4);</span>
+<span class="lineNum">     114 </span><span class="lineCov">          8 :         string usersJson = d-&gt;getUsersJsonString();</span>
+<span class="lineNum">     115 </span><span class="lineCov">          8 :         Json::Reader r = Json::Reader();</span>
+<span class="lineNum">     116 </span><span class="lineCov">          8 :         Json::Value val = Json::Value();</span>
+<span class="lineNum">     117 </span><span class="lineCov">          4 :         r.parse(usersJson,val,false);</span>
+<span class="lineNum">     118 </span><span class="lineCov">          8 :         vector&lt;User&gt; usersFromDB;</span>
+<span class="lineNum">     119 </span><span class="lineCov">         20 :         for (Json::Value::iterator it = val[&quot;users&quot;].begin(); it != val[&quot;users&quot;].end(); ++it) {</span>
+<span class="lineNum">     120 </span><span class="lineCov">         16 :                 string username = ((*it)[&quot;username&quot;].asString());</span>
+<span class="lineNum">     121 </span><span class="lineCov">         32 :                 User u = User(username);</span>
+<span class="lineNum">     122 </span><span class="lineCov">         16 :                 usersFromDB.push_back(u);</span>
+<span class="lineNum">     123 </span><span class="lineCov">         16 :         }</span>
+<span class="lineNum">     124 </span><span class="lineCov">          8 :         vector&lt;string&gt; founds;</span>
+<span class="lineNum">     125 </span><span class="lineCov">         20 :         for (size_t i = 0 ; i &lt; usersFromTest.size() ; i++){</span>
+<span class="lineNum">     126 </span><span class="lineCov">         16 :                 string userFromTest = usersFromTest[i]-&gt;getUsername();</span>
+<span class="lineNum">     127 </span><span class="lineCov">         80 :                 for (size_t j = 0 ; j &lt; usersFromDB.size() ; j++){</span>
+<span class="lineNum">     128 </span><span class="lineCov">         64 :                         string userFromDB = usersFromDB[j].getUsername();</span>
+<span class="lineNum">     129 </span><span class="lineCov">         64 :                         if (userFromTest == userFromDB){</span>
+<span class="lineNum">     130 </span><span class="lineCov">         16 :                                 founds.push_back(userFromDB);</span>
+<span class="lineNum">     131 </span>            :                         }
+<span class="lineNum">     132 </span><span class="lineCov">         64 :                 }</span>
+<span class="lineNum">     133 </span><span class="lineCov">         16 :         }</span>
+<span class="lineNum">     134 </span><span class="lineCov">          8 :         ASSERT_EQ(4,founds.size());</span>
+<span class="lineNum">     135 </span><span class="lineCov">          8 :         delete d;</span>
+<a name="136"><span class="lineNum">     136 </span>            : }</a>
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span><span class="lineCov">         21 : TEST(TestsDatabase,TestGetMessagesJsonString){</span>
+<span class="lineNum">     139 </span><span class="lineCov">          4 :         Database* d = new Database();</span>
+<span class="lineNum">     140 </span><span class="lineCov">          4 :         d-&gt;deleteDatabaseValues();</span>
+<span class="lineNum">     141 </span><span class="lineCov">          4 :         User u1 = User(&quot;user1&quot;);</span>
+<span class="lineNum">     142 </span><span class="lineCov">          8 :         User u2 = User(&quot;user2&quot;);</span>
+<span class="lineNum">     143 </span><span class="lineCov">          4 :         Message* m1 = new Message(&amp;u1,&amp;u2,&quot;test message1&quot;);</span>
+<span class="lineNum">     144 </span><span class="lineCov">          4 :         Message* m2 = new Message(&amp;u1,&amp;u2,&quot;test message2&quot;);</span>
+<span class="lineNum">     145 </span><span class="lineCov">          4 :         Message* m3 = new Message(&amp;u1,&amp;u2,&quot;test message3&quot;);</span>
+<span class="lineNum">     146 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m1);</span>
+<span class="lineNum">     147 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m2);</span>
+<span class="lineNum">     148 </span><span class="lineCov">          4 :         d-&gt;saveMessage(m3);</span>
+<span class="lineNum">     149 </span><span class="lineCov">          4 :         Conversation* c = d-&gt;getConversation(&amp;u1,&amp;u2);</span>
+<span class="lineNum">     150 </span><span class="lineCov">          8 :         ASSERT_EQ(3,c-&gt;getTotalMessages());</span>
+<span class="lineNum">     151 </span><span class="lineCov">          4 :         string json = d-&gt;getMessagesJsonString(c);</span>
+<span class="lineNum">     152 </span><span class="lineCov">          4 :         delete m1;</span>
+<span class="lineNum">     153 </span><span class="lineCov">          4 :         delete m2;</span>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          4 :         delete m3;</span></a>
+<span class="lineNum">     155 </span><span class="lineCov">          8 :         delete d;</span>
+<span class="lineNum">     156 </span><span class="lineCov">         15 : }</span>
+<span class="lineNum">     157 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

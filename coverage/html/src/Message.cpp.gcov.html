@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - resultsFiltered.info - src/Message.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">src</a> - Message.cpp<span style="font-size: 80%;"> (source / <a href="Message.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">resultsFiltered.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">49</td>
+            <td class="headerCovTableEntry">49</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-06-22</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /*</a>
+<span class="lineNum">       2 </span>            :  * Message.cpp
+<span class="lineNum">       3 </span>            :  *
+<span class="lineNum">       4 </span>            :  *  Created on: 10/4/2015
+<span class="lineNum">       5 </span>            :  *      Author: mateo
+<span class="lineNum">       6 </span>            :  */
+<span class="lineNum">       7 </span>            : 
+<a name="8"><span class="lineNum">       8 </span>            : #include &quot;Message.h&quot;</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">        160 : Message::Message(User* emisor, User* receptor, string body) {</span>
+<span class="lineNum">      11 </span><span class="lineCov">        160 :         this-&gt;emisor = emisor;</span>
+<span class="lineNum">      12 </span><span class="lineCov">        160 :         this-&gt;receptor = receptor;</span>
+<span class="lineNum">      13 </span><span class="lineCov">        160 :         this-&gt;body = body;</span>
+<span class="lineNum">      14 </span><span class="lineCov">        160 :         this-&gt;datetime = Clock::getTime();</span>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">        160 : }</span></a>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span><span class="lineCov">          8 : Message::Message(Json::Value value){</span>
+<span class="lineNum">      18 </span><span class="lineCov">          8 :         string emisor = value.get(&quot;emisor&quot;,&quot;&quot;).asString();</span>
+<span class="lineNum">      19 </span><span class="lineCov">         16 :         string receptor = value.get(&quot;receptor&quot;, &quot;&quot;).asString();</span>
+<span class="lineNum">      20 </span><span class="lineCov">         16 :         string id = value.get(&quot;id&quot;, &quot;&quot;).asString();</span>
+<span class="lineNum">      21 </span><span class="lineCov">         16 :         string body = value.get(&quot;body&quot;,&quot;&quot;).asString();</span>
+<span class="lineNum">      22 </span><span class="lineCov">         16 :         string datetime = value.get(&quot;datetime&quot;,&quot;&quot;).asString();</span>
+<span class="lineNum">      23 </span><span class="lineCov">          8 :         this-&gt;emisor = new User(emisor);</span>
+<span class="lineNum">      24 </span><span class="lineCov">          8 :         this-&gt;receptor = new User(receptor);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          8 :         this-&gt;body = body;</span>
+<span class="lineNum">      26 </span><span class="lineCov">          8 :         this-&gt;id = id;</span>
+<span class="lineNum">      27 </span><span class="lineCov">         16 :         this-&gt;datetime = datetime;</span>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">          8 : }</span></a>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">        312 : Message::~Message() {</span>
+<span class="lineNum">      31 </span>            : 
+<a name="32"><span class="lineNum">      32 </span><span class="lineCov">        312 : }</span></a>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">         20 : const string&amp; Message::getBody() const {</span>
+<span class="lineNum">      35 </span><span class="lineCov">         20 :         return body;</span>
+<a name="36"><span class="lineNum">      36 </span>            : }</a>
+<span class="lineNum">      37 </span>            : 
+<span class="lineNum">      38 </span><span class="lineCov">          4 : string Message::getDatetime() const {</span>
+<span class="lineNum">      39 </span><span class="lineCov">          4 :         return datetime;</span>
+<a name="40"><span class="lineNum">      40 </span>            : }</a>
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span><span class="lineCov">        290 : User* Message::getEmisor(){</span>
+<span class="lineNum">      43 </span><span class="lineCov">        290 :         return this-&gt;emisor;</span>
+<a name="44"><span class="lineNum">      44 </span>            : }</a>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">        288 : User* Message::getReceptor() {</span>
+<span class="lineNum">      47 </span><span class="lineCov">        288 :         return this-&gt;receptor;</span>
+<a name="48"><span class="lineNum">      48 </span>            : }</a>
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span><span class="lineCov">         10 : void Message::setReceptor(User* u){</span>
+<span class="lineNum">      51 </span><span class="lineCov">         10 :         this-&gt;receptor = u;</span>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">         10 : }</span></a>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span><span class="lineCov">        186 : void Message::setId(string id) {</span>
+<span class="lineNum">      55 </span><span class="lineCov">        186 :         this-&gt;id = id;</span>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">        186 : }</span></a>
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span><span class="lineCov">         24 : string Message::getId() {</span>
+<span class="lineNum">      59 </span><span class="lineCov">         24 :         return this-&gt;id;</span>
+<a name="60"><span class="lineNum">      60 </span>            : }</a>
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span><span class="lineCov">        216 : Value Message::toJsonValue() {</span>
+<span class="lineNum">      63 </span><span class="lineCov">        216 :         Value value(Json::objectValue);</span>
+<span class="lineNum">      64 </span><span class="lineCov">        216 :         value[&quot;emisor&quot;] = this-&gt;emisor-&gt;getUsername();</span>
+<span class="lineNum">      65 </span><span class="lineCov">        216 :         value[&quot;receptor&quot;] = this-&gt;receptor-&gt;getUsername();</span>
+<span class="lineNum">      66 </span><span class="lineCov">        216 :         value[&quot;body&quot;] = this-&gt;body;</span>
+<span class="lineNum">      67 </span><span class="lineCov">        216 :         value[&quot;id&quot;] = this-&gt;id;</span>
+<span class="lineNum">      68 </span><span class="lineCov">        216 :         value[&quot;datetime&quot;] = this-&gt;datetime;</span>
+<span class="lineNum">      69 </span><span class="lineCov">        216 :         return value;</span>
+<a name="70"><span class="lineNum">      70 </span>            : }</a>
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span><span class="lineCov">        142 : string Message::toJsonString() {</span>
+<span class="lineNum">      73 </span><span class="lineCov">        142 :         Json::StreamWriterBuilder builder;</span>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">        142 :         builder.settings_[&quot;identation&quot;] = &quot;\t&quot;;</span></a>
+<span class="lineNum">      75 </span><span class="lineCov">        142 :         return Json::writeString(builder,this-&gt;toJsonValue());</span>
+<span class="lineNum">      76 </span><span class="lineCov">         15 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
