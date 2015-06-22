@@ -124,49 +124,56 @@ Doc de REST API
 --------------------------------------------
 Todas las llamadas a la api tienen una respuesta json con el siguiente formato: 
 {result: ["OK", "ERROR"], code:[<<sólo presente si el result es ERROR], data: <<Json con datos de respuesta en caso de result: "OK">>}
-- /api/login
+- Login
+ + /api/login
  + Tipo: GET
- + params: username, password
- + response data: {token}
+ + params: username (header), password (header)
+ + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
 
-- /api/logout
+- Logout
+ + /api/logout
  + Tipo: GET
- + params: username, token
- + response data: 
+ + params: username (header), token (header)
+ + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
 
-- /api/validateToken
- + Tipo: 
- + params: 
- + response data: 
+- Validate Token
+ + /api/token
+ + Tipo: GET
+ + params: username (header), token (header)
+ + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
 
-- /api/isValidToken
- + Tipo: 
- + params: 
- + response data: 
+- Create User
+ + /api/user
+ + Tipo: POST 
+ + params: userJson (body)
+ + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime} 
+ + ejemplo userJson: {"username": "mateo" , "password": "contrasenia" , "name": "mateo bosco"}
 
-- /api/createUser
- + Tipo: 
- + params: 
- + response data: 
+- Update Profile
+ + /api/updateProfile
+ + Tipo: PUT 
+ + params: username (header), token (header), json con los campos que se quieren modificar (body)
+ + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime} 
+ + ejemplo body: {"name": "mateo" , "online": true , "latitud": 90, "longitud":34, "location":"colegiales"}
 
-- /api/updateProfile
- + Tipo: 
- + params: 
- + response data:  
+- Send Message
+ + /api/message
+ + Tipo: POST 
+ + params: username (header), token (header), messageJson (body)
+ + response data: {body,datetime,emisor,receptor,id}
+ + ejemplo messageJson: { "emisor":"mateo", "receptor":"pepe", "body":"mensaje para pepe" } 
 
-- /api/sendMessage
- + Tipo: 
- + params: 
- + response data:   
+- Send Diffusion Message
+ - /api/message
+ + Tipo: POST
+ + params: username (header), token (header), messageJson (body)
+ + response data: {body,datetime,emisor}
+ + ejemplo messageJson : { "emisor":"mateo", "receptor":"", "body":"mensaje para todos" } 
 
-- /api/sendDiffusionMessage
- + Tipo: 
- + params: 
- + response data:   
-
-- /api/getConversations
- + Tipo: 
- + params: 
+- Get Conversation
+ + /api/conversation
+ + Tipo: GET 
+ + params: username (header), token (header)
  + response data:     
 
 - /api/getMessages
