@@ -142,7 +142,7 @@ Se utilizaron dos repositorios distintos, uno para el proyecto de servidor y otr
 <div class="section" id="id2">
 <h3>Rest API<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Mongoose (<a class="reference external" href="https://github.com/Gregwar/mongoose-cpp">https://github.com/Gregwar/mongoose-cpp</a>)</li>
+<li>Mongoose (<a class="reference external" href="https://github.com/cesanta/mongoose">https://github.com/cesanta/mongoose</a>)</li>
 <li>RocksDB (<a class="reference external" href="http://rocksdb.org/">http://rocksdb.org/</a>)</li>
 <li>Json Cpp (<a class="reference external" href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a>)</li>
 <li>Google test (<a class="reference external" href="https://code.google.com/p/googletest/">https://code.google.com/p/googletest/</a>)</li>
@@ -244,16 +244,21 @@ Se utilizaron dos repositorios distintos, uno para el proyecto de servidor y otr
 <li>response data: {body : string , datetime : string , emisor : string}</li>
 <li>ejemplo messageJson : { &#8220;emisor&#8221;:&#8221;mateo&#8221;, &#8220;receptor&#8221;:&#8221;&#8221;, &#8220;body&#8221;:&#8221;mensaje para todos&#8221; }</li>
 </ul>
+<p>Get Conversation
++ /api/conversation&amp;username&lt;USER&gt;
++ Tipo: GET
++ params: username (header), token (header)
++ response data: vector [ { user1 : string , user2 : string . total_messages : int , id : string } ]</p>
 </div></blockquote>
 <ul class="simple">
-<li>Get Conversation</li>
+<li>Get Conversations</li>
 </ul>
 <blockquote>
 <div><ul class="simple">
 <li>/api/conversation</li>
 <li>Tipo: GET</li>
-<li>params: username (header), token (header)</li>
-<li>response data: vector [ { user1 : string , user2 : string . total_messages : int , id : string } ]</li>
+<li>params: username (header), token (header) , USER (url parameter)</li>
+<li>response data: { user1 : string , user2 : string . total_messages : int , id : string }</li>
 </ul>
 </div></blockquote>
 <ul class="simple">
@@ -647,10 +652,8 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 </li>
 <li><dl class="first docutils">
 <dt>Ejecutar los siguientes comandos</dt>
-<dd><ol class="first last loweralpha simple">
-<li>cp -a include/gtest /usr/include</li>
-<li>cp -a lib/.libs/* /usr/lib/</li>
-</ol>
+<dd><p class="first last">a. cp -a include/gtest /usr/include
+b.</p>
 </dd>
 </dl>
 </li>
