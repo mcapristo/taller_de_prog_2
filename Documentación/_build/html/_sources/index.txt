@@ -171,12 +171,6 @@ Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
  + response data: {body : string , datetime : string , emisor : string}
  + ejemplo messageJson : { "emisor":"mateo", "receptor":"", "body":"mensaje para todos" } 
 
- Get Conversation
- + /api/conversation&username<USER>
- + Tipo: GET 
- + params: username (header), token (header)
- + response data: vector [ { user1 : string , user2 : string . total_messages : int , id : string } ]
-
 - Get Conversations
  + /api/conversation
  + Tipo: GET 
