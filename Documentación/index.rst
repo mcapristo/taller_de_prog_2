@@ -124,72 +124,88 @@ Doc de REST API
 --------------------------------------------
 Todas las llamadas a la api tienen una respuesta json con el siguiente formato: 
 {result: ["OK", "ERROR"], code:[<<sólo presente si el result es ERROR], data: <<Json con datos de respuesta en caso de result: "OK">>}
+
 - Login
  + /api/login
  + Tipo: GET
  + params: username (header), password (header)
- + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
+ + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Logout
  + /api/logout
  + Tipo: GET
  + params: username (header), token (header)
- + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
+ + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Validate Token
  + /api/token
  + Tipo: GET
  + params: username (header), token (header)
- + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime}
+ + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
 - Create User
  + /api/user
  + Tipo: POST 
  + params: userJson (body)
- + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime} 
+ + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
  + ejemplo userJson: {"username": "mateo" , "password": "contrasenia" , "name": "mateo bosco"}
 
 - Update Profile
  + /api/updateProfile
  + Tipo: PUT 
  + params: username (header), token (header), json con los campos que se quieren modificar (body)
- + response data: {username, token, name, online, profileImage, latitud, longitud, checkinDatetime} 
+ + response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
  + ejemplo body: {"name": "mateo" , "online": true , "latitud": 90, "longitud":34, "location":"colegiales"}
 
 - Send Message
  + /api/message
  + Tipo: POST 
  + params: username (header), token (header), messageJson (body)
- + response data: {body,datetime,emisor,receptor,id}
+ + response data: {body : string , datetime : string , emisor : string , receptor : string , id : string }
  + ejemplo messageJson: { "emisor":"mateo", "receptor":"pepe", "body":"mensaje para pepe" } 
 
 - Send Diffusion Message
- - /api/message
+ + /api/message
  + Tipo: POST
  + params: username (header), token (header), messageJson (body)
- + response data: {body,datetime,emisor}
+ + response data: {body : string , datetime : string , emisor : string}
  + ejemplo messageJson : { "emisor":"mateo", "receptor":"", "body":"mensaje para todos" } 
 
 - Get Conversation
  + /api/conversation
  + Tipo: GET 
  + params: username (header), token (header)
- + response data:     
+ + response data: vector [ { user1 : string , user2 : string . total_messages : int , id : string } ]
 
-- /api/getMessages
- + Tipo: 
- + params: 
- + response data: 
+- Get Messages
+ + /api/getMessages&username=<USER>
+ + Tipo: GET
+ + params: username (header) , token (header) , USER (url parameter)
+ + response data: vector [ {body : string , datetime : string , emisor : string , receptor : string , id : string } ]
 
-- /api/getUserProfile
- + Tipo: 
- + params: 
- + response data:  
+- Get User Profile
+ + /api/user&username=<USER>
+ + Tipo: GET
+ + params: username (header) , token (header) , USER (url parameter)
+ + response data:  {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
 
-- /api/getUsersProfile
- + Tipo: 
- + params: 
- + response data:    
+- Get Users Profile
+ + /api/user
+ + Tipo: GET
+ + params: username (header) , token (header)
+ + response data: vector [ {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}
+
+- Codigos de error:
+ + INVALID_USERNAME = 1 					// El username no existe en la base de datos
+ + INVALID_PASSWORD = 2 					// La password no es correcta
+ + INVALID_TOKEN = 3 						// El token no es correcto
+ + ERROR_SEND_MESSAGE = 4 					// Error al enviar un mensaje
+ + ERROR_USER_PROFILE_DOESNT_EXISTS = 5 	// El usuario que se busca no existe
+ + USERNAME_ALREADY_EXISTS = 6 				// El nombre de usuario ya existe
+ + NO_PASSWORD = 7 							// No se envio password
+ + NO_USERNAME = 8 							// No se envio username
+ + INVALID_JSON = 9 						// El json de body tiene formato invalido
+ + ERROR_ON_SAVE = 10 						// Error al guardar en la base de datos
 
 Doc de pruebas
 --------------------------------------------

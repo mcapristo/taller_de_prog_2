@@ -113,24 +113,232 @@ Se utilizaron dos repositorios distintos, uno para el proyecto de servidor y otr
 <h1>Documentacion técnica<a class="headerlink" href="#documentacion-tecnica" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="doc-ambiente-de-desarrollo">
 <h2>Doc ambiente de desarrollo<a class="headerlink" href="#doc-ambiente-de-desarrollo" title="Permalink to this headline">¶</a></h2>
+<p>Para el desarrollo de la aplicación, se usaron las siguientes herramientas para el armado del ambiente.</p>
+<div class="section" id="aplicacion-movil">
+<h3>Aplicación Móvil<a class="headerlink" href="#aplicacion-movil" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Lenguaje: Java</li>
+<li>IDE: Android Studio</li>
+<li>Android SDK</li>
+</ul>
+</div>
+<div class="section" id="rest-api">
+<h3>Rest API<a class="headerlink" href="#rest-api" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Lenguaje: C++</li>
+<li>IDE: Eclipse</li>
+</ul>
+</div>
 </div>
 <div class="section" id="doc-de-librerias-y-compilacion">
 <h2>Doc de librerias y compilación<a class="headerlink" href="#doc-de-librerias-y-compilacion" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Aplicación Móvil<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Volley (<a class="reference external" href="https://developer.android.com/training/volley/index.html">https://developer.android.com/training/volley/index.html</a>)</li>
+<li>Gson (<a class="reference external" href="https://code.google.com/p/google-gson/">https://code.google.com/p/google-gson/</a>)</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Rest API<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Mongoose (<a class="reference external" href="https://github.com/Gregwar/mongoose-cpp">https://github.com/Gregwar/mongoose-cpp</a>)</li>
+<li>RocksDB (<a class="reference external" href="http://rocksdb.org/">http://rocksdb.org/</a>)</li>
+<li>Json Cpp (<a class="reference external" href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a>)</li>
+<li>Google test (<a class="reference external" href="https://code.google.com/p/googletest/">https://code.google.com/p/googletest/</a>)</li>
+</ul>
+</div>
 </div>
 <div class="section" id="doc-de-arquitectura-diseno">
 <h2>Doc de arquitectura/diseño<a class="headerlink" href="#doc-de-arquitectura-diseno" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/arquitectura.png" src="_images/arquitectura.png" />
 </div>
 <div class="section" id="doc-de-clases">
 <h2>Doc de clases<a class="headerlink" href="#doc-de-clases" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="doc-de-codigo">
 <h2>Doc de código<a class="headerlink" href="#doc-de-codigo" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="../../javadocs/index.html">Aplicación mobile</a></p>
 </div>
 <div class="section" id="doc-de-rest-api">
 <h2>Doc de REST API<a class="headerlink" href="#doc-de-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>Todas las llamadas a la api tienen una respuesta json con el siguiente formato:
+{result: [&#8220;OK&#8221;, &#8220;ERROR&#8221;], code:[&lt;&lt;sólo presente si el result es ERROR], data: &lt;&lt;Json con datos de respuesta en caso de result: &#8220;OK&#8221;&gt;&gt;}</p>
+<ul class="simple">
+<li>Login</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/login</li>
+<li>Tipo: GET</li>
+<li>params: username (header), password (header)</li>
+<li>response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Logout</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/logout</li>
+<li>Tipo: GET</li>
+<li>params: username (header), token (header)</li>
+<li>response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Validate Token</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/token</li>
+<li>Tipo: GET</li>
+<li>params: username (header), token (header)</li>
+<li>response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Create User</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/user</li>
+<li>Tipo: POST</li>
+<li>params: userJson (body)</li>
+<li>response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+<li>ejemplo userJson: {&#8220;username&#8221;: &#8220;mateo&#8221; , &#8220;password&#8221;: &#8220;contrasenia&#8221; , &#8220;name&#8221;: &#8220;mateo bosco&#8221;}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Update Profile</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/updateProfile</li>
+<li>Tipo: PUT</li>
+<li>params: username (header), token (header), json con los campos que se quieren modificar (body)</li>
+<li>response data: {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+<li>ejemplo body: {&#8220;name&#8221;: &#8220;mateo&#8221; , &#8220;online&#8221;: true , &#8220;latitud&#8221;: 90, &#8220;longitud&#8221;:34, &#8220;location&#8221;:&#8221;colegiales&#8221;}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Send Message</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/message</li>
+<li>Tipo: POST</li>
+<li>params: username (header), token (header), messageJson (body)</li>
+<li>response data: {body : string , datetime : string , emisor : string , receptor : string , id : string }</li>
+<li>ejemplo messageJson: { &#8220;emisor&#8221;:&#8221;mateo&#8221;, &#8220;receptor&#8221;:&#8221;pepe&#8221;, &#8220;body&#8221;:&#8221;mensaje para pepe&#8221; }</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Send Diffusion Message</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/message</li>
+<li>Tipo: POST</li>
+<li>params: username (header), token (header), messageJson (body)</li>
+<li>response data: {body : string , datetime : string , emisor : string}</li>
+<li>ejemplo messageJson : { &#8220;emisor&#8221;:&#8221;mateo&#8221;, &#8220;receptor&#8221;:&#8221;&#8221;, &#8220;body&#8221;:&#8221;mensaje para todos&#8221; }</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Get Conversation</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/conversation</li>
+<li>Tipo: GET</li>
+<li>params: username (header), token (header)</li>
+<li>response data: vector [ { user1 : string , user2 : string . total_messages : int , id : string } ]</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Get Messages</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/getMessages&amp;username=&lt;USER&gt;</li>
+<li>Tipo: GET</li>
+<li>params: username (header) , token (header) , USER (url parameter)</li>
+<li>response data: vector [ {body : string , datetime : string , emisor : string , receptor : string , id : string } ]</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Get User Profile</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/user&amp;username=&lt;USER&gt;</li>
+<li>Tipo: GET</li>
+<li>params: username (header) , token (header) , USER (url parameter)</li>
+<li>response data:  {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Get Users Profile</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>/api/user</li>
+<li>Tipo: GET</li>
+<li>params: username (header) , token (header)</li>
+<li>response data: vector [ {username : string , token : string , name : string , online : bool , profileImage : string , latitud : double , longitud : double , checkinDatetime : string}</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Codigos de error:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>INVALID_USERNAME = 1                                         // El username no existe en la base de datos</li>
+<li>INVALID_PASSWORD = 2                                         // La password no es correcta</li>
+<li>INVALID_TOKEN = 3                                            // El token no es correcto</li>
+<li>ERROR_SEND_MESSAGE = 4                                       // Error al enviar un mensaje</li>
+<li>ERROR_USER_PROFILE_DOESNT_EXISTS = 5         // El usuario que se busca no existe</li>
+<li>USERNAME_ALREADY_EXISTS = 6                          // El nombre de usuario ya existe</li>
+<li>NO_PASSWORD = 7                                                      // No se envio password</li>
+<li>NO_USERNAME = 8                                                      // No se envio username</li>
+<li>INVALID_JSON = 9                                             // El json de body tiene formato invalido</li>
+<li>ERROR_ON_SAVE = 10                                           // Error al guardar en la base de datos</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="doc-de-pruebas">
 <h2>Doc de pruebas<a class="headerlink" href="#doc-de-pruebas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Aplicación móvil<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Librería utilizada: JUnit</p>
+</li>
+<li><dl class="first docutils">
+<dt>Cobertura: Jacoco</dt>
+<dd><ul class="first last simple">
+<li>Nivel de cobertura:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Rest API<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Librería utilizada: gtest (<a class="reference external" href="https://code.google.com/p/googletest/">https://code.google.com/p/googletest/</a>)</p>
+</li>
+<li><dl class="first docutils">
+<dt>Cobertura: gcov (<a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Gcov.html">https://gcc.gnu.org/onlinedocs/gcc/Gcov.html</a>)</dt>
+<dd><ul class="first last simple">
+<li>Nivel de cobertura:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="section" id="manual-de-usuario-del-cliente">
@@ -484,11 +692,11 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <div class="section" id="mantenimiento">
 <h2>Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="id1">
-<h2>Known issues<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>Known issues<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="id2">
-<h2>Troubleshooting<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>Troubleshooting<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul class="simple">
 </ul>
@@ -514,13 +722,25 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#documentacion-tecnica">Documentacion técnica</a><ul>
-<li><a class="reference internal" href="#doc-ambiente-de-desarrollo">Doc ambiente de desarrollo</a></li>
-<li><a class="reference internal" href="#doc-de-librerias-y-compilacion">Doc de librerias y compilación</a></li>
+<li><a class="reference internal" href="#doc-ambiente-de-desarrollo">Doc ambiente de desarrollo</a><ul>
+<li><a class="reference internal" href="#aplicacion-movil">Aplicación Móvil</a></li>
+<li><a class="reference internal" href="#rest-api">Rest API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#doc-de-librerias-y-compilacion">Doc de librerias y compilación</a><ul>
+<li><a class="reference internal" href="#id1">Aplicación Móvil</a></li>
+<li><a class="reference internal" href="#id2">Rest API</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#doc-de-arquitectura-diseno">Doc de arquitectura/diseño</a></li>
 <li><a class="reference internal" href="#doc-de-clases">Doc de clases</a></li>
 <li><a class="reference internal" href="#doc-de-codigo">Doc de código</a></li>
 <li><a class="reference internal" href="#doc-de-rest-api">Doc de REST API</a></li>
-<li><a class="reference internal" href="#doc-de-pruebas">Doc de pruebas</a></li>
+<li><a class="reference internal" href="#doc-de-pruebas">Doc de pruebas</a><ul>
+<li><a class="reference internal" href="#id3">Aplicación móvil</a></li>
+<li><a class="reference internal" href="#id4">Rest API</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#manual-de-usuario-del-cliente">Manual de usuario del cliente</a><ul>
@@ -538,8 +758,8 @@ Una vez configurada y salvada presionamos el botón &#8220;Volver&#8221;.</p>
 <li><a class="reference internal" href="#instalacon-y-configuracion">Instalacón y configuración</a></li>
 <li><a class="reference internal" href="#forma-de-uso">Forma de uso</a></li>
 <li><a class="reference internal" href="#mantenimiento">Mantenimiento</a></li>
-<li><a class="reference internal" href="#id1">Known issues</a></li>
-<li><a class="reference internal" href="#id2">Troubleshooting</a></li>
+<li><a class="reference internal" href="#id5">Known issues</a></li>
+<li><a class="reference internal" href="#id6">Troubleshooting</a></li>
 </ul>
 </li>
 </ul>
