@@ -14,7 +14,7 @@
 Database::Database() {
 	Options options;
 	options.create_if_missing = true;
-	Status s = DB::Open(options, "/tmp/testdb", &this->db);
+	Status s = DB::Open(options, "database", &this->db);
 	if (s.ok()){
 		s = db->CreateColumnFamily(ColumnFamilyOptions(), "UserCF", &this->userCF);
 		assert(s.ok());
