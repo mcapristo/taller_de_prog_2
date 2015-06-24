@@ -4,7 +4,7 @@ var searchData=
   ['getbody',['getBody',['../classMessage.html#a1de1dc1dd23372bc59d35eb65122e990',1,'Message']]],
   ['getcheckindatetime',['getCheckinDatetime',['../classUser.html#a70692f9ab9740a20d62f7086c4741e54',1,'User']]],
   ['getconversation',['getConversation',['../classDatabase.html#a6db0563f834b2956026a2eaad45152ef',1,'Database']]],
-  ['getconversations',['getConversations',['../classDatabase.html#af24b666fcd1da3e3ac0fc41712a28ec2',1,'Database']]],
+  ['getconversations',['getConversations',['../classDatabase.html#af24b666fcd1da3e3ac0fc41712a28ec2',1,'Database::getConversations()'],['../classServiceLayer.html#a7b502342d937cb644ad8fa077cf4c563',1,'ServiceLayer::getConversations()']]],
   ['getdatetime',['getDatetime',['../classMessage.html#af85a5ded7c2ecbb967233d8d8ab12a64',1,'Message']]],
   ['getemisor',['getEmisor',['../classMessage.html#a6ef2c26162ee365b1ea7cc409bd3309c',1,'Message']]],
   ['getfirstuser',['getFirstUser',['../classConversation.html#a7ded9cbde983c07a4ac9cbe14fb83d5a',1,'Conversation']]],
@@ -17,6 +17,7 @@ var searchData=
   ['getlocation',['getLocation',['../classUser.html#a7d0456bd4a7f1a317e85fc3a58778541',1,'User']]],
   ['getlongitud',['getLongitud',['../classUser.html#a811258c8bd9966d530297feb60619795',1,'User']]],
   ['getmessage',['getMessage',['../classDatabase.html#aed6066647f099ed6d5ec78f761024f62',1,'Database']]],
+  ['getmessages',['getMessages',['../classServiceLayer.html#a3d5142f67a7d93a9b190c742772033d1',1,'ServiceLayer']]],
   ['getmessagesjsonstring',['getMessagesJsonString',['../classDatabase.html#ab51ad49f185d893dd38396b1144dbe0d',1,'Database']]],
   ['getmessagesjsonvalue',['getMessagesJsonValue',['../classDatabase.html#aa1f80f47e6ef058c5d04f2b0b78f544e',1,'Database']]],
   ['getname',['getName',['../classUser.html#adb316ac38d5f62a967686e7b736a0469',1,'User']]],
@@ -30,8 +31,10 @@ var searchData=
   ['getuser',['getUser',['../classDatabase.html#ab5c56d4cc97bc85dc533ba5f8343fcb1',1,'Database']]],
   ['getuserloginprofilejsonvalue',['getUserLoginProfileJsonValue',['../classUser.html#a0bfa5d8db0a33ba1f8f69f617d697783',1,'User']]],
   ['getusername',['getUsername',['../classUser.html#a5705c32c347050449ba6d72f32f18482',1,'User']]],
+  ['getuserprofile',['getUserProfile',['../classServiceLayer.html#afe132fdef6f03f5f62caa525e4327100',1,'ServiceLayer']]],
   ['getuserprofilejsonvalue',['getUserProfileJsonValue',['../classUser.html#a7afe8d1e03e893b4da768773d4f444f8',1,'User']]],
   ['getusers',['getUsers',['../classDatabase.html#ab2c80b0b673fb1f3245e1b830e697326',1,'Database']]],
   ['getusersjsonstring',['getUsersJsonString',['../classDatabase.html#a6a64633ab53686e26c2bde4e1507064a',1,'Database']]],
-  ['getusersjsonvalue',['getUsersJsonValue',['../classDatabase.html#af424a8f65d8f6be861c891246dc0f9d9',1,'Database']]]
+  ['getusersjsonvalue',['getUsersJsonValue',['../classDatabase.html#af424a8f65d8f6be861c891246dc0f9d9',1,'Database']]],
+  ['getusersprofile',['getUsersProfile',['../classServiceLayer.html#aa734255db70314f738b097b6c048c994',1,'ServiceLayer']]]
 ];

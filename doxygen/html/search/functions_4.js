@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['log',['log',['../classLoggero.html#af560ec1e9fc12d441d9539f1e939bf43',1,'Loggero']]],
-  ['login',['login',['../classUser.html#a42fc61851c865d8e9e0a02dd6d794553',1,'User']]],
-  ['logout',['logout',['../classUser.html#ade7eb5acf5097892168086ceed504ab3',1,'User']]]
+  ['increasetotalmessages',['increaseTotalMessages',['../classConversation.html#a023f83bc82e30bb4f4d05c3c30f1fc5f',1,'Conversation']]],
+  ['isonline',['isOnline',['../classUser.html#a73952dc0320736f3532e0037ae27cfef',1,'User']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['put',['put',['../classDatabase.html#a03b8b9b0fc9661a8f4cdf095486b1efa',1,'Database::put(ColumnFamilyHandle *cfHandle, string key, string value)'],['../classDatabase.html#a039739d8784bd2d050a5132c7b42c289',1,'Database::put(string key, string value)']]]
+  ['message',['Message',['../classMessage.html#a3d631e5f5506a662dbff5f8a4469b279',1,'Message::Message(User *emisor, User *receptor, string body)'],['../classMessage.html#a763bb4ea8a99e1630a6e73653b7ace0a',1,'Message::Message(Json::Value)']]]
 ];

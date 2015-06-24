@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
@@ -84,7 +85,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
-      <li class="current"><a href="#index_u"><span>u</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
+      <li class="current"><a href="#index_v"><span>v</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -113,7 +115,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMessageFactory.html#a4e26f5e4948862fcef2501a00634861b">MessageFactory</a>
 </li>
 <li>createUser()
-: <a class="el" href="classUserFactory.html#a356507f8efd67ae43de4fc572f5c3e6d">UserFactory</a>
+: <a class="el" href="classServiceLayer.html#ae7b18cf7b281a5e97fe291202865bf24">ServiceLayer</a>
+, <a class="el" href="classUserFactory.html#a356507f8efd67ae43de4fc572f5c3e6d">UserFactory</a>
 </li>
 <li>createUserFromJsonString()
 : <a class="el" href="classUserFactory.html#adc3f508aed8ec4dbf8dcf7becd6018eb">UserFactory</a>
@@ -134,6 +137,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 
 
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>ev_handler()
+: <a class="el" href="classServer.html#a35ee7138b8d6f2aea6ecaf63dc874441">Server</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>get()
 : <a class="el" href="classDatabase.html#aaeca6b96023c0a805a0d4aef73e80bc5">Database</a>
@@ -149,6 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getConversations()
 : <a class="el" href="classDatabase.html#af24b666fcd1da3e3ac0fc41712a28ec2">Database</a>
+, <a class="el" href="classServiceLayer.html#a7b502342d937cb644ad8fa077cf4c563">ServiceLayer</a>
 </li>
 <li>getDatetime()
 : <a class="el" href="classMessage.html#af85a5ded7c2ecbb967233d8d8ab12a64">Message</a>
@@ -186,6 +197,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getMessage()
 : <a class="el" href="classDatabase.html#aed6066647f099ed6d5ec78f761024f62">Database</a>
+</li>
+<li>getMessages()
+: <a class="el" href="classServiceLayer.html#a3d5142f67a7d93a9b190c742772033d1">ServiceLayer</a>
 </li>
 <li>getMessagesJsonString()
 : <a class="el" href="classDatabase.html#ab51ad49f185d893dd38396b1144dbe0d">Database</a>
@@ -226,6 +240,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getUsername()
 : <a class="el" href="classUser.html#a5705c32c347050449ba6d72f32f18482">User</a>
 </li>
+<li>getUserProfile()
+: <a class="el" href="classServiceLayer.html#afe132fdef6f03f5f62caa525e4327100">ServiceLayer</a>
+</li>
 <li>getUserProfileJsonValue()
 : <a class="el" href="classUser.html#a7afe8d1e03e893b4da768773d4f444f8">User</a>
 </li>
@@ -237,6 +254,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getUsersJsonValue()
 : <a class="el" href="classDatabase.html#af424a8f65d8f6be861c891246dc0f9d9">Database</a>
+</li>
+<li>getUsersProfile()
+: <a class="el" href="classServiceLayer.html#aa734255db70314f738b097b6c048c994">ServiceLayer</a>
 </li>
 </ul>
 
@@ -256,10 +276,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classLoggero.html#af560ec1e9fc12d441d9539f1e939bf43">Loggero</a>
 </li>
 <li>login()
-: <a class="el" href="classUser.html#a42fc61851c865d8e9e0a02dd6d794553">User</a>
+: <a class="el" href="classServiceLayer.html#a156db9a26ee9c18b5dc004a53e6db135">ServiceLayer</a>
+, <a class="el" href="classUser.html#a42fc61851c865d8e9e0a02dd6d794553">User</a>
 </li>
 <li>logout()
-: <a class="el" href="classUser.html#ade7eb5acf5097892168086ceed504ab3">User</a>
+: <a class="el" href="classServiceLayer.html#aa58f32a68f65731f5bff417a6d8587cd">ServiceLayer</a>
+, <a class="el" href="classUser.html#ade7eb5acf5097892168086ceed504ab3">User</a>
 </li>
 </ul>
 
@@ -287,6 +309,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>saveUser()
 : <a class="el" href="classDatabase.html#a773b34557b1875cfa887597a4e4f5c8a">Database</a>
+</li>
+<li>sendMessage()
+: <a class="el" href="classServiceLayer.html#a8b160670006abd96a72634c021ff171f">ServiceLayer</a>
 </li>
 <li>setCheckinDatetime()
 : <a class="el" href="classUser.html#a3147b802b9e598b1d191b983115fefef">User</a>
@@ -343,6 +368,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>updateProfile()
+: <a class="el" href="classServiceLayer.html#a927f11b4f38d260b83b3c4de67801d81">ServiceLayer</a>
+</li>
 <li>updateUser()
 : <a class="el" href="classUser.html#a416c9c7d90055844050106aa5b493471">User</a>
 </li>
@@ -350,10 +378,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classUser.html#a79cb2c4bc5ad9221a6e55b6a0981a27e">User</a>
 </li>
 </ul>
+
+
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
+<li>validateToken()
+: <a class="el" href="classServiceLayer.html#a3158abab790bb26288e3d42529044c47">ServiceLayer</a>
+</li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 24 2015 19:12:20 for MensajerO/Server by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 24 2015 19:17:11 for MensajerO/Server by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

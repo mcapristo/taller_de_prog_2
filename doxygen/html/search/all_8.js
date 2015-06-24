@@ -3,6 +3,7 @@ var searchData=
   ['saveconversation',['saveConversation',['../classDatabase.html#a691f379438eeb46f1557ade969e15564',1,'Database']]],
   ['savemessage',['saveMessage',['../classDatabase.html#aedececaa0011428707df6792296d9e13',1,'Database']]],
   ['saveuser',['saveUser',['../classDatabase.html#a773b34557b1875cfa887597a4e4f5c8a',1,'Database']]],
+  ['sendmessage',['sendMessage',['../classServiceLayer.html#a8b160670006abd96a72634c021ff171f',1,'ServiceLayer']]],
   ['server',['Server',['../classServer.html',1,'']]],
   ['servicelayer',['ServiceLayer',['../classServiceLayer.html',1,'']]],
   ['setcheckindatetime',['setCheckinDatetime',['../classUser.html#a3147b802b9e598b1d191b983115fefef',1,'User']]],
