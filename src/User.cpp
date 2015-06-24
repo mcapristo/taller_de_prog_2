@@ -7,6 +7,10 @@
 
 #include "User.h"
 
+/**
+ *
+ * @param username of the user as a string
+ */
 User::User(string username) {
 	this->username = username;
 	this->online = false;
@@ -22,91 +26,179 @@ User::User(string username) {
 User::~User() {
 }
 
+/**
+ *
+ * @return a string with the name of the user
+ */
 string User::getName(){
 	return name;
 }
 
+/**
+ *
+ * @param name a string with the name of the user
+ */
 void User::setName(const string& name) {
 	this->name = name;
 }
-
+/**
+ *
+ * @return a bool that says if the user is online
+ */
 bool User::isOnline(){
 	return online;
 }
 
+/**
+ *
+ * @param online a bool that says if the user is online
+ */
 void User::setOnline(bool online) {
 	this->online = online;
 }
 
+/**
+ *
+ * @return the password of the user as string
+ */
 string User::getPassword(){
 	return password;
 }
 
+/**
+ *
+ * @param password a string with the password of the user
+ */
 void User::setPassword(const string& password) {
 	this->password = password;
 }
 
+/**
+ *
+ * @return a string with the username
+ */
 string User::getUsername(){
 	return username;
 }
 
+/**
+ *
+ * @return a string with the token of the user.
+ */
 string User::getToken(){
 	return this->token;
 }
 
+/**
+ *
+ * @param t the token of the user as a string
+ */
 void User::setToken(string t){
 	this->token = t;
 }
 
+/**
+ *
+ * @return a string of the profile image encoded
+ */
 string User::getProfileImage(){
 	return this->profileImage;
 }
 
+/**
+ *
+ * @param image a string of the profile image encoded
+ */
 void User::setProfileImage(string image){
 	this->profileImage = image;
 }
 
+/**
+ *
+ * @param latitud a double
+ */
 void User::setLatitud(double latitud){
 	this->latitud = latitud;
 }
 
+/**
+ *
+ * @return a double
+ */
 double User::getLatitud(){
 	return this->latitud;
 }
 
+/**
+ *
+ * @param longitud a double
+ */
 void User::setLongitud(double longitud){
 	this->longitud = longitud;
 }
 
+/**
+ *
+ * @return a double
+ */
 double User::getLongitud(){
 	return this->longitud;
 }
 
+/**
+ *
+ * @param location as a string
+ * also change the checkindatetime
+ */
 void User::setLocation(string location){
 	this->location = location;
 	this->setCheckinDatetime(Clock::getTime());
 }
 
+/**
+ *
+ * @return a string with the location
+ */
 string User::getLocation(){
 	return this->location;
 }
 
+/**
+ *
+ * @param datetime as a string
+ */
 void User::setCheckinDatetime(string datetime){
 	this->checkinDatetime = datetime;
 }
 
+/**
+ *
+ * @return a string
+ */
 string User::getCheckinDatetime(){
 	return this->checkinDatetime;
 }
 
+/**
+ *
+ * @param datetime as a string
+ */
 void User::setLastActivityDatetime(string datetime){
 	this->lastActivityDatetime = datetime;
 }
 
+/**
+ *
+ * @return a string
+ */
 string User::getLastActivityDatetime(){
 	return this->lastActivityDatetime;
 }
 
+/**
+ *
+ * @return a Json::Value that represents the user
+ */
 Json::Value User::toJsonValue() {
 	Json::Value value(Json::objectValue);
 	value["username"] = this->username;
@@ -124,12 +216,19 @@ Json::Value User::toJsonValue() {
 	return value;
 }
 
+/**
+ *
+ * @return a json string that represents the user
+ */
 string User::toJsonString() {
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,this->toJsonValue());
 }
 
+/**
+ * sets the token and the online to true
+ */
 void User::login(){
 	string input = this->getUsername()+this->getPassword()+this->getName();
 	std::hash<std::string> hash_fn;
@@ -141,11 +240,18 @@ void User::login(){
 	this->online = true;
 }
 
+/**
+ * deletes the token and sets the online to false
+ */
 void User::logout(){
 	this->setToken("");
 	this->online = false;
 }
 
+/**
+ *
+ * @return a Json::Value with the attributes of the user but not the password or the token
+ */
 Json::Value User::getUserProfileJsonValue(){
 	Json::Value val = Json::Value();
 	val["username"] = this->getUsername();
@@ -160,12 +266,22 @@ Json::Value User::getUserProfileJsonValue(){
 	return val;
 }
 
+/**
+ *
+ * @return a Json::Value with all the attributes of the user but not the password
+ */
 Json::Value User::getUserLoginProfileJsonValue(){
 	Json::Value val = this->getUserProfileJsonValue();
 	val["token"] = this->getToken();
 	return val;
 }
 
+/**
+ *
+ * @param val Json::Value with the attributes to change to this user.
+ * only the following attributes can be changed
+ * name, profileImage, password, online, latitud, longitud, location, checkinDatetime, lastActivityDatetime
+ */
 void User::updateUser(Json::Value val){
 	string name = val.get("name","").asString();
 	if (name != "") this->setName(name);

@@ -7,6 +7,10 @@
 
 #include "Database.h"
 
+/**
+ * Creates the Database, empty if it does not exist
+ * or initiates an existing one
+ */
 Database::Database() {
 	Options options;
 	options.create_if_missing = true;
@@ -45,15 +49,31 @@ Database::~Database() {
 	delete this->messageCF;
 	delete this->db;
 }
-
+/**
+ *
+ * @param key the key of the key-value pair
+ * @return the value as string
+ */
 string Database::get(string key) {
 	return this->get(this->defaultCF,key);
 }
 
+/**
+ *
+ * @param key from key-value to persist in the database
+ * @param value from key-value to persist in the database
+ * @return true if OK, false if not OK
+ */
 bool Database::put(string key, string value) {
 	return this->put(this->defaultCF,key,value);
 }
 
+/**
+ *
+ * @param cfHandle the ColumnFamilyHandler
+ * @param key
+ * @return value in database
+ */
 string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 	string value;
 	Status res = this->db->Get(ReadOptions(),cfHandle,key,&value);
@@ -61,6 +81,13 @@ string Database::get(ColumnFamilyHandle* cfHandle, string key) {
 	return value;
 }
 
+/**
+ *
+ * @param cfHandle the ColumnFamilyHandler of key-value
+ * @param key the key
+ * @param value to persist
+ * @return true if OK, false if not OK
+ */
 bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 //	cout<< "SET in "+ cfHandle->GetName() +": clave: '" + key + "', valor: '" + value +"'" << endl;
 	WriteOptions wo = WriteOptions();
@@ -68,6 +95,11 @@ bool Database::put(ColumnFamilyHandle* cfHandle,string key, string value) {
 	return res.ok();
 }
 
+/**
+ *
+ * @param str a json string
+ * @return the json string parsed as Json::Value
+ */
 Json::Value Database::getJsonValueFromString(string str) {
 	Json::Reader r = Json::Reader();
 	Json::Value val = Json::Value();
@@ -75,12 +107,22 @@ Json::Value Database::getJsonValueFromString(string str) {
 	return val;
 }
 
+/**
+ *
+ * @param value a Json::Value to convert to string
+ * @return the json as a string
+ */
 string Database::getJsonStringFromValue(Json::Value value){
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
 	return Json::writeString(builder,value);
 }
 
+/**
+ *
+ * @param key the username
+ * @return a pointer to User in database
+ */
 User* Database::getUser(string key) {
 	string json = this->get(this->userCF,key);
 	if (json == "") return NULL;
@@ -90,19 +132,34 @@ User* Database::getUser(string key) {
 	return u;
 }
 
+/**
+ *
+ * @param user a pointer to User to persist in the database
+ * @return true if OK, false if not OK
+ */
 bool Database::saveUser(User* user) {
 	string username = user->getUsername();
 	string json = user->toJsonString();
 	return this->put(this->userCF,username,json);
 }
 
-
+/**
+ *
+ * @param id of the message
+ * @return a pointer to the message in database
+ */
 Message* Database::getMessage(string id){
 	string json = this->get(this->messageCF,id);
 	Json::Value val = this->getJsonValueFromString(json);
 	return new Message(val);
 }
 
+/**
+ *
+ * @param m a pointer to the Message
+ * @param key the id of the message
+ * @return true if OK, false if not OK
+ */
 bool Database::saveMessageWithKey(Message* m, string key){
 
 	string conversationJson = this->get(this->conversationCF,key);
@@ -126,7 +183,11 @@ bool Database::saveMessageWithKey(Message* m, string key){
 	return this->put(this->messageCF,finalkey,m->toJsonString());
 
 }
-
+/**
+ *
+ * @param m a pointer to the message to persist in the database
+ * @return true if OK, false if not OK
+ */
 bool Database::saveMessage(Message* m) {
 	Conversation* conv = this->getConversation(m->getEmisor(),m->getReceptor());
 
@@ -142,7 +203,10 @@ bool Database::saveMessage(Message* m) {
 
 }
 
-
+/**
+ *
+ * @return how many values were deleted
+ */
 int Database::deleteDatabaseValues(){
 	std::vector<ColumnFamilyHandle*> column_families;
 	column_families.push_back(this->defaultCF);
@@ -164,6 +228,12 @@ int Database::deleteDatabaseValues(){
 	return i;
 }
 
+/**
+ *
+ * @param u1 One of the users in the conversation
+ * @param u2 The other user in the conversation
+ * @return a pointer to the Conversation in database
+ */
 Conversation* Database::getConversation(User* u1, User* u2){
 	string key1 = u1->getUsername()+u2->getUsername();
 	string value1 = this->get(this->conversationCF,key1);
@@ -182,6 +252,11 @@ Conversation* Database::getConversation(User* u1, User* u2){
 	}
 }
 
+/**
+ *
+ * @param conv a pointer to the conversation to save in database
+ * @return true if OK, false if not OK
+ */
 bool Database::saveConversation(Conversation* conv){
 	string key1 = conv->getFirstUser()->getUsername() + conv->getSecondUser()->getUsername();
 	string value1 = this->get(key1);
@@ -204,6 +279,10 @@ bool Database::saveConversation(Conversation* conv){
 	return this->put(this->conversationCF,key1,json);
 }
 
+/**
+ *
+ * @return a vector of pointers to the users in the database
+ */
 vector<User*> Database::getUsers(){
 	ColumnFamilyHandle* h = this->userCF;
 	Iterator* it = this->db->NewIterator(ReadOptions(),h);
@@ -220,7 +299,10 @@ vector<User*> Database::getUsers(){
 	delete it;
 	return users;
 }
-
+/**
+ *
+ * @return a json value of all the users in the database
+ */
 Json::Value Database::getUsersJsonValue(){
 	ColumnFamilyHandle* h = this->userCF;
 	Iterator* it = this->db->NewIterator(ReadOptions(),h);
@@ -240,6 +322,10 @@ Json::Value Database::getUsersJsonValue(){
 
 }
 
+/**
+ *
+ * @return a json string of all the users in the database
+ */
 string Database::getUsersJsonString(){
 	Json::Value jsonValue = this->getUsersJsonValue();
 	Json::StreamWriterBuilder builder;
@@ -247,6 +333,11 @@ string Database::getUsersJsonString(){
 	return Json::writeString(builder,jsonValue);
 }
 
+/**
+ *
+ * @param conv the conversation that contains all the messages that you want
+ * @return a Json::Value of all the messages in the conversation
+ */
 Json::Value Database::getMessagesJsonValue(Conversation* conv){
 	int tot_msg = conv->getTotalMessages();
 	Json::Value arrayValue = Json::Value();
@@ -265,6 +356,11 @@ Json::Value Database::getMessagesJsonValue(Conversation* conv){
 	return arrayValue;
 }
 
+/**
+ *
+ * @param conv the conversation that contains all the messages that you want to retreive from the database
+ * @return a json string that contains all the messages
+ */
 string Database::getMessagesJsonString(Conversation* conv){
 	Json::Value jsonValue = this->getMessagesJsonValue(conv);
 	Json::StreamWriterBuilder builder;
@@ -272,6 +368,11 @@ string Database::getMessagesJsonString(Conversation* conv){
 	return Json::writeString(builder,jsonValue);
 }
 
+/**
+ *
+ * @param user a pointer to a user
+ * @return all the conversations that this user has
+ */
 vector<Conversation*> Database::getConversations(User* user){
 	vector<User*> users = this->getUsers();
 	vector<Conversation*> conversations = vector<Conversation*>();

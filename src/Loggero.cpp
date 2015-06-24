@@ -11,6 +11,10 @@
 #include "Constants.h"
 Loggero* Loggero::instance = NULL;
 
+/**
+ *
+ * @return the instance of the singleton Loggero
+ */
 Loggero* Loggero::getInstnce() {
 	if(!instance){
 		instance = new Loggero();
@@ -25,6 +29,12 @@ Loggero::Loggero(){
 Loggero::~Loggero() {
 }
 
+/**
+ *
+ * @param type of log. See Constants
+ * @param message the message to log
+ * @return 1 in error, 0 in success
+ */
 int Loggero::log(int type, string message) {
 	ofstream logFile;
 	logFile.open ("./log.txt", ios::app);

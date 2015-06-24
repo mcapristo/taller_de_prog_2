@@ -7,6 +7,10 @@
 
 #include "Clock.h"
 
+/**
+ *
+ * @return datetime as a string
+ */
 string Clock::getTime() {
 	time_t now = time(0);
 	struct tm tstruct;

@@ -112,8 +112,10 @@ Doc de arquitectura/diseño
 --------------------------------------------
 .. image:: Screenshots/arquitectura.png
 
-Doc de clases
+Doc de Flujo entre Activities
 --------------------------------------------
+
+.. image:: Screenshots/Diagrama.png
 
 Doc de código
 --------------------------------------------

@@ -1,0 +1,345 @@
+\hypertarget{classDatabase}{\section{Database Class Reference}
+\label{classDatabase}\index{Database@{Database}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDatabase_a4703c80e6969d33565ea340f768fdadf}{Database} ()
+\item 
+string \hyperlink{classDatabase_aaeca6b96023c0a805a0d4aef73e80bc5}{get} (Column\-Family\-Handle $\ast$cf\-Handle, string key)
+\item 
+bool \hyperlink{classDatabase_a03b8b9b0fc9661a8f4cdf095486b1efa}{put} (Column\-Family\-Handle $\ast$cf\-Handle, string key, string value)
+\item 
+string \hyperlink{classDatabase_aff1c4f3eeb87791ba42fab6e0dcb6548}{get} (string key)
+\item 
+bool \hyperlink{classDatabase_a039739d8784bd2d050a5132c7b42c289}{put} (string key, string value)
+\item 
+\hyperlink{classUser}{User} $\ast$ \hyperlink{classDatabase_ab5c56d4cc97bc85dc533ba5f8343fcb1}{get\-User} (string key)
+\item 
+bool \hyperlink{classDatabase_a773b34557b1875cfa887597a4e4f5c8a}{save\-User} (\hyperlink{classUser}{User} $\ast$user)
+\item 
+\hyperlink{classMessage}{Message} $\ast$ \hyperlink{classDatabase_aed6066647f099ed6d5ec78f761024f62}{get\-Message} (string id)
+\item 
+bool \hyperlink{classDatabase_aedececaa0011428707df6792296d9e13}{save\-Message} (\hyperlink{classMessage}{Message} $\ast$m)
+\item 
+int \hyperlink{classDatabase_a9601ee85341d98215b7e832a6659f39c}{delete\-Database\-Values} ()
+\item 
+Json\-::\-Value \hyperlink{classDatabase_a883ced43e68ea29073518d6d788f4188}{get\-Json\-Value\-From\-String} (string str)
+\item 
+string \hyperlink{classDatabase_a17f4296cbce40609301374d8fcbbb1bf}{get\-Json\-String\-From\-Value} (Json\-::\-Value)
+\item 
+\hyperlink{classConversation}{Conversation} $\ast$ \hyperlink{classDatabase_a6db0563f834b2956026a2eaad45152ef}{get\-Conversation} (\hyperlink{classUser}{User} $\ast$u1, \hyperlink{classUser}{User} $\ast$u2)
+\item 
+vector$<$ \hyperlink{classConversation}{Conversation} $\ast$ $>$ \hyperlink{classDatabase_af24b666fcd1da3e3ac0fc41712a28ec2}{get\-Conversations} (\hyperlink{classUser}{User} $\ast$user)
+\item 
+bool \hyperlink{classDatabase_a691f379438eeb46f1557ade969e15564}{save\-Conversation} (\hyperlink{classConversation}{Conversation} $\ast$conv)
+\item 
+vector$<$ \hyperlink{classUser}{User} $\ast$ $>$ \hyperlink{classDatabase_ab2c80b0b673fb1f3245e1b830e697326}{get\-Users} ()
+\item 
+string \hyperlink{classDatabase_a6a64633ab53686e26c2bde4e1507064a}{get\-Users\-Json\-String} ()
+\item 
+Json\-::\-Value \hyperlink{classDatabase_af424a8f65d8f6be861c891246dc0f9d9}{get\-Users\-Json\-Value} ()
+\item 
+string \hyperlink{classDatabase_ab51ad49f185d893dd38396b1144dbe0d}{get\-Messages\-Json\-String} (\hyperlink{classConversation}{Conversation} $\ast$conv)
+\item 
+Json\-::\-Value \hyperlink{classDatabase_aa1f80f47e6ef058c5d04f2b0b78f544e}{get\-Messages\-Json\-Value} (\hyperlink{classConversation}{Conversation} $\ast$conv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classDatabase_a4703c80e6969d33565ea340f768fdadf}{\index{Database@{Database}!Database@{Database}}
+\index{Database@{Database}!Database@{Database}}
+\subsubsection[{Database}]{\setlength{\rightskip}{0pt plus 5cm}Database\-::\-Database (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a4703c80e6969d33565ea340f768fdadf}
+Creates the \hyperlink{classDatabase}{Database}, empty if it does not exist or initiates an existing one 
+
+\subsection{Member Function Documentation}
+\hypertarget{classDatabase_a9601ee85341d98215b7e832a6659f39c}{\index{Database@{Database}!delete\-Database\-Values@{delete\-Database\-Values}}
+\index{delete\-Database\-Values@{delete\-Database\-Values}!Database@{Database}}
+\subsubsection[{delete\-Database\-Values}]{\setlength{\rightskip}{0pt plus 5cm}int Database\-::delete\-Database\-Values (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a9601ee85341d98215b7e832a6659f39c}
+\begin{DoxyReturn}{Returns}
+how many values were deleted 
+\end{DoxyReturn}
+\hypertarget{classDatabase_aaeca6b96023c0a805a0d4aef73e80bc5}{\index{Database@{Database}!get@{get}}
+\index{get@{get}!Database@{Database}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}string Database\-::get (
+\begin{DoxyParamCaption}
+\item[{Column\-Family\-Handle $\ast$}]{cf\-Handle, }
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_aaeca6b96023c0a805a0d4aef73e80bc5}
+
+\begin{DoxyParams}{Parameters}
+{\em cf\-Handle} & the Column\-Family\-Handler \\
+\hline
+{\em key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_aff1c4f3eeb87791ba42fab6e0dcb6548}{\index{Database@{Database}!get@{get}}
+\index{get@{get}!Database@{Database}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}string Database\-::get (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_aff1c4f3eeb87791ba42fab6e0dcb6548}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the key of the key-\/value pair \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value as string 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a6db0563f834b2956026a2eaad45152ef}{\index{Database@{Database}!get\-Conversation@{get\-Conversation}}
+\index{get\-Conversation@{get\-Conversation}!Database@{Database}}
+\subsubsection[{get\-Conversation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Conversation} $\ast$ Database\-::get\-Conversation (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{u1, }
+\item[{{\bf User} $\ast$}]{u2}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a6db0563f834b2956026a2eaad45152ef}
+
+\begin{DoxyParams}{Parameters}
+{\em u1} & One of the users in the conversation \\
+\hline
+{\em u2} & The other user in the conversation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the \hyperlink{classConversation}{Conversation} in database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_af24b666fcd1da3e3ac0fc41712a28ec2}{\index{Database@{Database}!get\-Conversations@{get\-Conversations}}
+\index{get\-Conversations@{get\-Conversations}!Database@{Database}}
+\subsubsection[{get\-Conversations}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Conversation} $\ast$ $>$ Database\-::get\-Conversations (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_af24b666fcd1da3e3ac0fc41712a28ec2}
+
+\begin{DoxyParams}{Parameters}
+{\em user} & a pointer to a user \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+all the conversations that this user has 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a17f4296cbce40609301374d8fcbbb1bf}{\index{Database@{Database}!get\-Json\-String\-From\-Value@{get\-Json\-String\-From\-Value}}
+\index{get\-Json\-String\-From\-Value@{get\-Json\-String\-From\-Value}!Database@{Database}}
+\subsubsection[{get\-Json\-String\-From\-Value}]{\setlength{\rightskip}{0pt plus 5cm}string Database\-::get\-Json\-String\-From\-Value (
+\begin{DoxyParamCaption}
+\item[{Json\-::\-Value}]{value}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a17f4296cbce40609301374d8fcbbb1bf}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & a Json\-::\-Value to convert to string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the json as a string 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a883ced43e68ea29073518d6d788f4188}{\index{Database@{Database}!get\-Json\-Value\-From\-String@{get\-Json\-Value\-From\-String}}
+\index{get\-Json\-Value\-From\-String@{get\-Json\-Value\-From\-String}!Database@{Database}}
+\subsubsection[{get\-Json\-Value\-From\-String}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value Database\-::get\-Json\-Value\-From\-String (
+\begin{DoxyParamCaption}
+\item[{string}]{str}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a883ced43e68ea29073518d6d788f4188}
+
+\begin{DoxyParams}{Parameters}
+{\em str} & a json string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the json string parsed as Json\-::\-Value 
+\end{DoxyReturn}
+\hypertarget{classDatabase_aed6066647f099ed6d5ec78f761024f62}{\index{Database@{Database}!get\-Message@{get\-Message}}
+\index{get\-Message@{get\-Message}!Database@{Database}}
+\subsubsection[{get\-Message}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Message} $\ast$ Database\-::get\-Message (
+\begin{DoxyParamCaption}
+\item[{string}]{id}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_aed6066647f099ed6d5ec78f761024f62}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & of the message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the message in database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_ab51ad49f185d893dd38396b1144dbe0d}{\index{Database@{Database}!get\-Messages\-Json\-String@{get\-Messages\-Json\-String}}
+\index{get\-Messages\-Json\-String@{get\-Messages\-Json\-String}!Database@{Database}}
+\subsubsection[{get\-Messages\-Json\-String}]{\setlength{\rightskip}{0pt plus 5cm}string Database\-::get\-Messages\-Json\-String (
+\begin{DoxyParamCaption}
+\item[{{\bf Conversation} $\ast$}]{conv}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_ab51ad49f185d893dd38396b1144dbe0d}
+
+\begin{DoxyParams}{Parameters}
+{\em conv} & the conversation that contains all the messages that you want to retreive from the database \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a json string that contains all the messages 
+\end{DoxyReturn}
+\hypertarget{classDatabase_aa1f80f47e6ef058c5d04f2b0b78f544e}{\index{Database@{Database}!get\-Messages\-Json\-Value@{get\-Messages\-Json\-Value}}
+\index{get\-Messages\-Json\-Value@{get\-Messages\-Json\-Value}!Database@{Database}}
+\subsubsection[{get\-Messages\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value Database\-::get\-Messages\-Json\-Value (
+\begin{DoxyParamCaption}
+\item[{{\bf Conversation} $\ast$}]{conv}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_aa1f80f47e6ef058c5d04f2b0b78f544e}
+
+\begin{DoxyParams}{Parameters}
+{\em conv} & the conversation that contains all the messages that you want \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a Json\-::\-Value of all the messages in the conversation 
+\end{DoxyReturn}
+\hypertarget{classDatabase_ab5c56d4cc97bc85dc533ba5f8343fcb1}{\index{Database@{Database}!get\-User@{get\-User}}
+\index{get\-User@{get\-User}!Database@{Database}}
+\subsubsection[{get\-User}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User} $\ast$ Database\-::get\-User (
+\begin{DoxyParamCaption}
+\item[{string}]{key}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_ab5c56d4cc97bc85dc533ba5f8343fcb1}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the username \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to \hyperlink{classUser}{User} in database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_ab2c80b0b673fb1f3245e1b830e697326}{\index{Database@{Database}!get\-Users@{get\-Users}}
+\index{get\-Users@{get\-Users}!Database@{Database}}
+\subsubsection[{get\-Users}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf User} $\ast$ $>$ Database\-::get\-Users (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_ab2c80b0b673fb1f3245e1b830e697326}
+\begin{DoxyReturn}{Returns}
+a vector of pointers to the users in the database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a6a64633ab53686e26c2bde4e1507064a}{\index{Database@{Database}!get\-Users\-Json\-String@{get\-Users\-Json\-String}}
+\index{get\-Users\-Json\-String@{get\-Users\-Json\-String}!Database@{Database}}
+\subsubsection[{get\-Users\-Json\-String}]{\setlength{\rightskip}{0pt plus 5cm}string Database\-::get\-Users\-Json\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a6a64633ab53686e26c2bde4e1507064a}
+\begin{DoxyReturn}{Returns}
+a json string of all the users in the database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_af424a8f65d8f6be861c891246dc0f9d9}{\index{Database@{Database}!get\-Users\-Json\-Value@{get\-Users\-Json\-Value}}
+\index{get\-Users\-Json\-Value@{get\-Users\-Json\-Value}!Database@{Database}}
+\subsubsection[{get\-Users\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value Database\-::get\-Users\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_af424a8f65d8f6be861c891246dc0f9d9}
+\begin{DoxyReturn}{Returns}
+a json value of all the users in the database 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a03b8b9b0fc9661a8f4cdf095486b1efa}{\index{Database@{Database}!put@{put}}
+\index{put@{put}!Database@{Database}}
+\subsubsection[{put}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::put (
+\begin{DoxyParamCaption}
+\item[{Column\-Family\-Handle $\ast$}]{cf\-Handle, }
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a03b8b9b0fc9661a8f4cdf095486b1efa}
+
+\begin{DoxyParams}{Parameters}
+{\em cf\-Handle} & the Column\-Family\-Handler of key-\/value \\
+\hline
+{\em key} & the key \\
+\hline
+{\em value} & to persist \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if O\-K, false if not O\-K 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a039739d8784bd2d050a5132c7b42c289}{\index{Database@{Database}!put@{put}}
+\index{put@{put}!Database@{Database}}
+\subsubsection[{put}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::put (
+\begin{DoxyParamCaption}
+\item[{string}]{key, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a039739d8784bd2d050a5132c7b42c289}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & from key-\/value to persist in the database \\
+\hline
+{\em value} & from key-\/value to persist in the database \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if O\-K, false if not O\-K 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a691f379438eeb46f1557ade969e15564}{\index{Database@{Database}!save\-Conversation@{save\-Conversation}}
+\index{save\-Conversation@{save\-Conversation}!Database@{Database}}
+\subsubsection[{save\-Conversation}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::save\-Conversation (
+\begin{DoxyParamCaption}
+\item[{{\bf Conversation} $\ast$}]{conv}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a691f379438eeb46f1557ade969e15564}
+
+\begin{DoxyParams}{Parameters}
+{\em conv} & a pointer to the conversation to save in database \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if O\-K, false if not O\-K 
+\end{DoxyReturn}
+\hypertarget{classDatabase_aedececaa0011428707df6792296d9e13}{\index{Database@{Database}!save\-Message@{save\-Message}}
+\index{save\-Message@{save\-Message}!Database@{Database}}
+\subsubsection[{save\-Message}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::save\-Message (
+\begin{DoxyParamCaption}
+\item[{{\bf Message} $\ast$}]{m}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_aedececaa0011428707df6792296d9e13}
+
+\begin{DoxyParams}{Parameters}
+{\em m} & a pointer to the message to persist in the database \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if O\-K, false if not O\-K 
+\end{DoxyReturn}
+\hypertarget{classDatabase_a773b34557b1875cfa887597a4e4f5c8a}{\index{Database@{Database}!save\-User@{save\-User}}
+\index{save\-User@{save\-User}!Database@{Database}}
+\subsubsection[{save\-User}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::save\-User (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{user}
+\end{DoxyParamCaption}
+)}}\label{classDatabase_a773b34557b1875cfa887597a4e4f5c8a}
+
+\begin{DoxyParams}{Parameters}
+{\em user} & a pointer to \hyperlink{classUser}{User} to persist in the database \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if O\-K, false if not O\-K 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Database.\-h\item 
+Database.\-cpp\end{DoxyCompactItemize}

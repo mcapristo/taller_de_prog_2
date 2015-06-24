@@ -1,0 +1,384 @@
+\hypertarget{classUser}{\section{User Class Reference}
+\label{classUser}\index{User@{User}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classUser_a79cb2c4bc5ad9221a6e55b6a0981a27e}{User} (string username)
+\item 
+string \hyperlink{classUser_adb316ac38d5f62a967686e7b736a0469}{get\-Name} ()
+\item 
+void \hyperlink{classUser_ac44eb16e566dd060399e8f87ceec3fac}{set\-Name} (const string \&name)
+\item 
+bool \hyperlink{classUser_a73952dc0320736f3532e0037ae27cfef}{is\-Online} ()
+\item 
+void \hyperlink{classUser_a9cbe82e7191959323c3d380b6e78bf33}{set\-Online} (bool online)
+\item 
+string \hyperlink{classUser_a090eb9ee354cc25b2e8240b714b39d64}{get\-Password} ()
+\item 
+void \hyperlink{classUser_a00ba1579772decc59ab7f97bc262ce4a}{set\-Password} (const string \&password)
+\item 
+string \hyperlink{classUser_a5705c32c347050449ba6d72f32f18482}{get\-Username} ()
+\item 
+string \hyperlink{classUser_a700372bc6d19cbac725465de917b38a3}{get\-Token} ()
+\item 
+void \hyperlink{classUser_abc940c6478909bdf61acc5cfec24f189}{set\-Token} (string t)
+\item 
+string \hyperlink{classUser_abde67d56392ae39f8f9a47dae95f4220}{get\-Profile\-Image} ()
+\item 
+void \hyperlink{classUser_acc6da9f66ccdea972de126acadc3f69f}{set\-Profile\-Image} (string image)
+\item 
+double \hyperlink{classUser_a78ff4937b992a5a53c2fdc30be97507d}{get\-Latitud} ()
+\item 
+void \hyperlink{classUser_ad79d7b69bcf6e0b9070dcd539884d0f8}{set\-Latitud} (double latitud)
+\item 
+double \hyperlink{classUser_a811258c8bd9966d530297feb60619795}{get\-Longitud} ()
+\item 
+void \hyperlink{classUser_aafdb669757a37e09d56c412d69835144}{set\-Longitud} (double longitud)
+\item 
+string \hyperlink{classUser_a7d0456bd4a7f1a317e85fc3a58778541}{get\-Location} ()
+\item 
+void \hyperlink{classUser_aafccf6cd7fb08acde087389892d03f24}{set\-Location} (string location)
+\item 
+string \hyperlink{classUser_a70692f9ab9740a20d62f7086c4741e54}{get\-Checkin\-Datetime} ()
+\item 
+void \hyperlink{classUser_a3147b802b9e598b1d191b983115fefef}{set\-Checkin\-Datetime} (string datetime)
+\item 
+string \hyperlink{classUser_a92940ade2055d4582e847abb755eeef2}{get\-Last\-Activity\-Datetime} ()
+\item 
+void \hyperlink{classUser_a969006ba369cf770f0b23fb836033226}{set\-Last\-Activity\-Datetime} (string datetime)
+\item 
+void \hyperlink{classUser_a42fc61851c865d8e9e0a02dd6d794553}{login} ()
+\item 
+void \hyperlink{classUser_ade7eb5acf5097892168086ceed504ab3}{logout} ()
+\item 
+void \hyperlink{classUser_a416c9c7d90055844050106aa5b493471}{update\-User} (Json\-::\-Value val)
+\item 
+Json\-::\-Value \hyperlink{classUser_a130b4d4f3ba0a1641af4ad68f70e8711}{to\-Json\-Value} ()
+\item 
+string \hyperlink{classUser_aabc2c7838ee6a9950999112b45f657b7}{to\-Json\-String} ()
+\item 
+Json\-::\-Value \hyperlink{classUser_a7afe8d1e03e893b4da768773d4f444f8}{get\-User\-Profile\-Json\-Value} ()
+\item 
+Json\-::\-Value \hyperlink{classUser_a0bfa5d8db0a33ba1f8f69f617d697783}{get\-User\-Login\-Profile\-Json\-Value} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classUser_a79cb2c4bc5ad9221a6e55b6a0981a27e}{\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\subsubsection[{User}]{\setlength{\rightskip}{0pt plus 5cm}User\-::\-User (
+\begin{DoxyParamCaption}
+\item[{string}]{username}
+\end{DoxyParamCaption}
+)}}\label{classUser_a79cb2c4bc5ad9221a6e55b6a0981a27e}
+
+\begin{DoxyParams}{Parameters}
+{\em username} & of the user as a string \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classUser_a70692f9ab9740a20d62f7086c4741e54}{\index{User@{User}!get\-Checkin\-Datetime@{get\-Checkin\-Datetime}}
+\index{get\-Checkin\-Datetime@{get\-Checkin\-Datetime}!User@{User}}
+\subsubsection[{get\-Checkin\-Datetime}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Checkin\-Datetime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a70692f9ab9740a20d62f7086c4741e54}
+\begin{DoxyReturn}{Returns}
+a string 
+\end{DoxyReturn}
+\hypertarget{classUser_a92940ade2055d4582e847abb755eeef2}{\index{User@{User}!get\-Last\-Activity\-Datetime@{get\-Last\-Activity\-Datetime}}
+\index{get\-Last\-Activity\-Datetime@{get\-Last\-Activity\-Datetime}!User@{User}}
+\subsubsection[{get\-Last\-Activity\-Datetime}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Last\-Activity\-Datetime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a92940ade2055d4582e847abb755eeef2}
+\begin{DoxyReturn}{Returns}
+a string 
+\end{DoxyReturn}
+\hypertarget{classUser_a78ff4937b992a5a53c2fdc30be97507d}{\index{User@{User}!get\-Latitud@{get\-Latitud}}
+\index{get\-Latitud@{get\-Latitud}!User@{User}}
+\subsubsection[{get\-Latitud}]{\setlength{\rightskip}{0pt plus 5cm}double User\-::get\-Latitud (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a78ff4937b992a5a53c2fdc30be97507d}
+\begin{DoxyReturn}{Returns}
+a double 
+\end{DoxyReturn}
+\hypertarget{classUser_a7d0456bd4a7f1a317e85fc3a58778541}{\index{User@{User}!get\-Location@{get\-Location}}
+\index{get\-Location@{get\-Location}!User@{User}}
+\subsubsection[{get\-Location}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Location (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a7d0456bd4a7f1a317e85fc3a58778541}
+\begin{DoxyReturn}{Returns}
+a string with the location 
+\end{DoxyReturn}
+\hypertarget{classUser_a811258c8bd9966d530297feb60619795}{\index{User@{User}!get\-Longitud@{get\-Longitud}}
+\index{get\-Longitud@{get\-Longitud}!User@{User}}
+\subsubsection[{get\-Longitud}]{\setlength{\rightskip}{0pt plus 5cm}double User\-::get\-Longitud (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a811258c8bd9966d530297feb60619795}
+\begin{DoxyReturn}{Returns}
+a double 
+\end{DoxyReturn}
+\hypertarget{classUser_adb316ac38d5f62a967686e7b736a0469}{\index{User@{User}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!User@{User}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_adb316ac38d5f62a967686e7b736a0469}
+\begin{DoxyReturn}{Returns}
+a string with the name of the user 
+\end{DoxyReturn}
+\hypertarget{classUser_a090eb9ee354cc25b2e8240b714b39d64}{\index{User@{User}!get\-Password@{get\-Password}}
+\index{get\-Password@{get\-Password}!User@{User}}
+\subsubsection[{get\-Password}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Password (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a090eb9ee354cc25b2e8240b714b39d64}
+\begin{DoxyReturn}{Returns}
+the password of the user as string 
+\end{DoxyReturn}
+\hypertarget{classUser_abde67d56392ae39f8f9a47dae95f4220}{\index{User@{User}!get\-Profile\-Image@{get\-Profile\-Image}}
+\index{get\-Profile\-Image@{get\-Profile\-Image}!User@{User}}
+\subsubsection[{get\-Profile\-Image}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Profile\-Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_abde67d56392ae39f8f9a47dae95f4220}
+\begin{DoxyReturn}{Returns}
+a string of the profile image encoded 
+\end{DoxyReturn}
+\hypertarget{classUser_a700372bc6d19cbac725465de917b38a3}{\index{User@{User}!get\-Token@{get\-Token}}
+\index{get\-Token@{get\-Token}!User@{User}}
+\subsubsection[{get\-Token}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Token (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a700372bc6d19cbac725465de917b38a3}
+\begin{DoxyReturn}{Returns}
+a string with the token of the user. 
+\end{DoxyReturn}
+\hypertarget{classUser_a0bfa5d8db0a33ba1f8f69f617d697783}{\index{User@{User}!get\-User\-Login\-Profile\-Json\-Value@{get\-User\-Login\-Profile\-Json\-Value}}
+\index{get\-User\-Login\-Profile\-Json\-Value@{get\-User\-Login\-Profile\-Json\-Value}!User@{User}}
+\subsubsection[{get\-User\-Login\-Profile\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value User\-::get\-User\-Login\-Profile\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a0bfa5d8db0a33ba1f8f69f617d697783}
+\begin{DoxyReturn}{Returns}
+a Json\-::\-Value with all the attributes of the user but not the password 
+\end{DoxyReturn}
+\hypertarget{classUser_a5705c32c347050449ba6d72f32f18482}{\index{User@{User}!get\-Username@{get\-Username}}
+\index{get\-Username@{get\-Username}!User@{User}}
+\subsubsection[{get\-Username}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::get\-Username (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a5705c32c347050449ba6d72f32f18482}
+\begin{DoxyReturn}{Returns}
+a string with the username 
+\end{DoxyReturn}
+\hypertarget{classUser_a7afe8d1e03e893b4da768773d4f444f8}{\index{User@{User}!get\-User\-Profile\-Json\-Value@{get\-User\-Profile\-Json\-Value}}
+\index{get\-User\-Profile\-Json\-Value@{get\-User\-Profile\-Json\-Value}!User@{User}}
+\subsubsection[{get\-User\-Profile\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value User\-::get\-User\-Profile\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a7afe8d1e03e893b4da768773d4f444f8}
+\begin{DoxyReturn}{Returns}
+a Json\-::\-Value with the attributes of the user but not the password or the token 
+\end{DoxyReturn}
+\hypertarget{classUser_a73952dc0320736f3532e0037ae27cfef}{\index{User@{User}!is\-Online@{is\-Online}}
+\index{is\-Online@{is\-Online}!User@{User}}
+\subsubsection[{is\-Online}]{\setlength{\rightskip}{0pt plus 5cm}bool User\-::is\-Online (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a73952dc0320736f3532e0037ae27cfef}
+\begin{DoxyReturn}{Returns}
+a bool that says if the user is online 
+\end{DoxyReturn}
+\hypertarget{classUser_a42fc61851c865d8e9e0a02dd6d794553}{\index{User@{User}!login@{login}}
+\index{login@{login}!User@{User}}
+\subsubsection[{login}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::login (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a42fc61851c865d8e9e0a02dd6d794553}
+sets the token and the online to true \hypertarget{classUser_ade7eb5acf5097892168086ceed504ab3}{\index{User@{User}!logout@{logout}}
+\index{logout@{logout}!User@{User}}
+\subsubsection[{logout}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::logout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_ade7eb5acf5097892168086ceed504ab3}
+deletes the token and sets the online to false \hypertarget{classUser_a3147b802b9e598b1d191b983115fefef}{\index{User@{User}!set\-Checkin\-Datetime@{set\-Checkin\-Datetime}}
+\index{set\-Checkin\-Datetime@{set\-Checkin\-Datetime}!User@{User}}
+\subsubsection[{set\-Checkin\-Datetime}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Checkin\-Datetime (
+\begin{DoxyParamCaption}
+\item[{string}]{datetime}
+\end{DoxyParamCaption}
+)}}\label{classUser_a3147b802b9e598b1d191b983115fefef}
+
+\begin{DoxyParams}{Parameters}
+{\em datetime} & as a string \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_a969006ba369cf770f0b23fb836033226}{\index{User@{User}!set\-Last\-Activity\-Datetime@{set\-Last\-Activity\-Datetime}}
+\index{set\-Last\-Activity\-Datetime@{set\-Last\-Activity\-Datetime}!User@{User}}
+\subsubsection[{set\-Last\-Activity\-Datetime}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Last\-Activity\-Datetime (
+\begin{DoxyParamCaption}
+\item[{string}]{datetime}
+\end{DoxyParamCaption}
+)}}\label{classUser_a969006ba369cf770f0b23fb836033226}
+
+\begin{DoxyParams}{Parameters}
+{\em datetime} & as a string \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_ad79d7b69bcf6e0b9070dcd539884d0f8}{\index{User@{User}!set\-Latitud@{set\-Latitud}}
+\index{set\-Latitud@{set\-Latitud}!User@{User}}
+\subsubsection[{set\-Latitud}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Latitud (
+\begin{DoxyParamCaption}
+\item[{double}]{latitud}
+\end{DoxyParamCaption}
+)}}\label{classUser_ad79d7b69bcf6e0b9070dcd539884d0f8}
+
+\begin{DoxyParams}{Parameters}
+{\em latitud} & a double \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_aafccf6cd7fb08acde087389892d03f24}{\index{User@{User}!set\-Location@{set\-Location}}
+\index{set\-Location@{set\-Location}!User@{User}}
+\subsubsection[{set\-Location}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Location (
+\begin{DoxyParamCaption}
+\item[{string}]{location}
+\end{DoxyParamCaption}
+)}}\label{classUser_aafccf6cd7fb08acde087389892d03f24}
+
+\begin{DoxyParams}{Parameters}
+{\em location} & as a string also change the checkindatetime \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_aafdb669757a37e09d56c412d69835144}{\index{User@{User}!set\-Longitud@{set\-Longitud}}
+\index{set\-Longitud@{set\-Longitud}!User@{User}}
+\subsubsection[{set\-Longitud}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Longitud (
+\begin{DoxyParamCaption}
+\item[{double}]{longitud}
+\end{DoxyParamCaption}
+)}}\label{classUser_aafdb669757a37e09d56c412d69835144}
+
+\begin{DoxyParams}{Parameters}
+{\em longitud} & a double \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_ac44eb16e566dd060399e8f87ceec3fac}{\index{User@{User}!set\-Name@{set\-Name}}
+\index{set\-Name@{set\-Name}!User@{User}}
+\subsubsection[{set\-Name}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Name (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name}
+\end{DoxyParamCaption}
+)}}\label{classUser_ac44eb16e566dd060399e8f87ceec3fac}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & a string with the name of the user \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_a9cbe82e7191959323c3d380b6e78bf33}{\index{User@{User}!set\-Online@{set\-Online}}
+\index{set\-Online@{set\-Online}!User@{User}}
+\subsubsection[{set\-Online}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Online (
+\begin{DoxyParamCaption}
+\item[{bool}]{online}
+\end{DoxyParamCaption}
+)}}\label{classUser_a9cbe82e7191959323c3d380b6e78bf33}
+
+\begin{DoxyParams}{Parameters}
+{\em online} & a bool that says if the user is online \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_a00ba1579772decc59ab7f97bc262ce4a}{\index{User@{User}!set\-Password@{set\-Password}}
+\index{set\-Password@{set\-Password}!User@{User}}
+\subsubsection[{set\-Password}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Password (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{password}
+\end{DoxyParamCaption}
+)}}\label{classUser_a00ba1579772decc59ab7f97bc262ce4a}
+
+\begin{DoxyParams}{Parameters}
+{\em password} & a string with the password of the user \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_acc6da9f66ccdea972de126acadc3f69f}{\index{User@{User}!set\-Profile\-Image@{set\-Profile\-Image}}
+\index{set\-Profile\-Image@{set\-Profile\-Image}!User@{User}}
+\subsubsection[{set\-Profile\-Image}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Profile\-Image (
+\begin{DoxyParamCaption}
+\item[{string}]{image}
+\end{DoxyParamCaption}
+)}}\label{classUser_acc6da9f66ccdea972de126acadc3f69f}
+
+\begin{DoxyParams}{Parameters}
+{\em image} & a string of the profile image encoded \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_abc940c6478909bdf61acc5cfec24f189}{\index{User@{User}!set\-Token@{set\-Token}}
+\index{set\-Token@{set\-Token}!User@{User}}
+\subsubsection[{set\-Token}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::set\-Token (
+\begin{DoxyParamCaption}
+\item[{string}]{t}
+\end{DoxyParamCaption}
+)}}\label{classUser_abc940c6478909bdf61acc5cfec24f189}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the token of the user as a string \\
+\hline
+\end{DoxyParams}
+\hypertarget{classUser_aabc2c7838ee6a9950999112b45f657b7}{\index{User@{User}!to\-Json\-String@{to\-Json\-String}}
+\index{to\-Json\-String@{to\-Json\-String}!User@{User}}
+\subsubsection[{to\-Json\-String}]{\setlength{\rightskip}{0pt plus 5cm}string User\-::to\-Json\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_aabc2c7838ee6a9950999112b45f657b7}
+\begin{DoxyReturn}{Returns}
+a json string that represents the user 
+\end{DoxyReturn}
+\hypertarget{classUser_a130b4d4f3ba0a1641af4ad68f70e8711}{\index{User@{User}!to\-Json\-Value@{to\-Json\-Value}}
+\index{to\-Json\-Value@{to\-Json\-Value}!User@{User}}
+\subsubsection[{to\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value User\-::to\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classUser_a130b4d4f3ba0a1641af4ad68f70e8711}
+\begin{DoxyReturn}{Returns}
+a Json\-::\-Value that represents the user 
+\end{DoxyReturn}
+\hypertarget{classUser_a416c9c7d90055844050106aa5b493471}{\index{User@{User}!update\-User@{update\-User}}
+\index{update\-User@{update\-User}!User@{User}}
+\subsubsection[{update\-User}]{\setlength{\rightskip}{0pt plus 5cm}void User\-::update\-User (
+\begin{DoxyParamCaption}
+\item[{Json\-::\-Value}]{val}
+\end{DoxyParamCaption}
+)}}\label{classUser_a416c9c7d90055844050106aa5b493471}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & Json\-::\-Value with the attributes to change to this user. only the following attributes can be changed name, profile\-Image, password, online, latitud, longitud, location, checkin\-Datetime, last\-Activity\-Datetime \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+User.\-h\item 
+User.\-cpp\end{DoxyCompactItemize}

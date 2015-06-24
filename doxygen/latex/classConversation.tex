@@ -1,0 +1,144 @@
+\hypertarget{classConversation}{\section{Conversation Class Reference}
+\label{classConversation}\index{Conversation@{Conversation}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classConversation_ab64539442a54ad2ec13ac6a2c96fbdb5}{Conversation} (\hyperlink{classUser}{User} $\ast$u1, \hyperlink{classUser}{User} $\ast$u2)
+\item 
+\hyperlink{classConversation_a3305fc4a6176efc4510cffdadaf6a06b}{Conversation} (Json\-::\-Value value)
+\item 
+int \hyperlink{classConversation_a49ea25c1667b404479e6c29f2e4a8131}{get\-Total\-Messages} ()
+\item 
+void \hyperlink{classConversation_a023f83bc82e30bb4f4d05c3c30f1fc5f}{increase\-Total\-Messages} ()
+\item 
+string \hyperlink{classConversation_a04e61e4681af04d8cbdfaa9f49d3afbb}{to\-Json\-String} ()
+\item 
+Json\-::\-Value \hyperlink{classConversation_ac678ee1c2ad16c5a3dcde17251554b0f}{to\-Json\-Value} ()
+\item 
+void \hyperlink{classConversation_ad86b9d0178dcfa8e4c0723bc731bc610}{set\-Id} (string)
+\item 
+string \hyperlink{classConversation_a2cc67fce061706317657e57f7a5f8eae}{get\-Id} ()
+\item 
+\hyperlink{classUser}{User} $\ast$ \hyperlink{classConversation_a7ded9cbde983c07a4ac9cbe14fb83d5a}{get\-First\-User} ()
+\item 
+\hyperlink{classUser}{User} $\ast$ \hyperlink{classConversation_a042cb1108fcdfc1dccc5ba795198b03f}{get\-Second\-User} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classConversation_ab64539442a54ad2ec13ac6a2c96fbdb5}{\index{Conversation@{Conversation}!Conversation@{Conversation}}
+\index{Conversation@{Conversation}!Conversation@{Conversation}}
+\subsubsection[{Conversation}]{\setlength{\rightskip}{0pt plus 5cm}Conversation\-::\-Conversation (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{u1, }
+\item[{{\bf User} $\ast$}]{u2}
+\end{DoxyParamCaption}
+)}}\label{classConversation_ab64539442a54ad2ec13ac6a2c96fbdb5}
+
+\begin{DoxyParams}{Parameters}
+{\em u1} & One user in the conversation \\
+\hline
+{\em u2} & The other user in the conversation \\
+\hline
+\end{DoxyParams}
+\hypertarget{classConversation_a3305fc4a6176efc4510cffdadaf6a06b}{\index{Conversation@{Conversation}!Conversation@{Conversation}}
+\index{Conversation@{Conversation}!Conversation@{Conversation}}
+\subsubsection[{Conversation}]{\setlength{\rightskip}{0pt plus 5cm}Conversation\-::\-Conversation (
+\begin{DoxyParamCaption}
+\item[{Json\-::\-Value}]{value}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a3305fc4a6176efc4510cffdadaf6a06b}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A Json\-::\-Value that represents the conversation \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classConversation_a7ded9cbde983c07a4ac9cbe14fb83d5a}{\index{Conversation@{Conversation}!get\-First\-User@{get\-First\-User}}
+\index{get\-First\-User@{get\-First\-User}!Conversation@{Conversation}}
+\subsubsection[{get\-First\-User}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User} $\ast$ Conversation\-::get\-First\-User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a7ded9cbde983c07a4ac9cbe14fb83d5a}
+\begin{DoxyReturn}{Returns}
+One of the users 
+\end{DoxyReturn}
+\hypertarget{classConversation_a2cc67fce061706317657e57f7a5f8eae}{\index{Conversation@{Conversation}!get\-Id@{get\-Id}}
+\index{get\-Id@{get\-Id}!Conversation@{Conversation}}
+\subsubsection[{get\-Id}]{\setlength{\rightskip}{0pt plus 5cm}string Conversation\-::get\-Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a2cc67fce061706317657e57f7a5f8eae}
+\begin{DoxyReturn}{Returns}
+The id of the conversation 
+\end{DoxyReturn}
+\hypertarget{classConversation_a042cb1108fcdfc1dccc5ba795198b03f}{\index{Conversation@{Conversation}!get\-Second\-User@{get\-Second\-User}}
+\index{get\-Second\-User@{get\-Second\-User}!Conversation@{Conversation}}
+\subsubsection[{get\-Second\-User}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User} $\ast$ Conversation\-::get\-Second\-User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a042cb1108fcdfc1dccc5ba795198b03f}
+\begin{DoxyReturn}{Returns}
+One of the users 
+\end{DoxyReturn}
+\hypertarget{classConversation_a49ea25c1667b404479e6c29f2e4a8131}{\index{Conversation@{Conversation}!get\-Total\-Messages@{get\-Total\-Messages}}
+\index{get\-Total\-Messages@{get\-Total\-Messages}!Conversation@{Conversation}}
+\subsubsection[{get\-Total\-Messages}]{\setlength{\rightskip}{0pt plus 5cm}int Conversation\-::get\-Total\-Messages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a49ea25c1667b404479e6c29f2e4a8131}
+\begin{DoxyReturn}{Returns}
+total\-\_\-messages in conversation as int 
+\end{DoxyReturn}
+\hypertarget{classConversation_a023f83bc82e30bb4f4d05c3c30f1fc5f}{\index{Conversation@{Conversation}!increase\-Total\-Messages@{increase\-Total\-Messages}}
+\index{increase\-Total\-Messages@{increase\-Total\-Messages}!Conversation@{Conversation}}
+\subsubsection[{increase\-Total\-Messages}]{\setlength{\rightskip}{0pt plus 5cm}void Conversation\-::increase\-Total\-Messages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a023f83bc82e30bb4f4d05c3c30f1fc5f}
+Increase total\-\_\-messages by 1 \hypertarget{classConversation_ad86b9d0178dcfa8e4c0723bc731bc610}{\index{Conversation@{Conversation}!set\-Id@{set\-Id}}
+\index{set\-Id@{set\-Id}!Conversation@{Conversation}}
+\subsubsection[{set\-Id}]{\setlength{\rightskip}{0pt plus 5cm}void Conversation\-::set\-Id (
+\begin{DoxyParamCaption}
+\item[{string}]{id}
+\end{DoxyParamCaption}
+)}}\label{classConversation_ad86b9d0178dcfa8e4c0723bc731bc610}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \-: The id of the conversation \\
+\hline
+\end{DoxyParams}
+\hypertarget{classConversation_a04e61e4681af04d8cbdfaa9f49d3afbb}{\index{Conversation@{Conversation}!to\-Json\-String@{to\-Json\-String}}
+\index{to\-Json\-String@{to\-Json\-String}!Conversation@{Conversation}}
+\subsubsection[{to\-Json\-String}]{\setlength{\rightskip}{0pt plus 5cm}string Conversation\-::to\-Json\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_a04e61e4681af04d8cbdfaa9f49d3afbb}
+\begin{DoxyReturn}{Returns}
+The conversation as a json string 
+\end{DoxyReturn}
+\hypertarget{classConversation_ac678ee1c2ad16c5a3dcde17251554b0f}{\index{Conversation@{Conversation}!to\-Json\-Value@{to\-Json\-Value}}
+\index{to\-Json\-Value@{to\-Json\-Value}!Conversation@{Conversation}}
+\subsubsection[{to\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Json\-::\-Value Conversation\-::to\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classConversation_ac678ee1c2ad16c5a3dcde17251554b0f}
+\begin{DoxyReturn}{Returns}
+The conversation as a Json\-::\-Value 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Conversation.\-h\item 
+Conversation.\-cpp\end{DoxyCompactItemize}
