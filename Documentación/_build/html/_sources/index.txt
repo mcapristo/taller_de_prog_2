@@ -407,14 +407,40 @@ Una vez que querramos desloguearnos de la aplicación desde la opción "Cerrar S
 Known issues
 --------------------------------------------
 
-+ Cuando se cambia la foto de perfil por una existente en la galeria, en ciertas ocasiones esta foto aparece rotada.
-+ Cuando se gira el celular para utilizarlo de forma horizontal, algunos controles quedan desfasados.
-+ En celulares de pantalla pequeña (aproximadamente 3.5 pulgadas) los botones de "Volver" y "Guardar" del menú de "Editar perfil" no aparecen, también la palabra "Password" aparece cortada.
+1. Cuando se cambia la foto de perfil por una existente en la galeria, en ciertas ocasiones esta foto aparece rotada.
+2. Cuando se gira el celular para utilizarlo de forma horizontal, algunos controles quedan desfasados.
+3. En celulares de pantalla pequeña (aproximadamente 3.5 pulgadas) los botones de "Volver" y "Guardar" del menú de "Editar perfil" no aparecen, también la palabra "Password" aparece cortada.
 
 
 
 Troubleshooting
 --------------------------------------------
+
+1. Cambiar nuevamente la foto hasta que parezca correctamente.
+2. La mala apariencia de los botones no dificulta el funcionamiento de la aplicación, seguir usándola normalmente, en caso de tener un inconveniente por falta de algún botón ó ubicación indebida, volver el teléfono de manera vertical.
+
+Testing realizado
+--------------------------------------------
+Para recrear el uso normal y final de la aplicación se invitó a varios amigos que se la instalen y prueben.
+El resultado fue muy positivo dado que al no conocer que estaba permitido la utilizaron de varias maneras.
+Cabe destacar que el servidor en ningún momento se cayó ni devolvió datos incorrectos.
+
+Dentro de los test que pudimos apreciar destacamos:
+	a. Envío de emoticones.
+	b. Rotación y uso de la aplicación con el celular en horizontal.
+	c. Registración simultanea de usuarios.
+	d. Editar perfiles de usuario con diversas imágenes de la galería.
+	e. Uso en simultaneo del envío de chats comunes como chats por difusión.
+
+Modelos de celulares testeados:
+	a. Huawei Y300
+	b. Motorola E
+	c. Nexus 4
+	d. Samsung Galaxy S3 mini
+	e. Samsung Galaxy Fame
+	f. Samsung Galaxy Fame Lite
+	g. Samsung Galaxy Win
+	h. Sony Xperia Z3
 
 Documentación de administrador
 ============================================
