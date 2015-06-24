@@ -15,12 +15,23 @@ UserFactory::~UserFactory() {
 
 }
 
+/**
+ *
+ * @param username a string
+ * @param password a string
+ * @return a pointer to the created user
+ */
 User* UserFactory::createUser(string username, string password){
 	User* u = new User(username);
 	u->setPassword(password);
 	return u;
 }
 
+/**
+ *
+ * @param value a Json::Value that represents the suer
+ * @return a pointer to the user created
+ */
 User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	string username = value.get("username","").asString();
 	string password = value.get("password", "").asString();
@@ -48,6 +59,11 @@ User* UserFactory::createUserFromJsonValue(Json::Value value) {
 	return u;
 }
 
+/**
+ *
+ * @param json a json string that represents the user
+ * @return a pointer to the user created
+ */
 User* UserFactory::createUserFromJsonString(string json) {
 	Json::Reader r = Json::Reader();
 	Json::Value val = Json::Value();

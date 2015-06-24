@@ -7,7 +7,11 @@
 
 #include "MessageFactory.h"
 
-
+/**
+ *
+ * @param value a Json::Value that represents the message
+ * @return a pointer to the message
+ */
 Message* MessageFactory::createMessage(Json::Value value){
 	string emisor = value.get("emisor","").asString();
 	string receptor = value.get("receptor", "").asString();

@@ -6,7 +6,11 @@
  */
 
 #include "Conversation.h"
-
+/**
+ *
+ * @param u1 One user in the conversation
+ * @param u2 The other user in the conversation
+ */
 Conversation::Conversation(User* u1, User* u2) {
 	this->user1 = u1;
 	this->user2 = u2;
@@ -14,6 +18,10 @@ Conversation::Conversation(User* u1, User* u2) {
 	this->id = "";
 }
 
+/**
+ *
+ * @param value A Json::Value that represents the conversation
+ */
 Conversation::Conversation(Json::Value value){
 	string u1 = value.get("user1","").asString();
 	string u2 = value.get("user2", "").asString();
@@ -26,25 +34,43 @@ Conversation::Conversation(Json::Value value){
 }
 
 Conversation::~Conversation() {
-
 }
 
+/**
+ *
+ * @return total_messages in conversation as int
+ */
 int Conversation::getTotalMessages(){
 	return this->total_messages;
 }
 
+/**
+ * Increase total_messages by 1
+ */
 void Conversation::increaseTotalMessages(){
 	this->total_messages ++;
 }
 
+/**
+ *
+ * @return One of the users
+ */
 User* Conversation::getFirstUser(){
 	return this->user1;
 }
 
+/**
+ *
+ * @return One of the users
+ */
 User* Conversation::getSecondUser(){
 	return this->user2;
 }
 
+/**
+ *
+ * @return The conversation as a Json::Value
+ */
 Json::Value Conversation::toJsonValue(){
 	Json::Value value(Json::objectValue);
 	value["user1"] = this->user1->getUsername();
@@ -54,14 +80,26 @@ Json::Value Conversation::toJsonValue(){
 	return value;
 }
 
+/**
+ *
+ * @param id : The id of the conversation
+ */
 void Conversation::setId(string id){
 	this->id = id;
 }
 
+/**
+ *
+ * @return The id of the conversation
+ */
 string Conversation::getId(){
 	return this->id;
 }
 
+/**
+ *
+ * @return The conversation as a json string
+ */
 string Conversation::toJsonString(){
 	Json::StreamWriterBuilder builder;
 	builder.settings_["identation"] = "\t";
