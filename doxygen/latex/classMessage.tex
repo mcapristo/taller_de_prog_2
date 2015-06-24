@@ -1,0 +1,164 @@
+\hypertarget{classMessage}{\section{Message Class Reference}
+\label{classMessage}\index{Message@{Message}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMessage_a3d631e5f5506a662dbff5f8a4469b279}{Message} (\hyperlink{classUser}{User} $\ast$emisor, \hyperlink{classUser}{User} $\ast$receptor, string body)
+\item 
+\hyperlink{classMessage_a763bb4ea8a99e1630a6e73653b7ace0a}{Message} (Json\-::\-Value)
+\item 
+const string \& \hyperlink{classMessage_a1de1dc1dd23372bc59d35eb65122e990}{get\-Body} () const 
+\item 
+string \hyperlink{classMessage_af85a5ded7c2ecbb967233d8d8ab12a64}{get\-Datetime} () const 
+\item 
+\hyperlink{classUser}{User} $\ast$ \hyperlink{classMessage_a6ef2c26162ee365b1ea7cc409bd3309c}{get\-Emisor} ()
+\item 
+\hyperlink{classUser}{User} $\ast$ \hyperlink{classMessage_a09b657e492505dead601b2fb2b46603c}{get\-Receptor} ()
+\item 
+void \hyperlink{classMessage_a3b5192fefe4e3aecef9490c3453e320e}{set\-Receptor} (\hyperlink{classUser}{User} $\ast$u)
+\item 
+Value \hyperlink{classMessage_a3239717cb012db702953305a548ad39b}{to\-Json\-Value} ()
+\item 
+string \hyperlink{classMessage_afdf05aa8cf0c9fad537c281960215c13}{to\-Json\-String} ()
+\item 
+string \hyperlink{classMessage_aaaaaa629aa85124152901e258ceedd69}{get\-Id} ()
+\item 
+void \hyperlink{classMessage_a657cdc286b04496c023998937de8c893}{set\-Id} (string id)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classMessage_a3d631e5f5506a662dbff5f8a4469b279}{\index{Message@{Message}!Message@{Message}}
+\index{Message@{Message}!Message@{Message}}
+\subsubsection[{Message}]{\setlength{\rightskip}{0pt plus 5cm}Message\-::\-Message (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{emisor, }
+\item[{{\bf User} $\ast$}]{receptor, }
+\item[{string}]{body}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a3d631e5f5506a662dbff5f8a4469b279}
+
+\begin{DoxyParams}{Parameters}
+{\em emisor} & a pointer to the user that sends the message \\
+\hline
+{\em receptor} & a pointer to the user that receives the message \\
+\hline
+{\em body} & string. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classMessage_a763bb4ea8a99e1630a6e73653b7ace0a}{\index{Message@{Message}!Message@{Message}}
+\index{Message@{Message}!Message@{Message}}
+\subsubsection[{Message}]{\setlength{\rightskip}{0pt plus 5cm}Message\-::\-Message (
+\begin{DoxyParamCaption}
+\item[{Json\-::\-Value}]{value}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a763bb4ea8a99e1630a6e73653b7ace0a}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & a Json\-::\-Value that represents the message \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classMessage_a1de1dc1dd23372bc59d35eb65122e990}{\index{Message@{Message}!get\-Body@{get\-Body}}
+\index{get\-Body@{get\-Body}!Message@{Message}}
+\subsubsection[{get\-Body}]{\setlength{\rightskip}{0pt plus 5cm}const string \& Message\-::get\-Body (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classMessage_a1de1dc1dd23372bc59d35eb65122e990}
+\begin{DoxyReturn}{Returns}
+the body of the message as string 
+\end{DoxyReturn}
+\hypertarget{classMessage_af85a5ded7c2ecbb967233d8d8ab12a64}{\index{Message@{Message}!get\-Datetime@{get\-Datetime}}
+\index{get\-Datetime@{get\-Datetime}!Message@{Message}}
+\subsubsection[{get\-Datetime}]{\setlength{\rightskip}{0pt plus 5cm}string Message\-::get\-Datetime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classMessage_af85a5ded7c2ecbb967233d8d8ab12a64}
+\begin{DoxyReturn}{Returns}
+the datetime of the message as string 
+\end{DoxyReturn}
+\hypertarget{classMessage_a6ef2c26162ee365b1ea7cc409bd3309c}{\index{Message@{Message}!get\-Emisor@{get\-Emisor}}
+\index{get\-Emisor@{get\-Emisor}!Message@{Message}}
+\subsubsection[{get\-Emisor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User} $\ast$ Message\-::get\-Emisor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a6ef2c26162ee365b1ea7cc409bd3309c}
+\begin{DoxyReturn}{Returns}
+a pointer to the user that sends the message 
+\end{DoxyReturn}
+\hypertarget{classMessage_aaaaaa629aa85124152901e258ceedd69}{\index{Message@{Message}!get\-Id@{get\-Id}}
+\index{get\-Id@{get\-Id}!Message@{Message}}
+\subsubsection[{get\-Id}]{\setlength{\rightskip}{0pt plus 5cm}string Message\-::get\-Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMessage_aaaaaa629aa85124152901e258ceedd69}
+\begin{DoxyReturn}{Returns}
+a string that is the id of the message 
+\end{DoxyReturn}
+\hypertarget{classMessage_a09b657e492505dead601b2fb2b46603c}{\index{Message@{Message}!get\-Receptor@{get\-Receptor}}
+\index{get\-Receptor@{get\-Receptor}!Message@{Message}}
+\subsubsection[{get\-Receptor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User} $\ast$ Message\-::get\-Receptor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a09b657e492505dead601b2fb2b46603c}
+\begin{DoxyReturn}{Returns}
+a pointer to the user that receives the message 
+\end{DoxyReturn}
+\hypertarget{classMessage_a657cdc286b04496c023998937de8c893}{\index{Message@{Message}!set\-Id@{set\-Id}}
+\index{set\-Id@{set\-Id}!Message@{Message}}
+\subsubsection[{set\-Id}]{\setlength{\rightskip}{0pt plus 5cm}void Message\-::set\-Id (
+\begin{DoxyParamCaption}
+\item[{string}]{id}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a657cdc286b04496c023998937de8c893}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & a string that is the id of the message \\
+\hline
+\end{DoxyParams}
+\hypertarget{classMessage_a3b5192fefe4e3aecef9490c3453e320e}{\index{Message@{Message}!set\-Receptor@{set\-Receptor}}
+\index{set\-Receptor@{set\-Receptor}!Message@{Message}}
+\subsubsection[{set\-Receptor}]{\setlength{\rightskip}{0pt plus 5cm}void Message\-::set\-Receptor (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{u}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a3b5192fefe4e3aecef9490c3453e320e}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & a pointer to the user that receives the message \\
+\hline
+\end{DoxyParams}
+\hypertarget{classMessage_afdf05aa8cf0c9fad537c281960215c13}{\index{Message@{Message}!to\-Json\-String@{to\-Json\-String}}
+\index{to\-Json\-String@{to\-Json\-String}!Message@{Message}}
+\subsubsection[{to\-Json\-String}]{\setlength{\rightskip}{0pt plus 5cm}string Message\-::to\-Json\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMessage_afdf05aa8cf0c9fad537c281960215c13}
+\begin{DoxyReturn}{Returns}
+a json string of the message 
+\end{DoxyReturn}
+\hypertarget{classMessage_a3239717cb012db702953305a548ad39b}{\index{Message@{Message}!to\-Json\-Value@{to\-Json\-Value}}
+\index{to\-Json\-Value@{to\-Json\-Value}!Message@{Message}}
+\subsubsection[{to\-Json\-Value}]{\setlength{\rightskip}{0pt plus 5cm}Value Message\-::to\-Json\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classMessage_a3239717cb012db702953305a548ad39b}
+\begin{DoxyReturn}{Returns}
+a Json\-::\-Value of the message 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Message.\-h\item 
+Message.\-cpp\end{DoxyCompactItemize}
