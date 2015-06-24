@@ -120,6 +120,12 @@ Doc de Flujo entre Activities
 Doc de código
 --------------------------------------------
 `Aplicación mobile <../../javadocs/index.html>`_
+`Server <../../../doxygen/html/index.html>`_
+
+Doc de Clases (Server)
+--------------------------------------------
+
+.. image:: images/clases.png
 
 
 Doc de REST API
@@ -235,6 +241,7 @@ Rest API
 - Cobertura: gcov (https://gcc.gnu.org/onlinedocs/gcc/Gcov.html)
 	+ Nivel de cobertura (Line Coverage) : 97.5% (1505/1543)
 	+ Nivel de covertura (Function Coverage) : 97.8 %	(318/325)  
+	+ `Coverage <../../../coverage/html/index.html>`_
 
 
 Manual de usuario del cliente
