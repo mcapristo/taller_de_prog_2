@@ -274,6 +274,8 @@ Instalación y configuracón
 3. Desconectar el teléfono de la pc.
 4. Navegar a la carpeta que se copió la aplicación a partir del explorador de carpetas del teléfono.
 5. Presionar la aplicación y completar la acción mediante "Packege installer".
+	(En caso de que aparezca el siguiente mensaje de error "Por motivos de seguridad, su teléfono está configurado para bloquear la instalación de aplicaciones que no se hayan obtenido de Google Play.", ir a ajustes --> administración de dispositivo, fuentes desconocidas, permitir la instalación de aplicaciones de origenes distinitos a Play Store --> aceptar
+	Repetir los pasos a partir del paso 4.)
 6. Aceptar los terminos y condiciones.
 7. Ejecutar la aplicación.
 
@@ -405,7 +407,11 @@ Una vez que querramos desloguearnos de la aplicación desde la opción "Cerrar S
 Known issues
 --------------------------------------------
 
-+ Cuando cambio la foto de perfil por una existente en la galeria, en ciertas ocasiones esta sale rotada esta foto aparece rotada.
++ Cuando se cambia la foto de perfil por una existente en la galeria, en ciertas ocasiones esta foto aparece rotada.
++ Cuando se gira el celular para utilizarlo de forma horizontal, algunos controles quedan desfasados.
++ En celulares de pantalla pequeña (aproximadamente 3.5 pulgadas) los botones de "Volver" y "Guardar" del menú de "Editar perfil" no aparecen, también la palabra "Password" aparece cortada.
+
+
 
 Troubleshooting
 --------------------------------------------
