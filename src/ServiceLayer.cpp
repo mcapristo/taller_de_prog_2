@@ -33,6 +33,12 @@ Database* ServiceLayer::getDatabase(){
 	return this->db;
 }
 
+/**
+ *
+ * @param username
+ * @param password
+ * @return
+ */
 string ServiceLayer::login(string username, string password){
 	User* u = this->db->getUser(username);
 	Json::Value value = Json::Value();
@@ -54,6 +60,12 @@ string ServiceLayer::login(string username, string password){
 	return this->getDatabase()->getJsonStringFromValue(value);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @return
+ */
 string ServiceLayer::logout(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -71,6 +83,12 @@ string ServiceLayer::logout(string username, string token){
 	return this->getDatabase()->getJsonStringFromValue(value);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @return
+ */
 string ServiceLayer::validateToken(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -85,6 +103,12 @@ string ServiceLayer::validateToken(string username, string token){
 	return res;
 }
 
+/**
+ *
+ * @param u
+ * @param token
+ * @return
+ */
 string ServiceLayer::isValidToken(User* u, string token){
 	Json::Value value = Json::Value();
 	if (u == NULL){
@@ -104,6 +128,11 @@ string ServiceLayer::isValidToken(User* u, string token){
 	return "";
 }
 
+/**
+ *
+ * @param json
+ * @return
+ */
 string ServiceLayer::createUser(string json){
 	UserFactory uf = UserFactory();
 	Json::Value valueToReturn = Json::Value();
@@ -141,6 +170,13 @@ string ServiceLayer::createUser(string json){
 
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @param data
+ * @return
+ */
 string ServiceLayer::updateProfile(string username, string token, string data){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -170,6 +206,13 @@ string ServiceLayer::updateProfile(string username, string token, string data){
 	return this->getDatabase()->getJsonStringFromValue(ret);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @param jsonMessage
+ * @return
+ */
 string ServiceLayer::sendMessage(string username, string token, string jsonMessage){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -206,6 +249,12 @@ string ServiceLayer::sendMessage(string username, string token, string jsonMessa
 	return db->getJsonStringFromValue(rootValue);
 }
 
+/**
+ *
+ * @param sender
+ * @param m
+ * @return
+ */
 string ServiceLayer::sendDiffusionMessage(string sender, Message* m){
 	Json::Value rootValue = Json::Value();
 	rootValue["result"] = ServiceLayer::OK_STRING;
@@ -222,6 +271,12 @@ string ServiceLayer::sendDiffusionMessage(string sender, Message* m){
 	return this->db->getJsonStringFromValue(rootValue);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @return
+ */
 string ServiceLayer::getConversations(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -244,6 +299,13 @@ string ServiceLayer::getConversations(string username, string token){
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @param user2
+ * @return
+ */
 string ServiceLayer::getMessages(string username, string token, string user2){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -269,6 +331,13 @@ string ServiceLayer::getMessages(string username, string token, string user2){
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @param userToVisit
+ * @return
+ */
 string ServiceLayer::getUserProfile(string username, string token, string userToVisit){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);
@@ -290,6 +359,12 @@ string ServiceLayer::getUserProfile(string username, string token, string userTo
 	return this->getDatabase()->getJsonStringFromValue(rootValue);
 }
 
+/**
+ *
+ * @param username
+ * @param token
+ * @return
+ */
 string ServiceLayer::getUsersProfile(string username, string token){
 	User* u = this->getDatabase()->getUser(username);
 	string res = this->isValidToken(u,token);

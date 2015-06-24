@@ -14,6 +14,7 @@ Server::Server() {
 	this->logger = Loggero::getInstnce();
 }
 
+
 void Server::run(){
 	printf("To stop the server: kill -2 %d \n",getpid());
 	printf("Starting on port %s\n", mg_get_option(this->sv, "listening_port"));
@@ -25,6 +26,12 @@ void Server::run(){
 Server::~Server() {
 }
 
+/**
+ *
+ * @param conn
+ * @param ev
+ * @return
+ */
 int Server::eventHandlerCaller(mg_connection* conn, enum mg_event ev){
 	Server* s = (Server*) conn->server_param;
 	try{
@@ -37,6 +44,12 @@ int Server::eventHandlerCaller(mg_connection* conn, enum mg_event ev){
 
 }
 
+/**
+ *
+ * @param conn
+ * @param ev
+ * @return
+ */
 int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 	switch (ev) {
 		case MG_AUTH: return MG_TRUE;
@@ -93,6 +106,12 @@ int Server::ev_handler(mg_connection* conn, enum mg_event ev){
 	}
 }
 
+/**
+ *
+ * @param conn
+ * @param header
+ * @return
+ */
 string Server::readRequestHeader(mg_connection* conn, string header){
 	const char* headerPointer = mg_get_header(conn, header.c_str());
 	string h = "";
@@ -105,6 +124,11 @@ string Server::readRequestHeader(mg_connection* conn, string header){
 	return h;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleLogin(mg_connection* conn){
 	// cout<<"login"<<endl;
 	this->logger->log(1, "Login");
@@ -117,6 +141,11 @@ int Server::handleLogin(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleLogout(mg_connection* conn){
 	this->logger->log(Constants::INFO, "Logout");
 
@@ -128,6 +157,11 @@ int Server::handleLogout(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleValidateToken(mg_connection* conn){
 	this->logger->log(Constants::INFO, "ValidateLogin");
 
@@ -147,6 +181,11 @@ string createString(const char* c, size_t len){
 	return res;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 string Server::readRequestData(mg_connection* conn){
 	const char* data = conn->content;
 	size_t len = conn->content_len;
@@ -155,6 +194,11 @@ string Server::readRequestData(mg_connection* conn){
 	return d;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleCreateUser(mg_connection* conn){
 	// cout<<"create user"<<endl;
 	this->logger->log(Constants::INFO, "Create User");
@@ -166,6 +210,11 @@ int Server::handleCreateUser(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleUpdateUser(mg_connection* conn){
 	this->logger->log(Constants::INFO, "Update User");
 
@@ -178,6 +227,11 @@ int Server::handleUpdateUser(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleSendMessage(mg_connection* conn){
 	// cout<<"sendMessage"<<endl;
 	this->logger->log(1, "Send Message");
@@ -191,6 +245,11 @@ int Server::handleSendMessage(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleGetUsers(mg_connection* conn){
 	// cout<<"get users"<<endl;
 	this->logger->log(1, "Get Users");
@@ -203,6 +262,11 @@ int Server::handleGetUsers(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleGetConversations(mg_connection* conn){
 	// cout<<"getConversations"<<endl;
 	this->logger->log(1, "Get Conversations");
@@ -215,6 +279,11 @@ int Server::handleGetConversations(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleGetUser(mg_connection* conn){
 	this->logger->log(1, "Get User");
 
@@ -235,6 +304,11 @@ int Server::handleGetUser(mg_connection* conn){
 	return 0;
 }
 
+/**
+ *
+ * @param conn
+ * @return
+ */
 int Server::handleGetMessagesWithUser(mg_connection* conn){
 	this->logger->log(1,"Get Messages With User");
 
