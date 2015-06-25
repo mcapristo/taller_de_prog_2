@@ -69,6 +69,10 @@ Se utilizaron dos repositorios distintos, uno para el proyecto de servidor y otr
 + `Servidor <http://github.com/mcapristo/taller_de_prog_2>`_
 + `Cliente <http://github.com/mcapristo/taller_de_prog_2_android>`_
 
+Para la entrega final, se crearon los siguientes tags: 
++ `Servidor <https://github.com/mcapristo/taller_de_prog_2/tree/v1.0>`_
++ `Cliente <https://github.com/mcapristo/taller_de_prog_2_android/tree/v1.0>`_
+
 Sistema ticketing
 --------------------------------------------
 
