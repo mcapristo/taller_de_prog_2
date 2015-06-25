@@ -232,8 +232,10 @@ Doc de pruebas
 Aplicación móvil
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 - Librería utilizada: JUnit
-- Cobertura: Jacoco
-	+ Nivel de cobertura: 
+- Cobertura: Jacoco (Pendiente de configurar)
+- Para ejecutar los tests:
+  + Con el proyecto en android studio, botón derecho en el paquete de tests (androidTests) -> Run as android tests (la opción que tiene el ícono de android).
+
 
 Rest API
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
