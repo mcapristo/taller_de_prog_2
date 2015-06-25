@@ -285,7 +285,7 @@ Instalación y configuracón
 --------------------------------------------
 
 1. Conectar el teléfono a la pc a través del cable de USB.
-2. Copiar a la memoria interna ó tarjeta micro SD del teléfono la aplicación "Grupo3-MensajerO.apk".
+2. Copiar a la memoria interna ó tarjeta micro SD del teléfono la aplicación "MensajerO.apk". Dicho archivo se encuentra en la siguiente carpeta: /instalables/entrega_final.
 3. Desconectar el teléfono de la pc.
 4. Navegar a la carpeta que se copió la aplicación a partir del explorador de carpetas del teléfono.
 5. Presionar la aplicación y completar la acción mediante "Packege installer".
